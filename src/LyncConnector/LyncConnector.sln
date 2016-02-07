@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23023.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LyncConnector", "LyncConnector", "{2C7507D1-98D0-4C94-A903-04930A0E1B19}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{1552EB73-5E64-42C2-B06C-92A08A086D44}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\Begin-ExportScript-Lync.ps1 = Scripts\Begin-ExportScript-Lync.ps1
+		Scripts\Begin-ImportScript-Lync.ps1 = Scripts\Begin-ImportScript-Lync.ps1
+		Scripts\End-ExportScript-Lync.ps1 = Scripts\End-ExportScript-Lync.ps1
+		Scripts\End-ImportScript-Lync.ps1 = Scripts\End-ImportScript-Lync.ps1
+		Scripts\ExportScript-Lync.ps1 = Scripts\ExportScript-Lync.ps1
+		Scripts\HierarchyScript-Lync.ps1 = Scripts\HierarchyScript-Lync.ps1
+		Scripts\ImportScript-Lync.ps1 = Scripts\ImportScript-Lync.ps1
+		Scripts\Lync.Common.psm1 = Scripts\Lync.Common.psm1
+		Scripts\PartitionScript-Lync.ps1 = Scripts\PartitionScript-Lync.ps1
+		Scripts\Schema-Lync.xml = Scripts\Schema-Lync.xml
+		Scripts\SchemaScript-Lync.ps1 = Scripts\SchemaScript-Lync.ps1
+		Scripts\TestHarness-Lync.ps1 = Scripts\TestHarness-Lync.ps1
+		Scripts\TestHarness.Common.psm1 = Scripts\TestHarness.Common.psm1
+		Scripts\ValidationScript-Lync.ps1 = Scripts\ValidationScript-Lync.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestData", "TestData", "{4E8C6369-9FD1-43F0-9878-27CC4DF24F83}"
+	ProjectSection(SolutionItems) = preProject
+		TestData\Lync-Export-Add-User.xml = TestData\Lync-Export-Add-User.xml
+		TestData\Lync-Export-Delete-User.xml = TestData\Lync-Export-Delete-User.xml
+		TestData\Lync-Export-Update-User.xml = TestData\Lync-Export-Update-User.xml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1552EB73-5E64-42C2-B06C-92A08A086D44} = {2C7507D1-98D0-4C94-A903-04930A0E1B19}
+		{4E8C6369-9FD1-43F0-9878-27CC4DF24F83} = {2C7507D1-98D0-4C94-A903-04930A0E1B19}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,5 @@
+Copy following files from C:\Program Files\Microsoft Forefront Identity Manager\2010\Synchronization Service\Bin\Assemblies here.
+The files are required by the TestHarness script.
+
+1. Microsoft.MetadirectoryServices.dll
+2. Microsoft.MetadirectoryServicesEx.dll
