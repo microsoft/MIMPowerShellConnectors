@@ -35,7 +35,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Write-Debug "$Global:ConnectorName - Hierarchy Script: Execution Started..."
+Enter-Script -ScriptType "Hierarchy"
 
 function Get-Hierarchy
 {
@@ -109,4 +109,4 @@ if (![string]::IsNullOrEmpty($preferredDomainController))
 
 Get-Hierarchy
 
-Write-Debug "$Global:ConnectorName - Hierarchy Script: Execution Completed."
+Exit-Script -ScriptType "Hierarchy"

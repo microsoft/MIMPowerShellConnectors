@@ -14,9 +14,72 @@ Set-StrictMode -Version "2.0"
 
 $Global:ConnectorName = "LyncPowerShellConnector"
 $Global:RemoteSessionName = "LyncPowerShellConnector"
+$Error.Clear()
 
 #endregion "Global Variables"
 
+#region "Import Dependent Modules"
+
+# None
+
+#endregion "Import Dependent Modules"
+
+function Enter-Script
+{
+	<#
+	.Synopsis
+		Writes the Versbose message saying specified script execution started.
+	.Description
+		Writes the Versbose message saying specified script execution started.
+		Also clear the $Error variable.
+	#>
+	[CmdletBinding()]
+	param (
+		[parameter(Mandatory = $true)]
+		[string]
+		$ScriptType
+	)
+
+	Write-Verbose "$Global:ConnectorName - $ScriptType Script: Execution Started..."
+	$Error.Clear()
+}
+
+function Exit-Script
+{
+	<#
+	.Synopsis
+		Checks $Error variable for any Errors. Writes the Versbose message saying specified script execution sucessfully completed.
+	.Description
+		Checks $Error variable for any Errors. Writes the Versbose message saying specified script execution sucessfully completed.
+		Throws an exception if $Error is present
+	#>
+	[CmdletBinding()]
+	param (
+		[parameter(Mandatory = $true)]
+		[string]
+		$ScriptType,
+		[parameter(Mandatory = $false)]
+		[switch]
+		$SuppressErrorCheck,
+		[parameter(Mandatory = $false)]
+		[Type]
+		$ExceptionRaisedOnErrorCheck
+	)
+
+	if ($Error.Count -ne 0 -and !$SuppressErrorCheck)
+	{
+		$errorMessage = [string]$Error[0]
+
+		if ($ExceptionRaisedOnErrorCheck -eq $null)
+		{
+			$ExceptionRaisedOnErrorCheck = [Microsoft.MetadirectoryServices.ExtensibleExtensionException]
+		}
+
+		throw  $errorMessage -as $ExceptionRaisedOnErrorCheck
+	}
+
+	Write-Verbose "$Global:ConnectorName - $ScriptType Script: Execution Completed."
+}
 
 function Get-ExtensionsDirectory
 {
@@ -935,7 +998,7 @@ function Select-PreferredDomainController
 			}
 			else
 			{
-				throw "None of the servers from the Preferred Domain Controller List '{0}' is online." -f $DomainControllerList
+				throw [Microsoft.MetadirectoryServices.ServerDownException] ("None of the servers from the Preferred Domain Controller List '{0}' is online." -f $DomainControllerList)
 			}
 		}
 	}

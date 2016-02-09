@@ -39,11 +39,11 @@ $commonModule = (Join-Path -Path $scriptDir -ChildPath $configParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Write-Debug "$Global:ConnectorName - End-Export Script: Execution Started..."
+Enter-Script -ScriptType "End-Export"
 
 if (Test-Variable -Name "Session" -Scope "Global")
 {
 	Remove-PSSession $Global:Session
 }
 
-Write-Debug "$Global:ConnectorName - End-Export Script: Execution Completed."
+Exit-Script -ScriptType "End-Export"

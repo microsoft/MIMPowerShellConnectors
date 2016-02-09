@@ -38,7 +38,7 @@ $commonModule = (Join-Path -Path $scriptDir -ChildPath $configParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Write-Debug "$Global:ConnectorName - Export Script: Execution Started..."
+Enter-Script -ScriptType "Export"
 
 function Export-CSEntries
 {
@@ -85,7 +85,7 @@ function Export-CSEntries
 
 				default
 				{
-					Write-Error "Unknown CSEntry ObjectType: $_"
+					throw "Unknown CSEntry ObjectType: $_"
 				}
 			}
 		}
@@ -193,7 +193,7 @@ function Export-User
 
 		default
 		{
-			Write-Error "Unknown CSEntry ObjectModificationType: $_"
+			throw "Unknown CSEntry ObjectModificationType: $_"
 		}
 	}
 
@@ -586,4 +586,5 @@ $forceMove = (Get-ConfigParameter -ConfigParameters $configParameters -Parameter
 
 Export-CSEntries
 
-Write-Debug "$Global:ConnectorName - Export Script: Execution Completed."
+Exit-Script -ScriptType "Export" -SuppressErrorCheck
+

@@ -36,7 +36,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Write-Debug "$Global:ConnectorName - Begin-Export Script: Execution Started..."
+Enter-Script -ScriptType "Begin-Export"
 
 $server = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "Server"
 $preferredDomainController = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "PreferredDomainControllerFQDN"
@@ -66,4 +66,4 @@ if (!$session)
 	Write-Debug "Opened a new RPS Session."
 }
 
-Write-Debug "$Global:ConnectorName - Begin-Export Script: Execution Completed."
+Exit-Script -ScriptType "Begin-Export" -ExceptionRaisedOnErrorCheck [Microsoft.MetadirectoryServices.ServerDownException]

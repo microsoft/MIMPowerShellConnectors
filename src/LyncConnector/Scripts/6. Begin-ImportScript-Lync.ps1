@@ -36,7 +36,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Write-Debug "$Global:ConnectorName - Begin-Import Script: Execution Started..."
+Enter-Script -ScriptType "Begin-Import"
 
 function Get-OpenImportConnectionResults
 {
@@ -148,5 +148,5 @@ if (!$session)
 
 Get-OpenImportConnectionResults
 
-Write-Debug "$Global:ConnectorName - Begin-Import Script: Execution Completed."
+Exit-Script -ScriptType "Begin-Import" -ExceptionRaisedOnErrorCheck [Microsoft.MetadirectoryServices.ServerDownException]
 

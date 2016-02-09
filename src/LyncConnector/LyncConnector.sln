@@ -7,20 +7,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LyncConnector", "LyncConnec
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{1552EB73-5E64-42C2-B06C-92A08A086D44}"
 	ProjectSection(SolutionItems) = preProject
-		Scripts\Begin-ExportScript-Lync.ps1 = Scripts\Begin-ExportScript-Lync.ps1
-		Scripts\Begin-ImportScript-Lync.ps1 = Scripts\Begin-ImportScript-Lync.ps1
-		Scripts\End-ExportScript-Lync.ps1 = Scripts\End-ExportScript-Lync.ps1
-		Scripts\End-ImportScript-Lync.ps1 = Scripts\End-ImportScript-Lync.ps1
-		Scripts\ExportScript-Lync.ps1 = Scripts\ExportScript-Lync.ps1
-		Scripts\HierarchyScript-Lync.ps1 = Scripts\HierarchyScript-Lync.ps1
-		Scripts\ImportScript-Lync.ps1 = Scripts\ImportScript-Lync.ps1
-		Scripts\Lync.Common.psm1 = Scripts\Lync.Common.psm1
-		Scripts\PartitionScript-Lync.ps1 = Scripts\PartitionScript-Lync.ps1
+		Scripts\1. Lync.Common.psm1 = Scripts\1. Lync.Common.psm1
+		Scripts\10. ExportScript-Lync.ps1 = Scripts\10. ExportScript-Lync.ps1
+		Scripts\11. End-ExportScript-Lync.ps1 = Scripts\11. End-ExportScript-Lync.ps1
+		Scripts\2. ValidationScript-Lync.ps1 = Scripts\2. ValidationScript-Lync.ps1
+		Scripts\3. SchemaScript-Lync.ps1 = Scripts\3. SchemaScript-Lync.ps1
+		Scripts\4. PartitionScript-Lync.ps1 = Scripts\4. PartitionScript-Lync.ps1
+		Scripts\5. HierarchyScript-Lync.ps1 = Scripts\5. HierarchyScript-Lync.ps1
+		Scripts\6. Begin-ImportScript-Lync.ps1 = Scripts\6. Begin-ImportScript-Lync.ps1
+		Scripts\7. ImportScript-Lync.ps1 = Scripts\7. ImportScript-Lync.ps1
+		Scripts\8. End-ImportScript-Lync.ps1 = Scripts\8. End-ImportScript-Lync.ps1
+		Scripts\9. Begin-ExportScript-Lync.ps1 = Scripts\9. Begin-ExportScript-Lync.ps1
 		Scripts\Schema-Lync.xml = Scripts\Schema-Lync.xml
-		Scripts\SchemaScript-Lync.ps1 = Scripts\SchemaScript-Lync.ps1
 		Scripts\TestHarness-Lync.ps1 = Scripts\TestHarness-Lync.ps1
 		Scripts\TestHarness.Common.psm1 = Scripts\TestHarness.Common.psm1
-		Scripts\ValidationScript-Lync.ps1 = Scripts\ValidationScript-Lync.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestData", "TestData", "{4E8C6369-9FD1-43F0-9878-27CC4DF24F83}"

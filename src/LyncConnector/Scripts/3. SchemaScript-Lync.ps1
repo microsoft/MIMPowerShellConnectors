@@ -32,7 +32,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Write-Debug "$Global:ConnectorName - Schema Script: Execution Started..."
+Enter-Script -ScriptType "Schema"
 
 function Get-ConnectorSchema
 {
@@ -47,7 +47,8 @@ function Get-ConnectorSchema
     [OutputType([Microsoft.MetadirectoryServices.Schema])]
 	param (
 	)
-		$extensionsDir = Get-ExtensionsDirectory
+
+	$extensionsDir = Get-ExtensionsDirectory
 	$schemaXml = Join-Path -Path $extensionsDir -ChildPath "Schema-Lync.xml"
 
 	$schema = ConvertFrom-SchemaXml -SchemaXml $schemaXml
@@ -57,4 +58,4 @@ function Get-ConnectorSchema
 
 Get-ConnectorSchema
 
-Write-Debug "$Global:ConnectorName - Schema Script: Execution Completed."
+Exit-Script -ScriptType "Schema"

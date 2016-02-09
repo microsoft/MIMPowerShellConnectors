@@ -32,7 +32,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Write-Debug "$Global:ConnectorName - Partition Script: Execution Started..."
+Enter-Script -ScriptType "Partition"
 
 function Get-Partitions
 {
@@ -132,4 +132,4 @@ if ([string]::IsNullOrEmpty($preferredDomainController))
 
 Get-Partitions
 
-Write-Debug "$Global:ConnectorName - Partition Script: Execution Completed."
+Exit-Script -ScriptType "Partition"

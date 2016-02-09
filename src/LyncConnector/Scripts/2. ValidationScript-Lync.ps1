@@ -35,7 +35,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Write-Debug "$Global:ConnectorName - Validation Script: Execution Started..."
+Enter-Script -ScriptType "Validation"
 
 function Test-ConfigParameterPage
 {
@@ -175,6 +175,8 @@ function Test-ConnectivityConfigParameterPage
 			$errorMessage = [string]$errorMessage[0] + "`r`nConnector User: $user"
 
 			$validationResult = New-Object -TypeName "Microsoft.MetadirectoryServices.ParameterValidationResult" -ArgumentList $statusCode, $errorMessage, $errorParameter
+
+			$Error.Clear()
 		}
 		else
 		{
@@ -233,4 +235,4 @@ function Test-GlobalConfigParameterPage
 
 Test-ConfigParameterPage
 
-Write-Debug "$Global:ConnectorName - Validation Script: Execution Completed."
+Exit-Script -ScriptType "Validation"
