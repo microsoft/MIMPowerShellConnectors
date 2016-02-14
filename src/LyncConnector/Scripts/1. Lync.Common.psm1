@@ -924,7 +924,7 @@ function New-CSEntryChangeResult
 
 	if ($ExportAdd)
 	{
-		if ($NewArchorTable -eq $null -or !$NewAnchorTable.Keys.Count -eq 0)
+		if ($NewAnchorTable -eq $null -or $NewAnchorTable.Keys.Count -eq 0)
 		{
 			throw "The NewAnchorTable parameter must not be null."
 		}
@@ -977,6 +977,7 @@ function Select-PreferredDomainController
 				{
 					try
 					{
+						$preferredDC =$preferredDC.Trim()
 						$conn = New-Object "Net.Sockets.TcpClient"
 						$conn.Connect($preferredDC, 389)
 						$selected = $true

@@ -224,7 +224,7 @@ function Get-PagingFilter
 				throw ("Unexpected Page Index $pageIndex to import objectType {0}. Max Index: {1}" -f $ObjectType, $userPages.Length)
 			}
 
-			$ldapFilter = "(&(objectCategory=person)(objectClass=user)(msRTCSIP-PrimaryUserAddress=sip:{0}*)" -f $userPages[$pageIndex] # no spaces in the LDAP query or it will fail.
+			$ldapFilter = "(&(objectCategory=person)(objectClass=user)(msRTCSIP-PrimaryUserAddress=sip:{0}*)" -f $userPages[$pageIndex].Trim() # no spaces in the LDAP query or it will fail.
 
 			if (![string]::IsNullOrEmpty($LastRunDateTime))
 			{
@@ -252,7 +252,7 @@ function Get-PagingFilter
 				throw ("Unexpected Page Index $pageIndex to import objectType {0}. Max Index: {1}" -f $ObjectType, $ouPages.Length)
 			}
 
-			$ldapFilter = "(name={0}*)" -f $ouPages[$pageIndex]
+			$ldapFilter = "(name={0}*)" -f $ouPages[$pageIndex].Trim()
 			if (![string]::IsNullOrEmpty($LastRunDateTime))
 			{
 				$ldapFilter += "(whenChanged>={0:yyyyMMddHHmmss}.0Z)" -f ([DateTime]$LastRunDateTime).AddMinutes(-1*[int]$lastRunDateTimeOffset) # The LastRunDateTime in watermark is already in UTC.
@@ -475,11 +475,15 @@ else
 	$ouPages = $ouPages.Split(",")
 }
 
-$lastRunDateTimeOffset = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "LastRunDateTimeOffsetMinutes"
+$lastRunDateTimeOffset = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "LastRunDateTimeOffsetMinutes" 
 
-if (![string]::IsNullOrEmpty($lastRunDateTimeOffset))
+if ([string]::IsNullOrEmpty($lastRunDateTimeOffset))
 {
 	$lastRunDateTimeOffset = 30 # in minutes
+}
+else
+{
+	$lastRunDateTimeOffset.Trim()
 }
 
 $deltaImport = $openImportConnectionRunStep.ImportType -eq "Delta"

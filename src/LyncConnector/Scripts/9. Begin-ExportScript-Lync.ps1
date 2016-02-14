@@ -66,4 +66,5 @@ if (!$session)
 	Write-Debug "Opened a new RPS Session."
 }
 
-Exit-Script -ScriptType "Begin-Export" -ExceptionRaisedOnErrorCheck [Microsoft.MetadirectoryServices.ServerDownException]
+$exceptionRaisedOnErrorCheck = [Microsoft.MetadirectoryServices.ServerDownException]
+Exit-Script -ScriptType "Begin-Export" -ExceptionRaisedOnErrorCheck $exceptionRaisedOnErrorCheck

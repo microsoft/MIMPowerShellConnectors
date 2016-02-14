@@ -1,4 +1,4 @@
-<export-ma server='CONTOSO-FIMWAL1' export-date='2016-02-09 16:09:08.508'>
+<export-ma server='CONTOSO-FIMWAL1' export-date='2016-02-14 18:01:43.774'>
 <!--WARNING>
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
@@ -15,9 +15,9 @@
  <subtype>PowerShell (Microsoft)</subtype>
  <ma-listname>PowerShell (Microsoft)</ma-listname>
  <ma-companyname>Microsoft</ma-companyname>
- <creation-time>2016-02-06 19:45:38.065</creation-time>
- <last-modification-time>2016-02-09 16:08:50.652</last-modification-time>
- <version>40</version>
+ <creation-time>2016-02-06 19:45:38.067</creation-time>
+ <last-modification-time>2016-02-14 17:57:42.952</last-modification-time>
+ <version>48</version>
  <internal-version>1</internal-version>
  <password-sync-allowed>0</password-sync-allowed>
  <schema>
@@ -987,7 +987,7 @@ function New-CSEntryChangeResult
 
 	if ($ExportAdd)
 	{
-		if ($NewArchorTable -eq $null -or !$NewAnchorTable.Keys.Count -eq 0)
+		if ($NewAnchorTable -eq $null -or $NewAnchorTable.Keys.Count -eq 0)
 		{
 			throw "The NewAnchorTable parameter must not be null."
 		}
@@ -1040,6 +1040,7 @@ function Select-PreferredDomainController
 				{
 					try
 					{
+						$preferredDC =$preferredDC.Trim()
 						$conn = New-Object "Net.Sockets.TcpClient"
 						$conn.Connect($preferredDC, 389)
 						$selected = $true
@@ -1764,7 +1765,8 @@ if (!$session)
 
 Get-OpenImportConnectionResults
 
-Exit-Script -ScriptType "Begin-Import" -ExceptionRaisedOnErrorCheck [Microsoft.MetadirectoryServices.ServerDownException]
+$exceptionRaisedOnErrorCheck = [Microsoft.MetadirectoryServices.ServerDownException]
+Exit-Script -ScriptType "Begin-Import" -ExceptionRaisedOnErrorCheck $exceptionRaisedOnErrorCheck
 
 </parameter><parameter name="Import Script" type="text" use="global">&lt;#
 &lt;copyright file="ImportScript-Lync.ps1" company="Microsoft"&gt;
@@ -1992,7 +1994,7 @@ function Get-PagingFilter
 				throw ("Unexpected Page Index $pageIndex to import objectType {0}. Max Index: {1}" -f $ObjectType, $userPages.Length)
 			}
 
-			$ldapFilter = "(&amp;(objectCategory=person)(objectClass=user)(msRTCSIP-PrimaryUserAddress=sip:{0}*)" -f $userPages[$pageIndex] # no spaces in the LDAP query or it will fail.
+			$ldapFilter = "(&amp;(objectCategory=person)(objectClass=user)(msRTCSIP-PrimaryUserAddress=sip:{0}*)" -f $userPages[$pageIndex].Trim() # no spaces in the LDAP query or it will fail.
 
 			if (![string]::IsNullOrEmpty($LastRunDateTime))
 			{
@@ -2020,7 +2022,7 @@ function Get-PagingFilter
 				throw ("Unexpected Page Index $pageIndex to import objectType {0}. Max Index: {1}" -f $ObjectType, $ouPages.Length)
 			}
 
-			$ldapFilter = "(name={0}*)" -f $ouPages[$pageIndex]
+			$ldapFilter = "(name={0}*)" -f $ouPages[$pageIndex].Trim()
 			if (![string]::IsNullOrEmpty($LastRunDateTime))
 			{
 				$ldapFilter += "(whenChanged&gt;={0:yyyyMMddHHmmss}.0Z)" -f ([DateTime]$LastRunDateTime).AddMinutes(-1*[int]$lastRunDateTimeOffset) # The LastRunDateTime in watermark is already in UTC.
@@ -2243,11 +2245,15 @@ else
 	$ouPages = $ouPages.Split(",")
 }
 
-$lastRunDateTimeOffset = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "LastRunDateTimeOffsetMinutes"
+$lastRunDateTimeOffset = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "LastRunDateTimeOffsetMinutes" 
 
-if (![string]::IsNullOrEmpty($lastRunDateTimeOffset))
+if ([string]::IsNullOrEmpty($lastRunDateTimeOffset))
 {
 	$lastRunDateTimeOffset = 30 # in minutes
+}
+else
+{
+	$lastRunDateTimeOffset.Trim()
 }
 
 $deltaImport = $openImportConnectionRunStep.ImportType -eq "Delta"
@@ -2408,7 +2414,8 @@ if (!$session)
 	Write-Debug "Opened a new RPS Session."
 }
 
-Exit-Script -ScriptType "Begin-Export" -ExceptionRaisedOnErrorCheck [Microsoft.MetadirectoryServices.ServerDownException]
+$exceptionRaisedOnErrorCheck = [Microsoft.MetadirectoryServices.ServerDownException]
+Exit-Script -ScriptType "Begin-Export" -ExceptionRaisedOnErrorCheck $exceptionRaisedOnErrorCheck
 </parameter><parameter name="Export Script" type="text" use="global">&lt;#
 &lt;copyright file="ExportScript-Lync.ps1" company="Microsoft"&gt;
 	Copyright (c) Microsoft. All Rights Reserved.
@@ -3048,7 +3055,7 @@ if (Test-Variable -Name "Session" -Scope "Global")
 }
 
 Exit-Script -ScriptType "End-Export"
-</parameter><parameter name="Begin Password Script" type="text" use="global"></parameter><parameter name="Password Extension Script" type="text" use="global"></parameter><parameter name="End Password Script" type="text" use="global"></parameter><parameter name="SipAddressType_Global" type="string" use="global">UserPrincipalName</parameter><parameter name="SipDomain_Global" type="string" use="global"></parameter><parameter name="ForceMove_Global" type="string" use="global">Yes</parameter><parameter name="UserPages_Global" type="string" use="global">a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9</parameter><parameter name="OrganizationalUnitPages_Global" type="string" use="global"></parameter><parameter name="PreferredDomainControllerFQDN_Global" type="string" use="global">contoso-dc01</parameter><parameter name="LastRunDateTimeOffsetMinute_Global" type="string" use="global">30</parameter></parameter-values><case_normalize_dn_for_anchor>1</case_normalize_dn_for_anchor><possible_component_mappings><mapping><dn_component>Ou</dn_component><object_class>OrganizationalUnit</object_class></mapping></possible_component_mappings><default_visible_attributes><attribute>Guid</attribute><attribute>Name</attribute><attribute>ObjectClass</attribute><attribute>ObjectCategory</attribute><attribute>ArchivingPolicy</attribute><attribute>AudioVideoDisabled</attribute><attribute>ClientPolicy</attribute><attribute>ClientVersionPolicy</attribute><attribute>ConferencingPolicy</attribute><attribute>DialPlan</attribute><attribute>DisplayName</attribute><attribute>Enabled</attribute><attribute>EnabledForFederation</attribute><attribute>EnabledForInternetAccess</attribute><attribute>EnabledForRichPresence</attribute><attribute>EnterpriseVoiceEnabled</attribute><attribute>ExternalAccessPolicy</attribute><attribute>FirstName</attribute><attribute>HomeServer</attribute><attribute>HostedVoiceMail</attribute><attribute>HostedVoicemailPolicy</attribute><attribute>HostingProvider</attribute><attribute>Identity</attribute><attribute>IPPBXSoftPhoneRoutingEnabled</attribute><attribute>IsValid</attribute><attribute>LastName</attribute><attribute>LineServerURI</attribute><attribute>LineURI</attribute><attribute>LocationPolicy</attribute><attribute>OriginatorSid</attribute><attribute>PinPolicy</attribute><attribute>PresencePolicy</attribute><attribute>PrivateLine</attribute><attribute>ProxyAddresses</attribute><attribute>PublicNetworkEnabled</attribute><attribute>RegistrarPool</attribute><attribute>RemoteCallControlTelephonyEnabled</attribute><attribute>SamAccountName</attribute><attribute>Sid</attribute><attribute>SipAddress</attribute><attribute>TargetRegistrarPool</attribute><attribute>TargetServerIfMoving</attribute><attribute>TenantId</attribute><attribute>UserPrincipalName</attribute><attribute>VoicePolicy</attribute></default_visible_attributes></MAConfig>
+</parameter><parameter name="Begin Password Script" type="text" use="global"></parameter><parameter name="Password Extension Script" type="text" use="global"></parameter><parameter name="End Password Script" type="text" use="global"></parameter><parameter name="SipAddressType_Global" type="string" use="global">UserPrincipalName</parameter><parameter name="SipDomain_Global" type="string" use="global"></parameter><parameter name="ForceMove_Global" type="string" use="global">Yes</parameter><parameter name="UserPages_Global" type="string" use="global">a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9</parameter><parameter name="OrganizationalUnitPages_Global" type="string" use="global"></parameter><parameter name="PreferredDomainControllerFQDN_Global" type="string" use="global">contoso-dc01,contoso-dc02</parameter><parameter name="LastRunDateTimeOffsetMinute_Global" type="string" use="global">30</parameter></parameter-values><case_normalize_dn_for_anchor>1</case_normalize_dn_for_anchor><possible_component_mappings><mapping><dn_component>Ou</dn_component><object_class>OrganizationalUnit</object_class></mapping></possible_component_mappings><default_visible_attributes><attribute>Guid</attribute><attribute>Name</attribute><attribute>ObjectClass</attribute><attribute>ObjectCategory</attribute><attribute>ArchivingPolicy</attribute><attribute>AudioVideoDisabled</attribute><attribute>ClientPolicy</attribute><attribute>ClientVersionPolicy</attribute><attribute>ConferencingPolicy</attribute><attribute>DialPlan</attribute><attribute>DisplayName</attribute><attribute>Enabled</attribute><attribute>EnabledForFederation</attribute><attribute>EnabledForInternetAccess</attribute><attribute>EnabledForRichPresence</attribute><attribute>EnterpriseVoiceEnabled</attribute><attribute>ExternalAccessPolicy</attribute><attribute>FirstName</attribute><attribute>HomeServer</attribute><attribute>HostedVoiceMail</attribute><attribute>HostedVoicemailPolicy</attribute><attribute>HostingProvider</attribute><attribute>Identity</attribute><attribute>IPPBXSoftPhoneRoutingEnabled</attribute><attribute>IsValid</attribute><attribute>LastName</attribute><attribute>LineServerURI</attribute><attribute>LineURI</attribute><attribute>LocationPolicy</attribute><attribute>OriginatorSid</attribute><attribute>PinPolicy</attribute><attribute>PresencePolicy</attribute><attribute>PrivateLine</attribute><attribute>ProxyAddresses</attribute><attribute>PublicNetworkEnabled</attribute><attribute>RegistrarPool</attribute><attribute>RemoteCallControlTelephonyEnabled</attribute><attribute>SamAccountName</attribute><attribute>Sid</attribute><attribute>SipAddress</attribute><attribute>TargetRegistrarPool</attribute><attribute>TargetServerIfMoving</attribute><attribute>TenantId</attribute><attribute>UserPrincipalName</attribute><attribute>VoicePolicy</attribute></default_visible_attributes></MAConfig>
  </private-configuration>
  <SyncConfig-refresh-schema>0</SyncConfig-refresh-schema>
  <ma-partition-data>
@@ -3056,8 +3063,8 @@ Exit-Script -ScriptType "End-Export"
   <id>{5C72BB16-AFE7-4553-A301-74F0E796FA1A}</id>
   <name>DC=contoso,DC=com</name>
   <creation-time>2016-02-06 19:45:38.067</creation-time>
-  <last-modification-time>2016-02-09 16:08:50.637</last-modification-time>
-  <version>42</version>
+  <last-modification-time>2016-02-14 18:01:16.187</last-modification-time>
+  <version>58</version>
   <selected>1</selected>
   <filter>
    <object-classes>
@@ -3075,14 +3082,14 @@ Exit-Script -ScriptType "End-Export"
    </containers>
   </filter>
   <custom-data>
-   <ecma-partition-data><dn>DC=contoso,DC=com</dn><name>DC=contoso,DC=com</name><is-domain>1</is-domain></ecma-partition-data><water-mark>PABXAGEAdABlAHIATQBhAHIAawA+ADwAQwB1AHIAcgBlAG4AdABQAGEAZwBlAEkAbgBkAGUAeAA+ADAAPAAvAEMAdQByAHIAZQBuAHQAUABhAGcAZQBJAG4AZABlAHgAPgA8AE8AcgBnAGEAbgBpAHoAYQB0AGkAbwBuAGEAbABVAG4AaQB0AD4APABNAG8AcgBlAFQAbwBJAG0AcABvAHIAdAA+ADAAPAAvAE0AbwByAGUAVABvAEkAbQBwAG8AcgB0AD4APAAvAE8AcgBnAGEAbgBpAHoAYQB0AGkAbwBuAGEAbABVAG4AaQB0AD4APABVAHMAZQByAD4APABNAG8AcgBlAFQAbwBJAG0AcABvAHIAdAA+ADAAPAAvAE0AbwByAGUAVABvAEkAbQBwAG8AcgB0AD4APAAvAFUAcwBlAHIAPgA8AFAAcgBlAGYAZQByAHIAZQBkAEQAbwBtAGEAaQBuAEMAbwBuAHQAcgBvAGwAbABlAHIAPgBjAG8AbgB0AG8AcwBvAC0AZABjADAAMQA8AC8AUAByAGUAZgBlAHIAcgBlAGQARABvAG0AYQBpAG4AQwBvAG4AdAByAG8AbABsAGUAcgA+ADwATABhAHMAdABSAHUAbgBEAGEAdABlAFQAaQBtAGUAPgAyADAAMQA2AC0AMAAyAC0AMAA3ACAAMgAwADoAMAA5ADoAMwAwADwALwBMAGEAcwB0AFIAdQBuAEQAYQB0AGUAVABpAG0AZQA+ADwALwBXAGEAdABlAHIATQBhAHIAawA+AAAA</water-mark>
+   <ecma-partition-data><dn>DC=contoso,DC=com</dn><name>DC=contoso,DC=com</name><is-domain>1</is-domain></ecma-partition-data><water-mark>PABXAGEAdABlAHIATQBhAHIAawA+ADwAQwB1AHIAcgBlAG4AdABQAGEAZwBlAEkAbgBkAGUAeAA+ADAAPAAvAEMAdQByAHIAZQBuAHQAUABhAGcAZQBJAG4AZABlAHgAPgA8AE8AcgBnAGEAbgBpAHoAYQB0AGkAbwBuAGEAbABVAG4AaQB0AD4APABNAG8AcgBlAFQAbwBJAG0AcABvAHIAdAA+ADAAPAAvAE0AbwByAGUAVABvAEkAbQBwAG8AcgB0AD4APAAvAE8AcgBnAGEAbgBpAHoAYQB0AGkAbwBuAGEAbABVAG4AaQB0AD4APABVAHMAZQByAD4APABNAG8AcgBlAFQAbwBJAG0AcABvAHIAdAA+ADAAPAAvAE0AbwByAGUAVABvAEkAbQBwAG8AcgB0AD4APAAvAFUAcwBlAHIAPgA8AFAAcgBlAGYAZQByAHIAZQBkAEQAbwBtAGEAaQBuAEMAbwBuAHQAcgBvAGwAbABlAHIAPgBjAG8AbgB0AG8AcwBvAC0AZABjADAAMQA8AC8AUAByAGUAZgBlAHIAcgBlAGQARABvAG0AYQBpAG4AQwBvAG4AdAByAG8AbABsAGUAcgA+ADwATABhAHMAdABSAHUAbgBEAGEAdABlAFQAaQBtAGUAPgAyADAAMQA2AC0AMAAyAC0AMQA0ACAAMQA4ADoAMAAxADoAMQA1ADwALwBMAGEAcwB0AFIAdQBuAEQAYQB0AGUAVABpAG0AZQA+ADwALwBXAGEAdABlAHIATQBhAHIAawA+AAAA</water-mark>
   </custom-data>
-  <allowed-operations>28</allowed-operations>
+  <allowed-operations>29</allowed-operations>
   <current>
-   <batch-number>8</batch-number>
-   <sequence-number>199</sequence-number>
+   <batch-number>15</batch-number>
+   <sequence-number>361</sequence-number>
   </current>
-  <last-successful-batch>7</last-successful-batch>
+  <last-successful-batch>14</last-successful-batch>
   <filter-hints>
    <object-classes>
     <object-class>
@@ -3117,9 +3124,17 @@ Exit-Script -ScriptType "End-Export"
   <id>{6B3F3A8F-4B1E-4714-BB60-A7607418E183}</id>
   <name>Export</name>
   <creation-time>2016-02-07 16:56:22.673</creation-time>
-  <version>3</version>
-  <last-modification-time>2016-02-08 12:15:22.053</last-modification-time>
-  <configuration><step><step-type type="export"><export-subtype>to-file</export-subtype><export-subtype>resume-from-file</export-subtype></step-type><dropfile-name>Skype_Export.xml</dropfile-name><threshold><batch-size>9999</batch-size></threshold><partition>{5C72BB16-AFE7-4553-A301-74F0E796FA1A}</partition><custom-data><extensible2-step-data><timeout>0</timeout><batch-size>9999</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step">CONTOSO-FAIL</parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
+  <version>5</version>
+  <last-modification-time>2016-02-14 09:59:14.163</last-modification-time>
+  <configuration><step><step-type type="export"></step-type><threshold><batch-size>9999</batch-size></threshold><partition>{5C72BB16-AFE7-4553-A301-74F0E796FA1A}</partition><custom-data><extensible2-step-data><timeout>0</timeout><batch-size>9999</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
+ </run-configuration>
+ <run-configuration>
+  <id>{77B9B749-27CE-4AB5-B8A8-408F343EA17B}</id>
+  <name>Delta Synchronization</name>
+  <creation-time>2016-02-14 09:58:43.797</creation-time>
+  <version>1</version>
+  <last-modification-time>2016-02-14 09:58:43.797</last-modification-time>
+  <configuration><step><step-type type="apply-rules"><apply-rules-subtype>apply-pending</apply-rules-subtype></step-type><threshold><batch-size>1</batch-size></threshold><partition>{5C72BB16-AFE7-4553-A301-74F0E796FA1A}</partition><custom-data><extensible2-step-data><batch-size>0</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
  </run-configuration>
  <run-configuration>
   <id>{AA07FD46-B810-4C2A-AF51-DC38B61EE609}</id>

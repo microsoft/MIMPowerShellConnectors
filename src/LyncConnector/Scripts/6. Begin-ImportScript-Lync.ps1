@@ -148,5 +148,6 @@ if (!$session)
 
 Get-OpenImportConnectionResults
 
-Exit-Script -ScriptType "Begin-Import" -ExceptionRaisedOnErrorCheck [Microsoft.MetadirectoryServices.ServerDownException]
+$exceptionRaisedOnErrorCheck = [Microsoft.MetadirectoryServices.ServerDownException]
+Exit-Script -ScriptType "Begin-Import" -ExceptionRaisedOnErrorCheck $exceptionRaisedOnErrorCheck
 
