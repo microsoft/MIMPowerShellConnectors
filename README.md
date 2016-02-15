@@ -27,7 +27,7 @@ The MIM PowerShell Connector releases can be downloaded from the [releases](http
 
 # Documentation
 
-For more details and information on utilizing the MIM PowerShell Connectors please refer to the documentation in the [MIMWAL Wiki](https://github.com/Microsoft/MIMPowerShellConnectors/wiki).
+For more details and information on utilizing the MIM PowerShell Connectors please refer to the documentation in the [MIMPowerShellConnectors Wiki](https://github.com/Microsoft/MIMPowerShellConnectors/wiki).
 
 # Contributing to MIM PowerShell Connectors
 
