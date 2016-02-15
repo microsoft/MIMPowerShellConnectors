@@ -10,7 +10,7 @@
 #>
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 	$ConfigParameters,
@@ -50,7 +50,7 @@ function Get-OpenImportConnectionResults
 	
 	[CmdletBinding()]
 	[OutputType([System.Collections.Generic.List[Microsoft.MetadirectoryServices.OpenImportConnectionResults]])]
-	param (
+	param(
 	)
 	
 	$watermark = Get-WaterMark
@@ -71,7 +71,7 @@ function Get-WaterMark
 	
 	[CmdletBinding()]
     [OutputType([xml])]
-	param (
+	param(
 	)
 	
 	$waterMarkXml = $null

@@ -9,7 +9,7 @@
 #>
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 	$ConfigParameters,
@@ -51,7 +51,7 @@ function Export-CSEntries
 	
 	[CmdletBinding()]
 	[OutputType([System.Collections.Generic.List[Microsoft.MetadirectoryServices.CSEntryChangeResult]])]
-	param (
+	param(
 	)
 
 	$csentryChangeResults = New-GenericObject System.Collections.Generic.List Microsoft.MetadirectoryServices.CSEntryChangeResult
@@ -127,7 +127,7 @@ function Export-User
 	
 	[CmdletBinding()]
 	[OutputType([Hashtable])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -212,7 +212,7 @@ function Export-OrganizationalUnit
 	
 	[CmdletBinding()]
 	[OutputType([Hashtable])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -283,7 +283,7 @@ function Invoke-EnableCsUserCommand
 	#>
 	
 	[CmdletBinding()]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -333,7 +333,7 @@ function Invoke-SetCsUserCommand
 	#>
 	
 	[CmdletBinding()]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -387,7 +387,7 @@ function Invoke-GrantCsPolicyCommands
 	#>
 	
 	[CmdletBinding()]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -457,7 +457,7 @@ function Invoke-MoveCsUserCommand
 	#>
 	
 	[CmdletBinding()]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -493,7 +493,7 @@ function Invoke-DisableCsUserCommand
 	#>
 	
 	[CmdletBinding()]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -548,7 +548,7 @@ function Get-CsIdentity
 	
 	[CmdletBinding()]
 	[OutputType([string])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange

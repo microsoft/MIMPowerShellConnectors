@@ -10,7 +10,7 @@
 #>
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 	$ConfigParameters,

@@ -9,7 +9,7 @@
 #>
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[Microsoft.MetadirectoryServices.HierarchyNode]
 	$HierarchyNode,
@@ -48,7 +48,7 @@ function Get-Hierarchy
 
 	[CmdletBinding()]
     [OutputType([System.Collections.Generic.List[Microsoft.MetadirectoryServices.HierarchyNode]])]
-	param (
+	param(
 	)
 
 	$children = New-GenericObject System.Collections.Generic.List Microsoft.MetadirectoryServices.HierarchyNode

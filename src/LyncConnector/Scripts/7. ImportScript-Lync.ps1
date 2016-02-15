@@ -9,7 +9,7 @@
 #>
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 	$ConfigParameters,
@@ -51,7 +51,7 @@ function Import-CSEntries
 	
 	[CmdletBinding()]
     [OutputType([Microsoft.MetadirectoryServices.GetImportEntriesResults])]
-	param (
+	param(
 	)
 	
 	$importEntriesResults = New-Object -TypeName "Microsoft.MetadirectoryServices.GetImportEntriesResults"
@@ -143,7 +143,7 @@ function Import-Users
 	
 	[CmdletBinding()]
     [OutputType([Microsoft.MetadirectoryServices.GetImportEntriesResults])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$LdapFilter
@@ -202,7 +202,7 @@ function Get-PagingFilter
 	
 	[CmdletBinding()]
     [OutputType([string])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$ObjectType,
@@ -288,7 +288,7 @@ function Import-OrganizationalUnits
 	
 	[CmdletBinding()]
     [OutputType([Microsoft.MetadirectoryServices.GetImportEntriesResults])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$LdapFilter
@@ -333,7 +333,7 @@ function Get-OrganizationalUnits
 	
 	[CmdletBinding()]
     [OutputType([string[]])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$LdapFilter
@@ -394,7 +394,7 @@ function Get-OrganizationalUnitHierarchy
 	
 	[CmdletBinding()]
     [OutputType([string[]])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$RootDN,

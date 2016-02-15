@@ -34,14 +34,17 @@ function Enter-Script
 		Also clear the $Error variable.
 	#>
 	[CmdletBinding()]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$ScriptType
 	)
 
-	Write-Verbose "$Global:ConnectorName - $ScriptType Script: Execution Started..."
-	$Error.Clear()
+	process
+	{
+		Write-Verbose "$Global:ConnectorName - $ScriptType Script: Execution Started..."
+		$Error.Clear()
+	}
 }
 
 function Exit-Script
@@ -54,7 +57,7 @@ function Exit-Script
 		Throws an exception if $Error is present
 	#>
 	[CmdletBinding()]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$ScriptType,
@@ -66,19 +69,22 @@ function Exit-Script
 		$ExceptionRaisedOnErrorCheck
 	)
 
-	if ($Error.Count -ne 0 -and !$SuppressErrorCheck)
+	process
 	{
-		$errorMessage = [string]$Error[0]
-
-		if ($ExceptionRaisedOnErrorCheck -eq $null)
+		if ($Error.Count -ne 0 -and !$SuppressErrorCheck)
 		{
-			$ExceptionRaisedOnErrorCheck = [Microsoft.MetadirectoryServices.ExtensibleExtensionException]
+			$errorMessage = [string]$Error[0]
+
+			if ($ExceptionRaisedOnErrorCheck -eq $null)
+			{
+				$ExceptionRaisedOnErrorCheck = [Microsoft.MetadirectoryServices.ExtensibleExtensionException]
+			}
+
+			throw  $errorMessage -as $ExceptionRaisedOnErrorCheck
 		}
 
-		throw  $errorMessage -as $ExceptionRaisedOnErrorCheck
+		Write-Verbose "$Global:ConnectorName - $ScriptType Script: Execution Completed."
 	}
-
-	Write-Verbose "$Global:ConnectorName - $ScriptType Script: Execution Completed."
 }
 
 function Get-ExtensionsDirectory
@@ -92,7 +98,7 @@ function Get-ExtensionsDirectory
 	#>
 	[CmdletBinding()]
 	[OutputType([string])]
-	param (
+	param(
 	)
 
 	process
@@ -123,7 +129,7 @@ function New-GenericObject
 	
 	[CmdletBinding()]
 	[OutputType([object])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$TypeName,
@@ -172,7 +178,7 @@ function Test-Variable
 
 	[CmdletBinding()]
 	[OutputType([bool])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$Name,
@@ -209,7 +215,7 @@ function ConvertFrom-SchemaXml
 
 	[CmdletBinding()]
 	[OutputType([Microsoft.MetadirectoryServices.Schema])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[ValidateScript({ Test-Path $_ -PathType "Leaf" })]
 		[string]
@@ -281,7 +287,7 @@ function Get-CSEntryChangeValue
 
 	[CmdletBinding()]
 	[OutputType([object])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange,
@@ -349,7 +355,7 @@ function Get-CSEntryChangeValueIfChanged
 	
 	[CmdletBinding()]
 	[OutputType([object])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange,
@@ -411,7 +417,7 @@ function Test-CSEntryChangeValueChanged
 	
 	[CmdletBinding()]
 	[OutputType([bool])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange,
@@ -484,7 +490,7 @@ function Test-CSEntryChangeAttributeDeleted
 	
 	[CmdletBinding()]
 	[OutputType([bool])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange,
@@ -524,7 +530,7 @@ function Get-CSEntryChangeDN
 
 	[CmdletBinding()]
 	[OutputType([string])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -553,7 +559,7 @@ function Get-ConfigParameter
 
 	[CmdletBinding()]
 	[OutputType([string])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 		$ConfigParameters,
@@ -959,7 +965,7 @@ function Select-PreferredDomainController
 
 	[CmdletBinding()]
 	[OutputType([string])]
-	param (
+	param(
 		[parameter(Mandatory = $false)]
 		[string]
 		$DomainControllerList

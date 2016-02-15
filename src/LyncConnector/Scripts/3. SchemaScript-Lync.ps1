@@ -45,7 +45,7 @@ function Get-ConnectorSchema
 
 	[CmdletBinding()]
     [OutputType([Microsoft.MetadirectoryServices.Schema])]
-	param (
+	param(
 	)
 
 	$extensionsDir = Get-ExtensionsDirectory

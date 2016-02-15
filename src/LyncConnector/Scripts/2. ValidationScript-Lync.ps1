@@ -9,7 +9,7 @@
 #>
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 	$ConfigParameters,
@@ -48,7 +48,7 @@ function Test-ConfigParameterPage
 
 	[CmdletBinding()]
     [OutputType([Microsoft.MetadirectoryServices.ParameterValidationResult])]
-	param (
+	param(
 	)
 	
 	$validationResult = New-Object -TypeName "Microsoft.MetadirectoryServices.ParameterValidationResult" -ArgumentList "Success", $null, $null
@@ -95,7 +95,7 @@ function Test-ConnectivityConfigParameterPage
 
 	[CmdletBinding()]
     [OutputType([Microsoft.MetadirectoryServices.ParameterValidationResult])]
-	param (
+	param(
 	[parameter(Mandatory = $false)]
 	[ValidateSet("Partition", "Connectivity", "")]
 	[string]
@@ -199,7 +199,7 @@ function Test-GlobalConfigParameterPage
 
 	[CmdletBinding()]
     [OutputType([Microsoft.MetadirectoryServices.ParameterValidationResult])]
-	param (
+	param(
 	)
 
 	$validationResult = New-Object -TypeName "Microsoft.MetadirectoryServices.ParameterValidationResult" -ArgumentList "Success", $null, $null

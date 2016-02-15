@@ -10,7 +10,7 @@
 #>
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 	$ConfigParameters,
@@ -52,7 +52,7 @@ function Get-CloseImportConnectionResults
 	
 	[CmdletBinding()]
 	[OutputType([Microsoft.MetadirectoryServices.CloseImportConnectionResults])]
-	param (
+	param(
 	)
 	
 	$waterMark = [xml]$CloseImportConnectionRunStep.CustomData

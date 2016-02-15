@@ -9,7 +9,7 @@
 #>
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 	$ConfigParameters,
@@ -45,7 +45,7 @@ function Get-Partitions
 
 	[CmdletBinding()]
     [OutputType([System.Collections.Generic.List[Microsoft.MetadirectoryServices.Partition]])]
-	param (
+	param(
 	)
 	
 	$partitions = New-GenericObject System.Collections.Generic.List Microsoft.MetadirectoryServices.Partition
