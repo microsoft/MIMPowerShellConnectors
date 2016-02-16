@@ -483,7 +483,7 @@ if ([string]::IsNullOrEmpty($lastRunDateTimeOffset))
 }
 else
 {
-	$lastRunDateTimeOffset.Trim()
+	$lastRunDateTimeOffset = $lastRunDateTimeOffset.Trim()
 }
 
 $deltaImport = $openImportConnectionRunStep.ImportType -eq "Delta"

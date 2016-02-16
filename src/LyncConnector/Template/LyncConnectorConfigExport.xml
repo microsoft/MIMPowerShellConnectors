@@ -1,4 +1,4 @@
-<export-ma server='CONTOSO-FIMWAL1' export-date='2016-02-14 18:01:43.774'>
+<export-ma server='CONTOSO-FIMWAL1' export-date='2016-02-16 22:57:03.637'>
 <!--WARNING>
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
@@ -9,49 +9,26 @@
 </WARNING-->
 <ma-data>
  <format-version>1</format-version>
- <id>{D7A141C2-3C21-4CC1-8B41-14055EF3490B}</id>
+ <id>{A4ED877F-DAB0-455A-A645-EBA39E915BB8}</id>
  <name>Skype</name>
  <category>Extensible2</category>
  <subtype>PowerShell (Microsoft)</subtype>
  <ma-listname>PowerShell (Microsoft)</ma-listname>
  <ma-companyname>Microsoft</ma-companyname>
- <creation-time>2016-02-06 19:45:38.067</creation-time>
- <last-modification-time>2016-02-14 17:57:42.952</last-modification-time>
- <version>48</version>
+ <creation-time>2016-02-16 22:56:32.939</creation-time>
+ <last-modification-time>2016-02-16 22:56:49.818</last-modification-time>
+ <version>2</version>
  <internal-version>1</internal-version>
  <password-sync-allowed>0</password-sync-allowed>
  <schema>
   <dsml:dsml xmlns:ms-dsml="http://www.microsoft.com/MMS/DSML" xmlns:dsml="http://www.dsml.org/DSML"><dsml:directory-schema ms-dsml:no-objectclass-validation="true"><dsml:class id="OrganizationalUnit" type="structural" ms-dsml:locked="1"><dsml:name>OrganizationalUnit</dsml:name><dsml:attribute ref="#Name" required="false" ms-dsml:isAnchor="false" ms-dsml:allowedOperation="ImportOnly" /><dsml:attribute ref="#ObjectClass" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#ObjectCategory" required="false" ms-dsml:isAnchor="false" ms-dsml:allowedOperation="ImportOnly" /><dsml:attribute ref="#Guid" required="true" ms-dsml:isAnchor="true" ms-dsml:allowedOperation="ImportOnly" /><dsml:attribute ref="#export_password" required="false" /></dsml:class><dsml:class id="User" type="structural" ms-dsml:locked="1"><dsml:name>User</dsml:name><dsml:attribute ref="#ArchivingPolicy" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#AudioVideoDisabled" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#ClientPolicy" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#ClientVersionPolicy" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#ConferencingPolicy" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#DialPlan" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#DisplayName" required="false" ms-dsml:isAnchor="false" ms-dsml:allowedOperation="ImportOnly" /><dsml:attribute ref="#Enabled" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#EnabledForFederation" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#EnabledForInternetAccess" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#EnabledForRichPresence" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#EnterpriseVoiceEnabled" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#ExternalAccessPolicy" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#FirstName" required="false" ms-dsml:isAnchor="false" ms-dsml:allowedOperation="ImportOnly" /><dsml:attribute ref="#HomeServer" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#HostedVoiceMail" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#HostedVoicemailPolicy" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#HostingProvider" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#Identity" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#IPPBXSoftPhoneRoutingEnabled" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#IsValid" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#LastName" required="false" ms-dsml:isAnchor="false" ms-dsml:allowedOperation="ImportOnly" /><dsml:attribute ref="#LineServerURI" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#LineURI" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#LocationPolicy" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#Name" required="false" ms-dsml:isAnchor="false" ms-dsml:allowedOperation="ImportOnly" /><dsml:attribute ref="#ObjectCategory" required="false" ms-dsml:isAnchor="false" ms-dsml:allowedOperation="ImportOnly" /><dsml:attribute ref="#ObjectClass" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#OriginatorSid" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#PinPolicy" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#PresencePolicy" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#PrivateLine" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#ProxyAddresses" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#PublicNetworkEnabled" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#RegistrarPool" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#RemoteCallControlTelephonyEnabled" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#SamAccountName" required="false" ms-dsml:isAnchor="false" ms-dsml:allowedOperation="ImportOnly" /><dsml:attribute ref="#Sid" required="false" ms-dsml:isAnchor="false" ms-dsml:allowedOperation="ImportOnly" /><dsml:attribute ref="#SipAddress" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#TargetRegistrarPool" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#TargetServerIfMoving" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#TenantId" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#UserPrincipalName" required="false" ms-dsml:isAnchor="false" ms-dsml:allowedOperation="ImportOnly" /><dsml:attribute ref="#VoicePolicy" required="false" ms-dsml:isAnchor="false" /><dsml:attribute ref="#Guid" required="true" ms-dsml:isAnchor="true" ms-dsml:allowedOperation="ImportOnly" /><dsml:attribute ref="#export_password" required="false" /></dsml:class><dsml:attribute-type id="Name" single-value="true" ms-dsml:immutable="true"><dsml:name>Name</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="ObjectClass" single-value="false"><dsml:name>ObjectClass</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="ObjectCategory" single-value="true" ms-dsml:immutable="true"><dsml:name>ObjectCategory</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="Guid" single-value="true" ms-dsml:immutable="true"><dsml:name>Guid</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.5</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="ArchivingPolicy" single-value="true"><dsml:name>ArchivingPolicy</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="AudioVideoDisabled" single-value="true"><dsml:name>AudioVideoDisabled</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.7</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="ClientPolicy" single-value="true"><dsml:name>ClientPolicy</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="ClientVersionPolicy" single-value="true"><dsml:name>ClientVersionPolicy</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="ConferencingPolicy" single-value="true"><dsml:name>ConferencingPolicy</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="DialPlan" single-value="true"><dsml:name>DialPlan</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="DisplayName" single-value="true" ms-dsml:immutable="true"><dsml:name>DisplayName</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="Enabled" single-value="true"><dsml:name>Enabled</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.7</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="EnabledForFederation" single-value="true"><dsml:name>EnabledForFederation</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.7</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="EnabledForInternetAccess" single-value="true"><dsml:name>EnabledForInternetAccess</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.7</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="EnabledForRichPresence" single-value="true"><dsml:name>EnabledForRichPresence</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.7</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="EnterpriseVoiceEnabled" single-value="true"><dsml:name>EnterpriseVoiceEnabled</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.7</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="ExternalAccessPolicy" single-value="true"><dsml:name>ExternalAccessPolicy</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="FirstName" single-value="true" ms-dsml:immutable="true"><dsml:name>FirstName</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="HomeServer" single-value="true"><dsml:name>HomeServer</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="HostedVoiceMail" single-value="true"><dsml:name>HostedVoiceMail</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.7</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="HostedVoicemailPolicy" single-value="true"><dsml:name>HostedVoicemailPolicy</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="HostingProvider" single-value="true"><dsml:name>HostingProvider</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="Identity" single-value="true"><dsml:name>Identity</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="IPPBXSoftPhoneRoutingEnabled" single-value="true"><dsml:name>IPPBXSoftPhoneRoutingEnabled</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.7</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="IsValid" single-value="true"><dsml:name>IsValid</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.7</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="LastName" single-value="true" ms-dsml:immutable="true"><dsml:name>LastName</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="LineServerURI" single-value="true"><dsml:name>LineServerURI</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="LineURI" single-value="true"><dsml:name>LineURI</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="LocationPolicy" single-value="true"><dsml:name>LocationPolicy</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="OriginatorSid" single-value="true"><dsml:name>OriginatorSid</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="PinPolicy" single-value="true"><dsml:name>PinPolicy</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="PresencePolicy" single-value="true"><dsml:name>PresencePolicy</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="PrivateLine" single-value="true"><dsml:name>PrivateLine</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="ProxyAddresses" single-value="false"><dsml:name>ProxyAddresses</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="PublicNetworkEnabled" single-value="true"><dsml:name>PublicNetworkEnabled</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.7</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="RegistrarPool" single-value="true"><dsml:name>RegistrarPool</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="RemoteCallControlTelephonyEnabled" single-value="true"><dsml:name>RemoteCallControlTelephonyEnabled</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.7</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="SamAccountName" single-value="true" ms-dsml:immutable="true"><dsml:name>SamAccountName</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="Sid" single-value="true" ms-dsml:immutable="true"><dsml:name>Sid</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="SipAddress" single-value="true"><dsml:name>SipAddress</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="TargetRegistrarPool" single-value="true"><dsml:name>TargetRegistrarPool</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="TargetServerIfMoving" single-value="true"><dsml:name>TargetServerIfMoving</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="TenantId" single-value="true"><dsml:name>TenantId</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.5</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="UserPrincipalName" single-value="true" ms-dsml:immutable="true"><dsml:name>UserPrincipalName</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="VoicePolicy" single-value="true"><dsml:name>VoicePolicy</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type><dsml:attribute-type id="export_password" single-value="true" ms-dsml:encrypted="true" ms-dsml:export-only="true"><dsml:name>export_password</dsml:name><dsml:syntax>1.3.6.1.4.1.1466.115.121.1.15</dsml:syntax></dsml:attribute-type></dsml:directory-schema></dsml:dsml>
  </schema>
- <attribute-inclusion><attribute>AudioVideoDisabled</attribute><attribute>ClientPolicy</attribute><attribute>ClientVersionPolicy</attribute><attribute>ConferencingPolicy</attribute><attribute>DialPlan</attribute><attribute>DisplayName</attribute><attribute>Enabled</attribute><attribute>EnabledForFederation</attribute><attribute>EnabledForInternetAccess</attribute><attribute>EnabledForRichPresence</attribute><attribute>EnterpriseVoiceEnabled</attribute><attribute>ExternalAccessPolicy</attribute><attribute>FirstName</attribute><attribute>Guid</attribute><attribute>HomeServer</attribute><attribute>HostedVoiceMail</attribute><attribute>HostedVoicemailPolicy</attribute><attribute>HostingProvider</attribute><attribute>Identity</attribute><attribute>IPPBXSoftPhoneRoutingEnabled</attribute><attribute>IsValid</attribute><attribute>LastName</attribute><attribute>LineServerURI</attribute><attribute>LineURI</attribute><attribute>LocationPolicy</attribute><attribute>Name</attribute><attribute>ObjectCategory</attribute><attribute>ObjectClass</attribute><attribute>OriginatorSid</attribute><attribute>PinPolicy</attribute><attribute>PresencePolicy</attribute><attribute>PrivateLine</attribute><attribute>ProxyAddresses</attribute><attribute>PublicNetworkEnabled</attribute><attribute>RegistrarPool</attribute><attribute>RemoteCallControlTelephonyEnabled</attribute><attribute>SamAccountName</attribute><attribute>Sid</attribute><attribute>SipAddress</attribute><attribute>TargetRegistrarPool</attribute><attribute>TargetServerIfMoving</attribute><attribute>TenantId</attribute><attribute>UserPrincipalName</attribute><attribute>VoicePolicy</attribute><attribute>export_password</attribute></attribute-inclusion>
+ <attribute-inclusion><attribute>ArchivingPolicy</attribute><attribute>AudioVideoDisabled</attribute><attribute>ClientPolicy</attribute><attribute>ClientVersionPolicy</attribute><attribute>ConferencingPolicy</attribute><attribute>DialPlan</attribute><attribute>DisplayName</attribute><attribute>Enabled</attribute><attribute>EnabledForFederation</attribute><attribute>EnabledForInternetAccess</attribute><attribute>EnabledForRichPresence</attribute><attribute>EnterpriseVoiceEnabled</attribute><attribute>ExternalAccessPolicy</attribute><attribute>FirstName</attribute><attribute>Guid</attribute><attribute>HomeServer</attribute><attribute>HostedVoiceMail</attribute><attribute>HostedVoicemailPolicy</attribute><attribute>HostingProvider</attribute><attribute>Identity</attribute><attribute>IPPBXSoftPhoneRoutingEnabled</attribute><attribute>IsValid</attribute><attribute>LastName</attribute><attribute>LineServerURI</attribute><attribute>LineURI</attribute><attribute>LocationPolicy</attribute><attribute>Name</attribute><attribute>ObjectCategory</attribute><attribute>ObjectClass</attribute><attribute>OriginatorSid</attribute><attribute>PinPolicy</attribute><attribute>PresencePolicy</attribute><attribute>PrivateLine</attribute><attribute>ProxyAddresses</attribute><attribute>PublicNetworkEnabled</attribute><attribute>RegistrarPool</attribute><attribute>RemoteCallControlTelephonyEnabled</attribute><attribute>SamAccountName</attribute><attribute>Sid</attribute><attribute>SipAddress</attribute><attribute>TargetRegistrarPool</attribute><attribute>TargetServerIfMoving</attribute><attribute>TenantId</attribute><attribute>UserPrincipalName</attribute><attribute>VoicePolicy</attribute><attribute>export_password</attribute></attribute-inclusion>
  <stay-disconnector />
- <join>
-</join>
-
- <projection>
-</projection>
-
- <export-attribute-flow>
- <export-flow-set cd-object-type="User" mv-object-type="person">
-  <export-flow cd-attribute="Enabled" id="{4634E4BE-DE47-41E8-BF9A-296B7036E94E}" suppress-deletions="false">
-   <sync-rule-mapping mapping-type="constant" sync-rule-id="{D5883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{5B3538DC-8A16-4B9B-B3B2-DB1F19C00D4F}" initial-flow-only="true" is-existence-test="false">
-    <sync-rule-value>1</sync-rule-value>
-   </sync-rule-mapping>
-  </export-flow>
-  <export-flow cd-attribute="dn" id="{8CE847E8-E4DC-427B-80F5-7B70BF18E415}" suppress-deletions="false">
-   <sync-rule-mapping mapping-type="direct" sync-rule-id="{D5883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{2EB30357-0714-4078-8B08-CC134B68A4E3}" initial-flow-only="true" is-existence-test="false">
-    <src-attribute>xActiveDirectoryDN</src-attribute>
-   </sync-rule-mapping>
-  </export-flow>
-  <export-flow cd-attribute="RegistrarPool" id="{3D705628-2B54-4624-A993-0670495B42D9}" suppress-deletions="true">
-   <sync-rule-mapping mapping-type="constant" sync-rule-id="{D5883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{FF788E07-24EF-4AA5-8B86-BA0C4DFDA3DF}" initial-flow-only="false" is-existence-test="false">
-    <sync-rule-value>contoso-s4b01.contoso.com</sync-rule-value>
-   </sync-rule-mapping>
-  </export-flow>
- </export-flow-set>
-</export-attribute-flow>
-
- <provisioning-cleanup type="declared"><action>make-normal-disconnector</action></provisioning-cleanup>
+ <join />
+ <projection />
+ <export-attribute-flow />
+ <provisioning-cleanup type="declared"><action>delete-object</action></provisioning-cleanup>
  <extension />
  <controller-configuration>
  <application-protection>low</application-protection>
@@ -61,7 +38,7 @@
  <description></description>
  <ma-ui-settings><account-joiner-queries><attributes></attributes><filters max_mv_search_results=""></filters></account-joiner-queries></ma-ui-settings>
  <private-configuration>
-  <MAConfig><ui-data><xmlwizard><properties><sample_file></sample_file><code_page_description></code_page_description></properties><partitions></partitions><primary_class_mappings><mapping object_class="OrganizationalUnit" primary_class="OrganizationalUnit" user_define="0"><attribute>Name</attribute><attribute>ObjectClass</attribute><attribute>ObjectCategory</attribute><attribute>Guid</attribute><attribute>export_password</attribute></mapping><mapping object_class="User" primary_class="User" user_define="0"><attribute>AudioVideoDisabled</attribute><attribute>ClientPolicy</attribute><attribute>ClientVersionPolicy</attribute><attribute>ConferencingPolicy</attribute><attribute>DialPlan</attribute><attribute>DisplayName</attribute><attribute>Enabled</attribute><attribute>EnabledForFederation</attribute><attribute>EnabledForInternetAccess</attribute><attribute>EnabledForRichPresence</attribute><attribute>EnterpriseVoiceEnabled</attribute><attribute>ExternalAccessPolicy</attribute><attribute>FirstName</attribute><attribute>HomeServer</attribute><attribute>HostedVoiceMail</attribute><attribute>HostedVoicemailPolicy</attribute><attribute>HostingProvider</attribute><attribute>Identity</attribute><attribute>IPPBXSoftPhoneRoutingEnabled</attribute><attribute>IsValid</attribute><attribute>LastName</attribute><attribute>LineServerURI</attribute><attribute>LineURI</attribute><attribute>LocationPolicy</attribute><attribute>Name</attribute><attribute>ObjectCategory</attribute><attribute>ObjectClass</attribute><attribute>OriginatorSid</attribute><attribute>PinPolicy</attribute><attribute>PresencePolicy</attribute><attribute>PrivateLine</attribute><attribute>ProxyAddresses</attribute><attribute>PublicNetworkEnabled</attribute><attribute>RegistrarPool</attribute><attribute>RemoteCallControlTelephonyEnabled</attribute><attribute>SamAccountName</attribute><attribute>Sid</attribute><attribute>SipAddress</attribute><attribute>TargetRegistrarPool</attribute><attribute>TargetServerIfMoving</attribute><attribute>TenantId</attribute><attribute>UserPrincipalName</attribute><attribute>VoicePolicy</attribute><attribute>Guid</attribute><attribute>export_password</attribute></mapping></primary_class_mappings><object_classes><object_class cd_name="OrganizationalUnit" selected="-1" user_define="0" configured="-1" anchor="" dn_as_anchor="0"><attribute mandatory="0">Name</attribute><attribute mandatory="0">ObjectClass</attribute><attribute mandatory="0">ObjectCategory</attribute><attribute mandatory="-1">Guid</attribute><attribute mandatory="0">export_password</attribute></object_class><object_class cd_name="User" selected="-1" user_define="0" configured="-1" anchor="" dn_as_anchor="0"><attribute mandatory="0">AudioVideoDisabled</attribute><attribute mandatory="0">ClientPolicy</attribute><attribute mandatory="0">ClientVersionPolicy</attribute><attribute mandatory="0">ConferencingPolicy</attribute><attribute mandatory="0">DialPlan</attribute><attribute mandatory="0">DisplayName</attribute><attribute mandatory="0">Enabled</attribute><attribute mandatory="0">EnabledForFederation</attribute><attribute mandatory="0">EnabledForInternetAccess</attribute><attribute mandatory="0">EnabledForRichPresence</attribute><attribute mandatory="0">EnterpriseVoiceEnabled</attribute><attribute mandatory="0">ExternalAccessPolicy</attribute><attribute mandatory="0">FirstName</attribute><attribute mandatory="0">HomeServer</attribute><attribute mandatory="0">HostedVoiceMail</attribute><attribute mandatory="0">HostedVoicemailPolicy</attribute><attribute mandatory="0">HostingProvider</attribute><attribute mandatory="0">Identity</attribute><attribute mandatory="0">IPPBXSoftPhoneRoutingEnabled</attribute><attribute mandatory="0">IsValid</attribute><attribute mandatory="0">LastName</attribute><attribute mandatory="0">LineServerURI</attribute><attribute mandatory="0">LineURI</attribute><attribute mandatory="0">LocationPolicy</attribute><attribute mandatory="0">Name</attribute><attribute mandatory="0">ObjectCategory</attribute><attribute mandatory="0">ObjectClass</attribute><attribute mandatory="0">OriginatorSid</attribute><attribute mandatory="0">PinPolicy</attribute><attribute mandatory="0">PresencePolicy</attribute><attribute mandatory="0">PrivateLine</attribute><attribute mandatory="0">ProxyAddresses</attribute><attribute mandatory="0">PublicNetworkEnabled</attribute><attribute mandatory="0">RegistrarPool</attribute><attribute mandatory="0">RemoteCallControlTelephonyEnabled</attribute><attribute mandatory="0">SamAccountName</attribute><attribute mandatory="0">Sid</attribute><attribute mandatory="0">SipAddress</attribute><attribute mandatory="0">TargetRegistrarPool</attribute><attribute mandatory="0">TargetServerIfMoving</attribute><attribute mandatory="0">TenantId</attribute><attribute mandatory="0">UserPrincipalName</attribute><attribute mandatory="0">VoicePolicy</attribute><attribute mandatory="-1">Guid</attribute><attribute mandatory="0">export_password</attribute></object_class></object_classes><attributes><attribute cd_name="AudioVideoDisabled" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="ClientPolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="ClientVersionPolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="ConferencingPolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="DialPlan" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="DisplayName" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="Enabled" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="EnabledForFederation" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="EnabledForInternetAccess" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="EnabledForRichPresence" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="EnterpriseVoiceEnabled" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="ExternalAccessPolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="FirstName" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="Guid" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Binary" user_define="0" /><attribute cd_name="HomeServer" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="HostedVoiceMail" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="HostedVoicemailPolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="HostingProvider" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="Identity" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="IPPBXSoftPhoneRoutingEnabled" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="IsValid" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="LastName" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="LineServerURI" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="LineURI" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="LocationPolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="Name" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="ObjectCategory" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="ObjectClass" sample_data="" binary="0" multi_valued="-1" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="OriginatorSid" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="PinPolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="PresencePolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="PrivateLine" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="ProxyAddresses" sample_data="" binary="0" multi_valued="-1" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="PublicNetworkEnabled" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="RegistrarPool" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="RemoteCallControlTelephonyEnabled" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="SamAccountName" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="Sid" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="SipAddress" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="TargetRegistrarPool" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="TargetServerIfMoving" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="TenantId" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Binary" user_define="0" /><attribute cd_name="UserPrincipalName" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="VoicePolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="export_password" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /></attributes><anchor><attribute object_class="OrganizationalUnit">Guid</attribute><attribute object_class="User">Guid</attribute></anchor></xmlwizard><ma-help-text>Using this Connector you can synchronize with PowerShell Connector compliant data sources</ma-help-text></ui-data><importing><anchor><attribute object_class="OrganizationalUnit">Guid</attribute><attribute object_class="User">Guid</attribute></anchor><per-class-settings><class><name>OrganizationalUnit</name><anchor><attribute>Guid</attribute></anchor></class><class><name>User</name><anchor><attribute>Guid</attribute></anchor></class></per-class-settings></importing><exporting></exporting><ldap-dn>0</ldap-dn><change_type_attribute></change_type_attribute><add_change_type_value>Add</add_change_type_value><modify_change_type_value>Modify</modify_change_type_value><delete_change_type_value>Delete</delete_change_type_value><primary_class_mappings><mapping><primary_class>OrganizationalUnit</primary_class><oc-value>OrganizationalUnit</oc-value></mapping><mapping><primary_class>User</primary_class><oc-value>User</oc-value></mapping></primary_class_mappings><enable-unapplied-merge>0</enable-unapplied-merge><password-extension-config><password-extension-enabled>0</password-extension-enabled><dll data-owner="ISV"></dll><password-set-enabled></password-set-enabled><password-change-enabled></password-change-enabled><connection-info><connect-to></connect-to><user></user></connection-info><timeout></timeout></password-extension-config><file-type>Extensible2</file-type><extension-config><filename data-owner="ISV">Microsoft.IAM.Connector.PowerShell.dll</filename><import-default-page-size>9999</import-default-page-size><import-max-page-size>2147483647</import-max-page-size><export-default-page-size>9999</export-default-page-size><export-max-page-size>2147483647</export-max-page-size><export-mode data-owner="ISV">call-based</export-mode><import-mode>call-based</import-mode><export-enabled data-owner="ISV">1</export-enabled><import-enabled data-owner="ISV">1</import-enabled><discovery-partition>extensibility</discovery-partition><discovery-schema>extensibility</discovery-schema><discovery-hierarchy>extensibility</discovery-hierarchy><password-management-enabled>1</password-management-enabled><assembly-version>1.0.419.911</assembly-version><export-type>1</export-type><capability-bits>2751960688</capability-bits><supports-parameters-ex>0</supports-parameters-ex></extension-config><parameter-definitions refreshSchema="0" refreshPartition="0" refreshConnectivityParameters="0" refreshCapabilitiesParameters="0" refreshGlobalParameters="0" refreshOtherParameters="0" refreshSchemaParameters="0"><parameter><name></name><use>connectivity</use><type>label</type><validation></validation><text>To create a connector, specify parameters as appropriate to your target system</text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Server</name><use>connectivity</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Domain</name><use>connectivity</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>User</name><use>connectivity</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Password</name><use>connectivity</use><type>encrypted-string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>label</type><validation></validation><text>With Impersonate Connector Account, each PowerShell script will execute in its own runspace with the credentials provided above</text><default-value></default-value></parameter><parameter><name>Impersonate Connector Account</name><use>connectivity</use><type>checkbox</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Load User Profile When Impersonating</name><use>connectivity</use><type>checkbox</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Logon Type When Impersonating</name><use>connectivity</use><type>drop-down</type><validation>None,LogOnInteractive,LogOnNetwork,LogOnBatch,LogOnService,LogOnNetworkClearText</validation><text></text><default-value>None</default-value><dropdown-extensible>0</dropdown-extensible></parameter><parameter><name></name><use>connectivity</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Signed Scripts Only</name><use>connectivity</use><type>checkbox</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Common Module Script Name (with extension)</name><use>connectivity</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Common Module Script</name><use>connectivity</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Validation Script</name><use>connectivity</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Schema Script</name><use>connectivity</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>label</type><validation></validation><text>Provide additional parameter names in the below fields (Multiple names must be separated by comma)</text><default-value></default-value></parameter><parameter><name>Additional Config Parameter Names</name><use>connectivity</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Additional Encrypted Config Parameter Names</name><use>connectivity</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Hierarchy Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Begin Import Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Import Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>End Import Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Begin Export Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Export Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>End Export Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>global</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Begin Password Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Password Extension Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>End Password Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>global</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>global</use><type>label</type><validation></validation><text>Additional Configuration Parameters</text><default-value></default-value></parameter><parameter><name>SipAddressType_Global</name><use>global</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>SipDomain_Global</name><use>global</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>ForceMove_Global</name><use>global</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>UserPages_Global</name><use>global</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>OrganizationalUnitPages_Global</name><use>global</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>PreferredDomainControllerFQDN_Global</name><use>global</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>LastRunDateTimeOffsetMinute_Global</name><use>global</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>capabilities</use><type>label</type><validation></validation><text>Please define the capabilities of the Connector and the Connected System</text><default-value></default-value></parameter><parameter><name></name><use>capabilities</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Distinguished Name Style</name><use>capabilities</use><type>drop-down</type><validation>None,Generic,Ldap</validation><text></text><default-value>Ldap</default-value><dropdown-extensible>0</dropdown-extensible></parameter><parameter><name>Export Type</name><use>capabilities</use><type>drop-down</type><validation>AttributeUpdate,AttributeReplace,ObjectReplace,MultivaluedReferenceAttributeUpdate</validation><text></text><default-value>AttributeUpdate</default-value><dropdown-extensible>0</dropdown-extensible></parameter><parameter><name>Data Normalization</name><use>capabilities</use><type>drop-down</type><validation>None,Uppercase,RemoveAccents,Both</validation><text></text><default-value>None</default-value><dropdown-extensible>0</dropdown-extensible></parameter><parameter><name>Object Confirmation</name><use>capabilities</use><type>drop-down</type><validation>Normal,NoDeleteConfirmation,NoAddAndDeleteConfirmation</validation><text></text><default-value>Normal</default-value><dropdown-extensible>0</dropdown-extensible></parameter><parameter><name></name><use>capabilities</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Use DN As Anchor (Only LDAP style DN)</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name>Concurrent Operations Of Several Connectors</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>1</default-value></parameter><parameter><name></name><use>capabilities</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partitions (Only LDAP style DN)</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name>Hierarchy (Only LDAP style DN)</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name></name><use>capabilities</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Enable Import</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>1</default-value></parameter><parameter><name>Enable Delta Import</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name></name><use>capabilities</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Enable Export</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name>Enable Full Export</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name>No Reference Values In First Export Pass</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name>Enable Object Rename</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name>Delete-Add As Replace</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name></name><use>capabilities</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Enable Password operations</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name>Enable Export Password In First Pass</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name></name><use>partition</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition Server</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>partition</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition Domain</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition User</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition Password</name><use>partition</use><type>encrypted-string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>partition</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>partition</use><type>label</type><validation></validation><text>With Partition Impersonate Connector Account, each PowerShell script will execute in its own runspace with the credentials provided above</text><default-value></default-value></parameter><parameter><name>Partition Impersonate Connector Account</name><use>partition</use><type>checkbox</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition Load User Profile When Impersonating</name><use>partition</use><type>checkbox</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition Logon Type When Impersonating</name><use>partition</use><type>drop-down</type><validation>None,LogOnInteractive,LogOnNetwork,LogOnBatch,LogOnService,LogOnNetworkClearText</validation><text></text><default-value>None</default-value><dropdown-extensible>0</dropdown-extensible></parameter><parameter><name></name><use>partition</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition Validation Script</name><use>partition</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>partition</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>partition</use><type>label</type><validation></validation><text>Additional Configuration Parameters</text><default-value></default-value></parameter><parameter><name>SipAddressType_Partition</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>SipDomain_Partition</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>ForceMove_Partition</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>UserPages_Partition</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>OrganizationalUnitPages_Partition</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>PreferredDomainControllerFQDN_Partition</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>LastRunDateTimeOffsetMinute_Partition</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>run-step</use><type>label</type><validation></validation><text>RunStep Specific Configuration</text><default-value></default-value></parameter><parameter><name></name><use>run-step</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>run-step</use><type>label</type><validation></validation><text>Additional Configuration Parameters</text><default-value></default-value></parameter><parameter><name>SipAddressType_RunStep</name><use>run-step</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>SipDomain_RunStep</name><use>run-step</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>ForceMove_RunStep</name><use>run-step</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>UserPages_RunStep</name><use>run-step</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>OrganizationalUnitPages_RunStep</name><use>run-step</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>PreferredDomainControllerFQDN_RunStep</name><use>run-step</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>LastRunDateTimeOffsetMinute_RunStep</name><use>run-step</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter></parameter-definitions><parameter-values><parameter name="Password" type="encrypted-string" use="connectivity" encrypted="1"></parameter><parameter name="Distinguished Name Style" type="drop-down" use="capabilities">Ldap</parameter><parameter name="Export Type" type="drop-down" use="capabilities">AttributeUpdate</parameter><parameter name="Data Normalization" type="drop-down" use="capabilities">None</parameter><parameter name="Object Confirmation" type="drop-down" use="capabilities">NoAddAndDeleteConfirmation</parameter><parameter name="Use DN As Anchor (Only LDAP style DN)" type="checkbox" use="capabilities">0</parameter><parameter name="Concurrent Operations Of Several Connectors" type="checkbox" use="capabilities">1</parameter><parameter name="Partitions (Only LDAP style DN)" type="checkbox" use="capabilities">1</parameter><parameter name="Hierarchy (Only LDAP style DN)" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Import" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Delta Import" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Export" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Full Export" type="checkbox" use="capabilities">0</parameter><parameter name="No Reference Values In First Export Pass" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Object Rename" type="checkbox" use="capabilities">1</parameter><parameter name="Delete-Add As Replace" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Password operations" type="checkbox" use="capabilities">0</parameter><parameter name="Enable Export Password In First Pass" type="checkbox" use="capabilities">0</parameter><parameter name="Server" type="string" use="connectivity">https://s4badmin.contoso.com/OcsPowerShell</parameter><parameter name="Domain" type="string" use="connectivity">CONTOSO</parameter><parameter name="User" type="string" use="connectivity">svc_fim_s4bma</parameter><parameter name="Impersonate Connector Account" type="checkbox" use="connectivity">0</parameter><parameter name="Load User Profile When Impersonating" type="checkbox" use="connectivity">0</parameter><parameter name="Logon Type When Impersonating" type="drop-down" use="connectivity">None</parameter><parameter name="Signed Scripts Only" type="checkbox" use="connectivity">0</parameter><parameter name="Common Module Script Name (with extension)" type="string" use="connectivity">Lync.common.psm1</parameter><parameter name="Common Module Script" type="text" use="connectivity">&lt;#
+  <MAConfig><ui-data><xmlwizard><properties><sample_file></sample_file><code_page_description></code_page_description></properties><partitions></partitions><primary_class_mappings><mapping object_class="OrganizationalUnit" primary_class="OrganizationalUnit" user_define="0"><attribute>Name</attribute><attribute>ObjectClass</attribute><attribute>ObjectCategory</attribute><attribute>Guid</attribute><attribute>export_password</attribute></mapping><mapping object_class="User" primary_class="User" user_define="0"><attribute>ArchivingPolicy</attribute><attribute>AudioVideoDisabled</attribute><attribute>ClientPolicy</attribute><attribute>ClientVersionPolicy</attribute><attribute>ConferencingPolicy</attribute><attribute>DialPlan</attribute><attribute>DisplayName</attribute><attribute>Enabled</attribute><attribute>EnabledForFederation</attribute><attribute>EnabledForInternetAccess</attribute><attribute>EnabledForRichPresence</attribute><attribute>EnterpriseVoiceEnabled</attribute><attribute>ExternalAccessPolicy</attribute><attribute>FirstName</attribute><attribute>HomeServer</attribute><attribute>HostedVoiceMail</attribute><attribute>HostedVoicemailPolicy</attribute><attribute>HostingProvider</attribute><attribute>Identity</attribute><attribute>IPPBXSoftPhoneRoutingEnabled</attribute><attribute>IsValid</attribute><attribute>LastName</attribute><attribute>LineServerURI</attribute><attribute>LineURI</attribute><attribute>LocationPolicy</attribute><attribute>Name</attribute><attribute>ObjectCategory</attribute><attribute>ObjectClass</attribute><attribute>OriginatorSid</attribute><attribute>PinPolicy</attribute><attribute>PresencePolicy</attribute><attribute>PrivateLine</attribute><attribute>ProxyAddresses</attribute><attribute>PublicNetworkEnabled</attribute><attribute>RegistrarPool</attribute><attribute>RemoteCallControlTelephonyEnabled</attribute><attribute>SamAccountName</attribute><attribute>Sid</attribute><attribute>SipAddress</attribute><attribute>TargetRegistrarPool</attribute><attribute>TargetServerIfMoving</attribute><attribute>TenantId</attribute><attribute>UserPrincipalName</attribute><attribute>VoicePolicy</attribute><attribute>Guid</attribute><attribute>export_password</attribute></mapping></primary_class_mappings><object_classes><object_class cd_name="OrganizationalUnit" selected="-1" user_define="0" configured="-1" anchor="" dn_as_anchor="0"><attribute mandatory="0">Name</attribute><attribute mandatory="0">ObjectClass</attribute><attribute mandatory="0">ObjectCategory</attribute><attribute mandatory="-1">Guid</attribute></object_class><object_class cd_name="User" selected="-1" user_define="0" configured="-1" anchor="" dn_as_anchor="0"><attribute mandatory="0">AudioVideoDisabled</attribute><attribute mandatory="0">ClientPolicy</attribute><attribute mandatory="0">ClientVersionPolicy</attribute><attribute mandatory="0">ConferencingPolicy</attribute><attribute mandatory="0">DialPlan</attribute><attribute mandatory="0">DisplayName</attribute><attribute mandatory="0">Enabled</attribute><attribute mandatory="0">EnabledForFederation</attribute><attribute mandatory="0">EnabledForInternetAccess</attribute><attribute mandatory="0">EnabledForRichPresence</attribute><attribute mandatory="0">EnterpriseVoiceEnabled</attribute><attribute mandatory="0">ExternalAccessPolicy</attribute><attribute mandatory="0">FirstName</attribute><attribute mandatory="0">HomeServer</attribute><attribute mandatory="0">HostedVoiceMail</attribute><attribute mandatory="0">HostedVoicemailPolicy</attribute><attribute mandatory="0">HostingProvider</attribute><attribute mandatory="0">Identity</attribute><attribute mandatory="0">IPPBXSoftPhoneRoutingEnabled</attribute><attribute mandatory="0">IsValid</attribute><attribute mandatory="0">LastName</attribute><attribute mandatory="0">LineServerURI</attribute><attribute mandatory="0">LineURI</attribute><attribute mandatory="0">LocationPolicy</attribute><attribute mandatory="0">Name</attribute><attribute mandatory="0">ObjectCategory</attribute><attribute mandatory="0">ObjectClass</attribute><attribute mandatory="0">OriginatorSid</attribute><attribute mandatory="0">PinPolicy</attribute><attribute mandatory="0">PresencePolicy</attribute><attribute mandatory="0">PrivateLine</attribute><attribute mandatory="0">ProxyAddresses</attribute><attribute mandatory="0">PublicNetworkEnabled</attribute><attribute mandatory="0">RegistrarPool</attribute><attribute mandatory="0">RemoteCallControlTelephonyEnabled</attribute><attribute mandatory="0">SamAccountName</attribute><attribute mandatory="0">Sid</attribute><attribute mandatory="0">SipAddress</attribute><attribute mandatory="0">TargetRegistrarPool</attribute><attribute mandatory="0">TargetServerIfMoving</attribute><attribute mandatory="0">TenantId</attribute><attribute mandatory="0">UserPrincipalName</attribute><attribute mandatory="0">VoicePolicy</attribute><attribute mandatory="-1">Guid</attribute></object_class></object_classes><attributes><attribute cd_name="ArchivingPolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="AudioVideoDisabled" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="ClientPolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="ClientVersionPolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="ConferencingPolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="DialPlan" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="DisplayName" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="Enabled" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="EnabledForFederation" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="EnabledForInternetAccess" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="EnabledForRichPresence" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="EnterpriseVoiceEnabled" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="ExternalAccessPolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="FirstName" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="Guid" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Binary" user_define="0" /><attribute cd_name="HomeServer" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="HostedVoiceMail" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="HostedVoicemailPolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="HostingProvider" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="Identity" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="IPPBXSoftPhoneRoutingEnabled" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="IsValid" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="LastName" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="LineServerURI" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="LineURI" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="LocationPolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="Name" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="ObjectCategory" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="ObjectClass" sample_data="" binary="0" multi_valued="-1" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="OriginatorSid" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="PinPolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="PresencePolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="PrivateLine" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="ProxyAddresses" sample_data="" binary="0" multi_valued="-1" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="PublicNetworkEnabled" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="RegistrarPool" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="RemoteCallControlTelephonyEnabled" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Bool" user_define="0" /><attribute cd_name="SamAccountName" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="Sid" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="SipAddress" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="TargetRegistrarPool" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="TargetServerIfMoving" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="TenantId" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="Binary" user_define="0" /><attribute cd_name="UserPrincipalName" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="VoicePolicy" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /><attribute cd_name="export_password" sample_data="" binary="0" multi_valued="0" file_reference="0" selected="-1" lower_bound="" upper_bound="" type="String" user_define="0" /></attributes><anchor><attribute object_class="OrganizationalUnit">Guid</attribute><attribute object_class="User">Guid</attribute></anchor></xmlwizard><ma-help-text>Using this Connector you can synchronize with PowerShell Connector compliant data sources</ma-help-text></ui-data><importing><anchor><attribute object_class="OrganizationalUnit">Guid</attribute><attribute object_class="User">Guid</attribute></anchor><per-class-settings><class><name>OrganizationalUnit</name><anchor><attribute>Guid</attribute></anchor></class><class><name>User</name><anchor><attribute>Guid</attribute></anchor></class></per-class-settings></importing><exporting></exporting><ldap-dn>0</ldap-dn><change_type_attribute></change_type_attribute><add_change_type_value>Add</add_change_type_value><modify_change_type_value>Modify</modify_change_type_value><delete_change_type_value>Delete</delete_change_type_value><primary_class_mappings><mapping><primary_class>OrganizationalUnit</primary_class><oc-value>OrganizationalUnit</oc-value></mapping><mapping><primary_class>User</primary_class><oc-value>User</oc-value></mapping></primary_class_mappings><enable-unapplied-merge>0</enable-unapplied-merge><password-extension-config><password-extension-enabled>0</password-extension-enabled><dll data-owner="ISV"></dll><password-set-enabled></password-set-enabled><password-change-enabled></password-change-enabled><connection-info><connect-to></connect-to><user></user></connection-info><timeout></timeout></password-extension-config><file-type>Extensible2</file-type><extension-config><filename data-owner="ISV">Microsoft.IAM.Connector.PowerShell.dll</filename><import-default-page-size>9999</import-default-page-size><import-max-page-size>2147483647</import-max-page-size><export-default-page-size>9999</export-default-page-size><export-max-page-size>2147483647</export-max-page-size><export-mode data-owner="ISV">call-based</export-mode><import-mode>call-based</import-mode><export-enabled data-owner="ISV">1</export-enabled><import-enabled data-owner="ISV">1</import-enabled><discovery-partition>extensibility</discovery-partition><discovery-schema>extensibility</discovery-schema><discovery-hierarchy>extensibility</discovery-hierarchy><password-management-enabled>1</password-management-enabled><assembly-version>1.0.419.911</assembly-version><export-type>1</export-type><capability-bits>2751960688</capability-bits><supports-parameters-ex>0</supports-parameters-ex></extension-config><parameter-definitions refreshSchema="0" refreshPartition="0" refreshConnectivityParameters="0" refreshCapabilitiesParameters="0" refreshGlobalParameters="0" refreshOtherParameters="0" refreshSchemaParameters="0"><parameter><name></name><use>connectivity</use><type>label</type><validation></validation><text>To create a connector, specify parameters as appropriate to your target system</text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Server</name><use>connectivity</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Domain</name><use>connectivity</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>User</name><use>connectivity</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Password</name><use>connectivity</use><type>encrypted-string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>label</type><validation></validation><text>With Impersonate Connector Account, each PowerShell script will execute in its own runspace with the credentials provided above</text><default-value></default-value></parameter><parameter><name>Impersonate Connector Account</name><use>connectivity</use><type>checkbox</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Load User Profile When Impersonating</name><use>connectivity</use><type>checkbox</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Logon Type When Impersonating</name><use>connectivity</use><type>drop-down</type><validation>None,LogOnInteractive,LogOnNetwork,LogOnBatch,LogOnService,LogOnNetworkClearText</validation><text></text><default-value>None</default-value><dropdown-extensible>0</dropdown-extensible></parameter><parameter><name></name><use>connectivity</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Signed Scripts Only</name><use>connectivity</use><type>checkbox</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Common Module Script Name (with extension)</name><use>connectivity</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Common Module Script</name><use>connectivity</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Validation Script</name><use>connectivity</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Schema Script</name><use>connectivity</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>connectivity</use><type>label</type><validation></validation><text>Provide additional parameter names in the below fields (Multiple names must be separated by comma)</text><default-value></default-value></parameter><parameter><name>Additional Config Parameter Names</name><use>connectivity</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Additional Encrypted Config Parameter Names</name><use>connectivity</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Hierarchy Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Begin Import Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Import Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>End Import Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Begin Export Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Export Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>End Export Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>global</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Begin Password Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Password Extension Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>End Password Script</name><use>global</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>global</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>global</use><type>label</type><validation></validation><text>Additional Configuration Parameters</text><default-value></default-value></parameter><parameter><name>SipAddressType_Global</name><use>global</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>SipDomain_Global</name><use>global</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>ForceMove_Global</name><use>global</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>UserPages_Global</name><use>global</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>OrganizationalUnitPages_Global</name><use>global</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>PreferredDomainControllerFQDN_Global</name><use>global</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>LastRunDateTimeOffsetMinute_Global</name><use>global</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>capabilities</use><type>label</type><validation></validation><text>Please define the capabilities of the Connector and the Connected System</text><default-value></default-value></parameter><parameter><name></name><use>capabilities</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Distinguished Name Style</name><use>capabilities</use><type>drop-down</type><validation>None,Generic,Ldap</validation><text></text><default-value>Ldap</default-value><dropdown-extensible>0</dropdown-extensible></parameter><parameter><name>Export Type</name><use>capabilities</use><type>drop-down</type><validation>AttributeUpdate,AttributeReplace,ObjectReplace,MultivaluedReferenceAttributeUpdate</validation><text></text><default-value>AttributeUpdate</default-value><dropdown-extensible>0</dropdown-extensible></parameter><parameter><name>Data Normalization</name><use>capabilities</use><type>drop-down</type><validation>None,Uppercase,RemoveAccents,Both</validation><text></text><default-value>None</default-value><dropdown-extensible>0</dropdown-extensible></parameter><parameter><name>Object Confirmation</name><use>capabilities</use><type>drop-down</type><validation>Normal,NoDeleteConfirmation,NoAddAndDeleteConfirmation</validation><text></text><default-value>Normal</default-value><dropdown-extensible>0</dropdown-extensible></parameter><parameter><name></name><use>capabilities</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Use DN As Anchor (Only LDAP style DN)</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name>Concurrent Operations Of Several Connectors</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>1</default-value></parameter><parameter><name></name><use>capabilities</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partitions (Only LDAP style DN)</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name>Hierarchy (Only LDAP style DN)</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name></name><use>capabilities</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Enable Import</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>1</default-value></parameter><parameter><name>Enable Delta Import</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name></name><use>capabilities</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Enable Export</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name>Enable Full Export</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name>No Reference Values In First Export Pass</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name>Enable Object Rename</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name>Delete-Add As Replace</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name></name><use>capabilities</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Enable Password operations</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name>Enable Export Password In First Pass</name><use>capabilities</use><type>checkbox</type><validation></validation><text></text><default-value>0</default-value></parameter><parameter><name></name><use>partition</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition Server</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>partition</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition Domain</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition User</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition Password</name><use>partition</use><type>encrypted-string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>partition</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>partition</use><type>label</type><validation></validation><text>With Partition Impersonate Connector Account, each PowerShell script will execute in its own runspace with the credentials provided above</text><default-value></default-value></parameter><parameter><name>Partition Impersonate Connector Account</name><use>partition</use><type>checkbox</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition Load User Profile When Impersonating</name><use>partition</use><type>checkbox</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition Logon Type When Impersonating</name><use>partition</use><type>drop-down</type><validation>None,LogOnInteractive,LogOnNetwork,LogOnBatch,LogOnService,LogOnNetworkClearText</validation><text></text><default-value>None</default-value><dropdown-extensible>0</dropdown-extensible></parameter><parameter><name></name><use>partition</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>Partition Validation Script</name><use>partition</use><type>text</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>partition</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>partition</use><type>label</type><validation></validation><text>Additional Configuration Parameters</text><default-value></default-value></parameter><parameter><name>SipAddressType_Partition</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>SipDomain_Partition</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>ForceMove_Partition</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>UserPages_Partition</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>OrganizationalUnitPages_Partition</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>PreferredDomainControllerFQDN_Partition</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>LastRunDateTimeOffsetMinute_Partition</name><use>partition</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>run-step</use><type>label</type><validation></validation><text>RunStep Specific Configuration</text><default-value></default-value></parameter><parameter><name></name><use>run-step</use><type>divider</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name></name><use>run-step</use><type>label</type><validation></validation><text>Additional Configuration Parameters</text><default-value></default-value></parameter><parameter><name>SipAddressType_RunStep</name><use>run-step</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>SipDomain_RunStep</name><use>run-step</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>ForceMove_RunStep</name><use>run-step</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>UserPages_RunStep</name><use>run-step</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>OrganizationalUnitPages_RunStep</name><use>run-step</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>PreferredDomainControllerFQDN_RunStep</name><use>run-step</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter><parameter><name>LastRunDateTimeOffsetMinute_RunStep</name><use>run-step</use><type>string</type><validation></validation><text></text><default-value></default-value></parameter></parameter-definitions><parameter-values><parameter name="Password" type="encrypted-string" use="connectivity" encrypted="1"></parameter><parameter name="Server" type="string" use="connectivity">https://s4badmin.contoso.com/OcsPowerShell</parameter><parameter name="Domain" type="string" use="connectivity">CONTOSO</parameter><parameter name="User" type="string" use="connectivity">svc_fim_s4bma</parameter><parameter name="Impersonate Connector Account" type="checkbox" use="connectivity">0</parameter><parameter name="Load User Profile When Impersonating" type="checkbox" use="connectivity">0</parameter><parameter name="Logon Type When Impersonating" type="drop-down" use="connectivity">None</parameter><parameter name="Signed Scripts Only" type="checkbox" use="connectivity">0</parameter><parameter name="Common Module Script Name (with extension)" type="string" use="connectivity">Lync.common.psm1</parameter><parameter name="Common Module Script" type="text" use="connectivity">&lt;#
 &lt;copyright file="Lync.Common.psm1" company="Microsoft"&gt;
 	Copyright (c) Microsoft. All Rights Reserved.
 	Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
@@ -97,14 +74,17 @@ function Enter-Script
 		Also clear the $Error variable.
 	#&gt;
 	[CmdletBinding()]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$ScriptType
 	)
 
-	Write-Verbose "$Global:ConnectorName - $ScriptType Script: Execution Started..."
-	$Error.Clear()
+	process
+	{
+		Write-Verbose "$Global:ConnectorName - $ScriptType Script: Execution Started..."
+		$Error.Clear()
+	}
 }
 
 function Exit-Script
@@ -117,7 +97,7 @@ function Exit-Script
 		Throws an exception if $Error is present
 	#&gt;
 	[CmdletBinding()]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$ScriptType,
@@ -129,19 +109,22 @@ function Exit-Script
 		$ExceptionRaisedOnErrorCheck
 	)
 
-	if ($Error.Count -ne 0 -and !$SuppressErrorCheck)
+	process
 	{
-		$errorMessage = [string]$Error[0]
-
-		if ($ExceptionRaisedOnErrorCheck -eq $null)
+		if ($Error.Count -ne 0 -and !$SuppressErrorCheck)
 		{
-			$ExceptionRaisedOnErrorCheck = [Microsoft.MetadirectoryServices.ExtensibleExtensionException]
+			$errorMessage = [string]$Error[0]
+
+			if ($ExceptionRaisedOnErrorCheck -eq $null)
+			{
+				$ExceptionRaisedOnErrorCheck = [Microsoft.MetadirectoryServices.ExtensibleExtensionException]
+			}
+
+			throw  $errorMessage -as $ExceptionRaisedOnErrorCheck
 		}
 
-		throw  $errorMessage -as $ExceptionRaisedOnErrorCheck
+		Write-Verbose "$Global:ConnectorName - $ScriptType Script: Execution Completed."
 	}
-
-	Write-Verbose "$Global:ConnectorName - $ScriptType Script: Execution Completed."
 }
 
 function Get-ExtensionsDirectory
@@ -155,7 +138,7 @@ function Get-ExtensionsDirectory
 	#&gt;
 	[CmdletBinding()]
 	[OutputType([string])]
-	param (
+	param(
 	)
 
 	process
@@ -186,7 +169,7 @@ function New-GenericObject
 	
 	[CmdletBinding()]
 	[OutputType([object])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$TypeName,
@@ -235,7 +218,7 @@ function Test-Variable
 
 	[CmdletBinding()]
 	[OutputType([bool])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$Name,
@@ -272,7 +255,7 @@ function ConvertFrom-SchemaXml
 
 	[CmdletBinding()]
 	[OutputType([Microsoft.MetadirectoryServices.Schema])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[ValidateScript({ Test-Path $_ -PathType "Leaf" })]
 		[string]
@@ -344,7 +327,7 @@ function Get-CSEntryChangeValue
 
 	[CmdletBinding()]
 	[OutputType([object])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange,
@@ -412,7 +395,7 @@ function Get-CSEntryChangeValueIfChanged
 	
 	[CmdletBinding()]
 	[OutputType([object])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange,
@@ -474,7 +457,7 @@ function Test-CSEntryChangeValueChanged
 	
 	[CmdletBinding()]
 	[OutputType([bool])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange,
@@ -547,7 +530,7 @@ function Test-CSEntryChangeAttributeDeleted
 	
 	[CmdletBinding()]
 	[OutputType([bool])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange,
@@ -587,7 +570,7 @@ function Get-CSEntryChangeDN
 
 	[CmdletBinding()]
 	[OutputType([string])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -616,7 +599,7 @@ function Get-ConfigParameter
 
 	[CmdletBinding()]
 	[OutputType([string])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 		$ConfigParameters,
@@ -1022,7 +1005,7 @@ function Select-PreferredDomainController
 
 	[CmdletBinding()]
 	[OutputType([string])]
-	param (
+	param(
 		[parameter(Mandatory = $false)]
 		[string]
 		$DomainControllerList
@@ -1080,7 +1063,7 @@ Export-ModuleMember -Function * -Variable *
 #&gt;
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 	$ConfigParameters,
@@ -1119,7 +1102,7 @@ function Test-ConfigParameterPage
 
 	[CmdletBinding()]
     [OutputType([Microsoft.MetadirectoryServices.ParameterValidationResult])]
-	param (
+	param(
 	)
 	
 	$validationResult = New-Object -TypeName "Microsoft.MetadirectoryServices.ParameterValidationResult" -ArgumentList "Success", $null, $null
@@ -1166,7 +1149,7 @@ function Test-ConnectivityConfigParameterPage
 
 	[CmdletBinding()]
     [OutputType([Microsoft.MetadirectoryServices.ParameterValidationResult])]
-	param (
+	param(
 	[parameter(Mandatory = $false)]
 	[ValidateSet("Partition", "Connectivity", "")]
 	[string]
@@ -1270,7 +1253,7 @@ function Test-GlobalConfigParameterPage
 
 	[CmdletBinding()]
     [OutputType([Microsoft.MetadirectoryServices.ParameterValidationResult])]
-	param (
+	param(
 	)
 
 	$validationResult = New-Object -TypeName "Microsoft.MetadirectoryServices.ParameterValidationResult" -ArgumentList "Success", $null, $null
@@ -1354,7 +1337,7 @@ function Get-ConnectorSchema
 
 	[CmdletBinding()]
     [OutputType([Microsoft.MetadirectoryServices.Schema])]
-	param (
+	param(
 	)
 
 	$extensionsDir = Get-ExtensionsDirectory
@@ -1368,7 +1351,7 @@ function Get-ConnectorSchema
 Get-ConnectorSchema
 
 Exit-Script -ScriptType "Schema"
-</parameter><parameter name="Additional Config Parameter Names" type="string" use="connectivity">SipAddressType,SipDomain,ForceMove,UserPages, OrganizationalUnitPages,PreferredDomainControllerFQDN, LastRunDateTimeOffsetMinute</parameter><parameter name="Additional Encrypted Config Parameter Names" type="string" use="connectivity"></parameter><parameter name="Partition Script" type="text" use="global">&lt;#
+</parameter><parameter name="Additional Config Parameter Names" type="string" use="connectivity">SipAddressType,SipDomain,ForceMove,UserPages, OrganizationalUnitPages,PreferredDomainControllerFQDN, LastRunDateTimeOffsetMinute</parameter><parameter name="Additional Encrypted Config Parameter Names" type="string" use="connectivity"></parameter><parameter name="Distinguished Name Style" type="drop-down" use="capabilities">Ldap</parameter><parameter name="Export Type" type="drop-down" use="capabilities">AttributeUpdate</parameter><parameter name="Data Normalization" type="drop-down" use="capabilities">None</parameter><parameter name="Object Confirmation" type="drop-down" use="capabilities">NoAddAndDeleteConfirmation</parameter><parameter name="Use DN As Anchor (Only LDAP style DN)" type="checkbox" use="capabilities">0</parameter><parameter name="Concurrent Operations Of Several Connectors" type="checkbox" use="capabilities">1</parameter><parameter name="Partitions (Only LDAP style DN)" type="checkbox" use="capabilities">1</parameter><parameter name="Hierarchy (Only LDAP style DN)" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Import" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Delta Import" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Export" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Full Export" type="checkbox" use="capabilities">0</parameter><parameter name="No Reference Values In First Export Pass" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Object Rename" type="checkbox" use="capabilities">1</parameter><parameter name="Delete-Add As Replace" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Password operations" type="checkbox" use="capabilities">0</parameter><parameter name="Enable Export Password In First Pass" type="checkbox" use="capabilities">0</parameter><parameter name="Partition Script" type="text" use="global">&lt;#
 &lt;copyright file="PartitionScript-Lync.ps1" company="Microsoft"&gt;
 	Copyright (c) Microsoft. All Rights Reserved.
 	Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.
@@ -1379,7 +1362,7 @@ Exit-Script -ScriptType "Schema"
 #&gt;
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 	$ConfigParameters,
@@ -1415,7 +1398,7 @@ function Get-Partitions
 
 	[CmdletBinding()]
     [OutputType([System.Collections.Generic.List[Microsoft.MetadirectoryServices.Partition]])]
-	param (
+	param(
 	)
 	
 	$partitions = New-GenericObject System.Collections.Generic.List Microsoft.MetadirectoryServices.Partition
@@ -1514,7 +1497,7 @@ Exit-Script -ScriptType "Partition"
 #&gt;
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[Microsoft.MetadirectoryServices.HierarchyNode]
 	$HierarchyNode,
@@ -1553,7 +1536,7 @@ function Get-Hierarchy
 
 	[CmdletBinding()]
     [OutputType([System.Collections.Generic.List[Microsoft.MetadirectoryServices.HierarchyNode]])]
-	param (
+	param(
 	)
 
 	$children = New-GenericObject System.Collections.Generic.List Microsoft.MetadirectoryServices.HierarchyNode
@@ -1627,7 +1610,7 @@ Exit-Script -ScriptType "Hierarchy"
 #&gt;
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 	$ConfigParameters,
@@ -1667,7 +1650,7 @@ function Get-OpenImportConnectionResults
 	
 	[CmdletBinding()]
 	[OutputType([System.Collections.Generic.List[Microsoft.MetadirectoryServices.OpenImportConnectionResults]])]
-	param (
+	param(
 	)
 	
 	$watermark = Get-WaterMark
@@ -1688,7 +1671,7 @@ function Get-WaterMark
 	
 	[CmdletBinding()]
     [OutputType([xml])]
-	param (
+	param(
 	)
 	
 	$waterMarkXml = $null
@@ -1779,7 +1762,7 @@ Exit-Script -ScriptType "Begin-Import" -ExceptionRaisedOnErrorCheck $exceptionRa
 #&gt;
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 	$ConfigParameters,
@@ -1821,7 +1804,7 @@ function Import-CSEntries
 	
 	[CmdletBinding()]
     [OutputType([Microsoft.MetadirectoryServices.GetImportEntriesResults])]
-	param (
+	param(
 	)
 	
 	$importEntriesResults = New-Object -TypeName "Microsoft.MetadirectoryServices.GetImportEntriesResults"
@@ -1913,7 +1896,7 @@ function Import-Users
 	
 	[CmdletBinding()]
     [OutputType([Microsoft.MetadirectoryServices.GetImportEntriesResults])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$LdapFilter
@@ -1972,7 +1955,7 @@ function Get-PagingFilter
 	
 	[CmdletBinding()]
     [OutputType([string])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$ObjectType,
@@ -2058,7 +2041,7 @@ function Import-OrganizationalUnits
 	
 	[CmdletBinding()]
     [OutputType([Microsoft.MetadirectoryServices.GetImportEntriesResults])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$LdapFilter
@@ -2103,7 +2086,7 @@ function Get-OrganizationalUnits
 	
 	[CmdletBinding()]
     [OutputType([string[]])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$LdapFilter
@@ -2164,7 +2147,7 @@ function Get-OrganizationalUnitHierarchy
 	
 	[CmdletBinding()]
     [OutputType([string[]])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[string]
 		$RootDN,
@@ -2253,7 +2236,7 @@ if ([string]::IsNullOrEmpty($lastRunDateTimeOffset))
 }
 else
 {
-	$lastRunDateTimeOffset.Trim()
+	$lastRunDateTimeOffset = $lastRunDateTimeOffset.Trim()
 }
 
 $deltaImport = $openImportConnectionRunStep.ImportType -eq "Delta"
@@ -2279,7 +2262,7 @@ Exit-Script -ScriptType "Import"
 #&gt;
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 	$ConfigParameters,
@@ -2321,7 +2304,7 @@ function Get-CloseImportConnectionResults
 	
 	[CmdletBinding()]
 	[OutputType([Microsoft.MetadirectoryServices.CloseImportConnectionResults])]
-	param (
+	param(
 	)
 	
 	$waterMark = [xml]$CloseImportConnectionRunStep.CustomData
@@ -2358,7 +2341,7 @@ Exit-Script -ScriptType "End-Import"
 #&gt;
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 	$ConfigParameters,
@@ -2427,7 +2410,7 @@ Exit-Script -ScriptType "Begin-Export" -ExceptionRaisedOnErrorCheck $exceptionRa
 #&gt;
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 	$ConfigParameters,
@@ -2469,7 +2452,7 @@ function Export-CSEntries
 	
 	[CmdletBinding()]
 	[OutputType([System.Collections.Generic.List[Microsoft.MetadirectoryServices.CSEntryChangeResult]])]
-	param (
+	param(
 	)
 
 	$csentryChangeResults = New-GenericObject System.Collections.Generic.List Microsoft.MetadirectoryServices.CSEntryChangeResult
@@ -2545,7 +2528,7 @@ function Export-User
 	
 	[CmdletBinding()]
 	[OutputType([Hashtable])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -2630,7 +2613,7 @@ function Export-OrganizationalUnit
 	
 	[CmdletBinding()]
 	[OutputType([Hashtable])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -2701,7 +2684,7 @@ function Invoke-EnableCsUserCommand
 	#&gt;
 	
 	[CmdletBinding()]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -2751,7 +2734,7 @@ function Invoke-SetCsUserCommand
 	#&gt;
 	
 	[CmdletBinding()]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -2805,7 +2788,7 @@ function Invoke-GrantCsPolicyCommands
 	#&gt;
 	
 	[CmdletBinding()]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -2875,7 +2858,7 @@ function Invoke-MoveCsUserCommand
 	#&gt;
 	
 	[CmdletBinding()]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -2911,7 +2894,7 @@ function Invoke-DisableCsUserCommand
 	#&gt;
 	
 	[CmdletBinding()]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -2966,7 +2949,7 @@ function Get-CsIdentity
 	
 	[CmdletBinding()]
 	[OutputType([string])]
-	param (
+	param(
 		[parameter(Mandatory = $true)]
 		[Microsoft.MetadirectoryServices.CSEntryChange]
 		$CSEntryChange
@@ -3018,7 +3001,7 @@ Exit-Script -ScriptType "Export" -SuppressErrorCheck
 #&gt;
 
 [CmdletBinding()]
-param (
+param(
 	[parameter(Mandatory = $true)]
 	[System.Collections.ObjectModel.KeyedCollection[string,Microsoft.MetadirectoryServices.ConfigParameter]]
 	$ConfigParameters,
@@ -3055,16 +3038,16 @@ if (Test-Variable -Name "Session" -Scope "Global")
 }
 
 Exit-Script -ScriptType "End-Export"
-</parameter><parameter name="Begin Password Script" type="text" use="global"></parameter><parameter name="Password Extension Script" type="text" use="global"></parameter><parameter name="End Password Script" type="text" use="global"></parameter><parameter name="SipAddressType_Global" type="string" use="global">UserPrincipalName</parameter><parameter name="SipDomain_Global" type="string" use="global"></parameter><parameter name="ForceMove_Global" type="string" use="global">Yes</parameter><parameter name="UserPages_Global" type="string" use="global">a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9</parameter><parameter name="OrganizationalUnitPages_Global" type="string" use="global"></parameter><parameter name="PreferredDomainControllerFQDN_Global" type="string" use="global">contoso-dc01,contoso-dc02</parameter><parameter name="LastRunDateTimeOffsetMinute_Global" type="string" use="global">30</parameter></parameter-values><case_normalize_dn_for_anchor>1</case_normalize_dn_for_anchor><possible_component_mappings><mapping><dn_component>Ou</dn_component><object_class>OrganizationalUnit</object_class></mapping></possible_component_mappings><default_visible_attributes><attribute>Guid</attribute><attribute>Name</attribute><attribute>ObjectClass</attribute><attribute>ObjectCategory</attribute><attribute>ArchivingPolicy</attribute><attribute>AudioVideoDisabled</attribute><attribute>ClientPolicy</attribute><attribute>ClientVersionPolicy</attribute><attribute>ConferencingPolicy</attribute><attribute>DialPlan</attribute><attribute>DisplayName</attribute><attribute>Enabled</attribute><attribute>EnabledForFederation</attribute><attribute>EnabledForInternetAccess</attribute><attribute>EnabledForRichPresence</attribute><attribute>EnterpriseVoiceEnabled</attribute><attribute>ExternalAccessPolicy</attribute><attribute>FirstName</attribute><attribute>HomeServer</attribute><attribute>HostedVoiceMail</attribute><attribute>HostedVoicemailPolicy</attribute><attribute>HostingProvider</attribute><attribute>Identity</attribute><attribute>IPPBXSoftPhoneRoutingEnabled</attribute><attribute>IsValid</attribute><attribute>LastName</attribute><attribute>LineServerURI</attribute><attribute>LineURI</attribute><attribute>LocationPolicy</attribute><attribute>OriginatorSid</attribute><attribute>PinPolicy</attribute><attribute>PresencePolicy</attribute><attribute>PrivateLine</attribute><attribute>ProxyAddresses</attribute><attribute>PublicNetworkEnabled</attribute><attribute>RegistrarPool</attribute><attribute>RemoteCallControlTelephonyEnabled</attribute><attribute>SamAccountName</attribute><attribute>Sid</attribute><attribute>SipAddress</attribute><attribute>TargetRegistrarPool</attribute><attribute>TargetServerIfMoving</attribute><attribute>TenantId</attribute><attribute>UserPrincipalName</attribute><attribute>VoicePolicy</attribute></default_visible_attributes></MAConfig>
+</parameter><parameter name="Begin Password Script" type="text" use="global"></parameter><parameter name="Password Extension Script" type="text" use="global"></parameter><parameter name="End Password Script" type="text" use="global"></parameter><parameter name="SipAddressType_Global" type="string" use="global">UserPrincipalName</parameter><parameter name="SipDomain_Global" type="string" use="global"></parameter><parameter name="ForceMove_Global" type="string" use="global">Yes</parameter><parameter name="UserPages_Global" type="string" use="global">a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9</parameter><parameter name="OrganizationalUnitPages_Global" type="string" use="global"></parameter><parameter name="PreferredDomainControllerFQDN_Global" type="string" use="global">contoso-dc01,contoso-dc02</parameter><parameter name="LastRunDateTimeOffsetMinute_Global" type="string" use="global">30</parameter></parameter-values><possible_component_mappings><mapping><dn_component>Ou</dn_component><object_class>OrganizationalUnit</object_class></mapping></possible_component_mappings><default_visible_attributes><attribute>Guid</attribute><attribute>Name</attribute><attribute>ObjectClass</attribute><attribute>ObjectCategory</attribute><attribute>ArchivingPolicy</attribute><attribute>AudioVideoDisabled</attribute><attribute>ClientPolicy</attribute><attribute>ClientVersionPolicy</attribute><attribute>ConferencingPolicy</attribute><attribute>DialPlan</attribute><attribute>DisplayName</attribute><attribute>Enabled</attribute><attribute>EnabledForFederation</attribute><attribute>EnabledForInternetAccess</attribute><attribute>EnabledForRichPresence</attribute><attribute>EnterpriseVoiceEnabled</attribute><attribute>ExternalAccessPolicy</attribute><attribute>FirstName</attribute><attribute>HomeServer</attribute><attribute>HostedVoiceMail</attribute><attribute>HostedVoicemailPolicy</attribute><attribute>HostingProvider</attribute><attribute>Identity</attribute><attribute>IPPBXSoftPhoneRoutingEnabled</attribute><attribute>IsValid</attribute><attribute>LastName</attribute><attribute>LineServerURI</attribute><attribute>LineURI</attribute><attribute>LocationPolicy</attribute><attribute>OriginatorSid</attribute><attribute>PinPolicy</attribute><attribute>PresencePolicy</attribute><attribute>PrivateLine</attribute><attribute>ProxyAddresses</attribute><attribute>PublicNetworkEnabled</attribute><attribute>RegistrarPool</attribute><attribute>RemoteCallControlTelephonyEnabled</attribute><attribute>SamAccountName</attribute><attribute>Sid</attribute><attribute>SipAddress</attribute><attribute>TargetRegistrarPool</attribute><attribute>TargetServerIfMoving</attribute><attribute>TenantId</attribute><attribute>UserPrincipalName</attribute><attribute>VoicePolicy</attribute></default_visible_attributes><case_normalize_dn_for_anchor>1</case_normalize_dn_for_anchor></MAConfig>
  </private-configuration>
  <SyncConfig-refresh-schema>0</SyncConfig-refresh-schema>
  <ma-partition-data>
  <partition>
-  <id>{5C72BB16-AFE7-4553-A301-74F0E796FA1A}</id>
+  <id>{1F5269DB-30FA-4336-BF23-7B262C3744B5}</id>
   <name>DC=contoso,DC=com</name>
-  <creation-time>2016-02-06 19:45:38.067</creation-time>
-  <last-modification-time>2016-02-14 18:01:16.187</last-modification-time>
-  <version>58</version>
+  <creation-time>2016-02-16 22:56:32.940</creation-time>
+  <last-modification-time>2016-02-16 22:56:32.940</last-modification-time>
+  <version>1</version>
   <selected>1</selected>
   <filter>
    <object-classes>
@@ -3082,14 +3065,14 @@ Exit-Script -ScriptType "End-Export"
    </containers>
   </filter>
   <custom-data>
-   <ecma-partition-data><dn>DC=contoso,DC=com</dn><name>DC=contoso,DC=com</name><is-domain>1</is-domain></ecma-partition-data><water-mark>PABXAGEAdABlAHIATQBhAHIAawA+ADwAQwB1AHIAcgBlAG4AdABQAGEAZwBlAEkAbgBkAGUAeAA+ADAAPAAvAEMAdQByAHIAZQBuAHQAUABhAGcAZQBJAG4AZABlAHgAPgA8AE8AcgBnAGEAbgBpAHoAYQB0AGkAbwBuAGEAbABVAG4AaQB0AD4APABNAG8AcgBlAFQAbwBJAG0AcABvAHIAdAA+ADAAPAAvAE0AbwByAGUAVABvAEkAbQBwAG8AcgB0AD4APAAvAE8AcgBnAGEAbgBpAHoAYQB0AGkAbwBuAGEAbABVAG4AaQB0AD4APABVAHMAZQByAD4APABNAG8AcgBlAFQAbwBJAG0AcABvAHIAdAA+ADAAPAAvAE0AbwByAGUAVABvAEkAbQBwAG8AcgB0AD4APAAvAFUAcwBlAHIAPgA8AFAAcgBlAGYAZQByAHIAZQBkAEQAbwBtAGEAaQBuAEMAbwBuAHQAcgBvAGwAbABlAHIAPgBjAG8AbgB0AG8AcwBvAC0AZABjADAAMQA8AC8AUAByAGUAZgBlAHIAcgBlAGQARABvAG0AYQBpAG4AQwBvAG4AdAByAG8AbABsAGUAcgA+ADwATABhAHMAdABSAHUAbgBEAGEAdABlAFQAaQBtAGUAPgAyADAAMQA2AC0AMAAyAC0AMQA0ACAAMQA4ADoAMAAxADoAMQA1ADwALwBMAGEAcwB0AFIAdQBuAEQAYQB0AGUAVABpAG0AZQA+ADwALwBXAGEAdABlAHIATQBhAHIAawA+AAAA</water-mark>
+   <ecma-partition-data><dn>DC=contoso,DC=com</dn><name>DC=contoso,DC=com</name><is-domain>1</is-domain></ecma-partition-data><water-mark>PABXAGEAdABlAHIATQBhAHIAawA+ADwAQwB1AHIAcgBlAG4AdABQAGEAZwBlAEkAbgBkAGUAeAA+ADAAPAAvAEMAdQByAHIAZQBuAHQAUABhAGcAZQBJAG4AZABlAHgAPgA8AE8AcgBnAGEAbgBpAHoAYQB0AGkAbwBuAGEAbABVAG4AaQB0AD4APABNAG8AcgBlAFQAbwBJAG0AcABvAHIAdAA+ADAAPAAvAE0AbwByAGUAVABvAEkAbQBwAG8AcgB0AD4APAAvAE8AcgBnAGEAbgBpAHoAYQB0AGkAbwBuAGEAbABVAG4AaQB0AD4APABVAHMAZQByAD4APABNAG8AcgBlAFQAbwBJAG0AcABvAHIAdAA+ADAAPAAvAE0AbwByAGUAVABvAEkAbQBwAG8AcgB0AD4APAAvAFUAcwBlAHIAPgA8AFAAcgBlAGYAZQByAHIAZQBkAEQAbwBtAGEAaQBuAEMAbwBuAHQAcgBvAGwAbABlAHIAPgBjAG8AbgB0AG8AcwBvAC0AZABjADAAMQA8AC8AUAByAGUAZgBlAHIAcgBlAGQARABvAG0AYQBpAG4AQwBvAG4AdAByAG8AbABsAGUAcgA+ADwATABhAHMAdABSAHUAbgBEAGEAdABlAFQAaQBtAGUAPgAyADAAMQA2AC0AMAAyAC0AMQA2ACAAMgAwADoAMQAyADoANAA4ADwALwBMAGEAcwB0AFIAdQBuAEQAYQB0AGUAVABpAG0AZQA+ADwALwBXAGEAdABlAHIATQBhAHIAawA+AAAA</water-mark>
   </custom-data>
-  <allowed-operations>29</allowed-operations>
+  <allowed-operations>1073741854</allowed-operations>
   <current>
-   <batch-number>15</batch-number>
-   <sequence-number>361</sequence-number>
+   <batch-number>1</batch-number>
+   <sequence-number>0</sequence-number>
   </current>
-  <last-successful-batch>14</last-successful-batch>
+  <last-successful-batch>0</last-successful-batch>
   <filter-hints>
    <object-classes>
     <object-class>
@@ -3113,44 +3096,44 @@ Exit-Script -ScriptType "End-Export"
 
  <ma-run-data>
  <run-configuration>
-  <id>{1D8617CF-C0C1-46D4-A100-145275B86D16}</id>
-  <name>Full Import</name>
-  <creation-time>2016-02-06 20:17:41.960</creation-time>
-  <version>5</version>
-  <last-modification-time>2016-02-09 15:58:23.880</last-modification-time>
-  <configuration><step><step-type type="full-import"><import-subtype>to-cs</import-subtype></step-type><threshold><batch-size>9999</batch-size></threshold><partition>{5C72BB16-AFE7-4553-A301-74F0E796FA1A}</partition><custom-data><extensible2-step-data><timeout>0</timeout><batch-size>9999</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
- </run-configuration>
- <run-configuration>
-  <id>{6B3F3A8F-4B1E-4714-BB60-A7607418E183}</id>
-  <name>Export</name>
-  <creation-time>2016-02-07 16:56:22.673</creation-time>
-  <version>5</version>
-  <last-modification-time>2016-02-14 09:59:14.163</last-modification-time>
-  <configuration><step><step-type type="export"></step-type><threshold><batch-size>9999</batch-size></threshold><partition>{5C72BB16-AFE7-4553-A301-74F0E796FA1A}</partition><custom-data><extensible2-step-data><timeout>0</timeout><batch-size>9999</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
- </run-configuration>
- <run-configuration>
-  <id>{77B9B749-27CE-4AB5-B8A8-408F343EA17B}</id>
-  <name>Delta Synchronization</name>
-  <creation-time>2016-02-14 09:58:43.797</creation-time>
-  <version>1</version>
-  <last-modification-time>2016-02-14 09:58:43.797</last-modification-time>
-  <configuration><step><step-type type="apply-rules"><apply-rules-subtype>apply-pending</apply-rules-subtype></step-type><threshold><batch-size>1</batch-size></threshold><partition>{5C72BB16-AFE7-4553-A301-74F0E796FA1A}</partition><custom-data><extensible2-step-data><batch-size>0</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
- </run-configuration>
- <run-configuration>
-  <id>{AA07FD46-B810-4C2A-AF51-DC38B61EE609}</id>
+  <id>{A69619A5-34BD-4E13-B760-DBA4F097F4D2}</id>
   <name>Delta Import</name>
-  <creation-time>2016-02-06 20:17:41.960</creation-time>
+  <creation-time>2016-02-16 22:56:32.987</creation-time>
   <version>1</version>
-  <last-modification-time>2016-02-06 20:17:41.960</last-modification-time>
-  <configuration><step><step-type type="delta-import"><import-subtype>to-cs</import-subtype></step-type><threshold><batch-size>9999</batch-size></threshold><partition>{5C72BB16-AFE7-4553-A301-74F0E796FA1A}</partition><custom-data><extensible2-step-data><timeout>0</timeout><batch-size>9999</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
+  <last-modification-time>2016-02-16 22:56:32.987</last-modification-time>
+  <configuration><step><step-type type="delta-import"><import-subtype>to-cs</import-subtype></step-type><threshold><batch-size>9999</batch-size></threshold><partition>{1F5269DB-30FA-4336-BF23-7B262C3744B5}</partition><custom-data><extensible2-step-data><timeout>0</timeout><batch-size>9999</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
  </run-configuration>
  <run-configuration>
-  <id>{AE0C488B-3EC1-4689-9D3F-6CA543C98A56}</id>
-  <name>Full Synchronisation</name>
-  <creation-time>2016-02-07 16:56:22.673</creation-time>
+  <id>{7CA44966-A6A0-4D51-96BF-B8DEFC3638CA}</id>
+  <name>Delta Synchronization</name>
+  <creation-time>2016-02-16 22:56:32.987</creation-time>
   <version>1</version>
-  <last-modification-time>2016-02-07 16:56:22.673</last-modification-time>
-  <configuration><step><step-type type="apply-rules"><apply-rules-subtype>reevaluate-flow-connectors</apply-rules-subtype></step-type><threshold><batch-size>1</batch-size></threshold><partition>{5C72BB16-AFE7-4553-A301-74F0E796FA1A}</partition><custom-data><extensible2-step-data><batch-size>0</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
+  <last-modification-time>2016-02-16 22:56:32.987</last-modification-time>
+  <configuration><step><step-type type="apply-rules"><apply-rules-subtype>apply-pending</apply-rules-subtype></step-type><threshold><batch-size>1</batch-size></threshold><partition>{1F5269DB-30FA-4336-BF23-7B262C3744B5}</partition><custom-data><extensible2-step-data><batch-size>0</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
+ </run-configuration>
+ <run-configuration>
+  <id>{76DEAA73-DE13-4191-8927-CDD5358203C3}</id>
+  <name>Export</name>
+  <creation-time>2016-02-16 22:56:32.987</creation-time>
+  <version>1</version>
+  <last-modification-time>2016-02-16 22:56:32.987</last-modification-time>
+  <configuration><step><step-type type="export"></step-type><threshold><batch-size>1</batch-size></threshold><partition>{1F5269DB-30FA-4336-BF23-7B262C3744B5}</partition><custom-data><extensible2-step-data><timeout>0</timeout><batch-size>1</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
+ </run-configuration>
+ <run-configuration>
+  <id>{1B5BE29E-57E2-460C-A6BF-7D215DDF43F3}</id>
+  <name>Full Import</name>
+  <creation-time>2016-02-16 22:56:32.987</creation-time>
+  <version>1</version>
+  <last-modification-time>2016-02-16 22:56:32.987</last-modification-time>
+  <configuration><step><step-type type="full-import"><import-subtype>to-cs</import-subtype></step-type><threshold><batch-size>9999</batch-size></threshold><partition>{1F5269DB-30FA-4336-BF23-7B262C3744B5}</partition><custom-data><extensible2-step-data><timeout>0</timeout><batch-size>9999</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
+ </run-configuration>
+ <run-configuration>
+  <id>{176A097D-65AE-46A1-9D09-8CFB90CDD9A6}</id>
+  <name>Full Synchronisation</name>
+  <creation-time>2016-02-16 22:56:32.987</creation-time>
+  <version>1</version>
+  <last-modification-time>2016-02-16 22:56:32.987</last-modification-time>
+  <configuration><step><step-type type="apply-rules"><apply-rules-subtype>reevaluate-flow-connectors</apply-rules-subtype></step-type><threshold><batch-size>1</batch-size></threshold><partition>{1F5269DB-30FA-4336-BF23-7B262C3744B5}</partition><custom-data><extensible2-step-data><batch-size>0</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
  </run-configuration>
 </ma-run-data>
 
@@ -3162,520 +3145,7 @@ Exit-Script -ScriptType "End-Export"
 </ma-data>
 
 <mv-data>
- <import-attribute-flow>
-  <import-flow-set mv-object-type="person">
-   <import-flows mv-attribute="xActiveDirectoryDN" type="ranked">
-    <import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{F9C75362-6DEF-4D5D-A820-BE01013D6B70}">
-     <sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{B450FD1D-A7B1-4CDD-A67F-0C0EDAB3A5F3}" initial-flow-only="false" is-existence-test="false">
-      <src-attribute intrinsic="true">dn</src-attribute>
-     </sync-rule-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="csObjectID" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{31676D61-D7C4-4F99-BA41-AD67B6376B16}">
-     <direct-mapping>
-      <src-attribute intrinsic="true">dn</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="expectedRulesList" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D4A67699-64D9-4715-A5B6-83F503A667B9}">
-     <direct-mapping>
-      <src-attribute>ExpectedRulesList</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="accountName" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{13539F96-195C-4199-8A8F-99FEFDDF5119}">
-     <direct-mapping>
-      <src-attribute>AccountName</src-attribute>
-     </direct-mapping>
-    </import-flow>
-    <import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{2BA28F87-2FBB-4A3D-B6E4-61347613C2CC}">
-     <sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{4DCDFA68-F7FA-4B8F-88AD-BA88BB52E881}" initial-flow-only="false" is-existence-test="false">
-      <src-attribute>sAMAccountName</src-attribute>
-     </sync-rule-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="address" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{2D39189F-6C43-43E8-9426-6AE386E875FF}">
-     <direct-mapping>
-      <src-attribute>Address</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="city" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{A1AA4B0B-2499-4252-87F5-5C1A790FA93E}">
-     <direct-mapping>
-      <src-attribute>City</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="company" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{1F17403F-DD92-4723-ABCD-3A17E96E82FA}">
-     <direct-mapping>
-      <src-attribute>Company</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="country" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{31D2DE71-81A0-4FFF-BF27-BEEF738DE8EC}">
-     <direct-mapping>
-      <src-attribute>Country</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="department" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{64F7EF76-E6B4-40BD-805C-5CBEA0681763}">
-     <direct-mapping>
-      <src-attribute>Department</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="description" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{B4994CD3-2F9F-4231-948D-548D68941872}">
-     <direct-mapping>
-      <src-attribute>Description</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="displayName" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D9D72B7B-D3FB-49DF-89B2-AA7B6C4DBF78}">
-     <direct-mapping>
-      <src-attribute>DisplayName</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="email" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{38BEE018-2759-437B-B5C8-23D59A2E85DA}">
-     <direct-mapping>
-      <src-attribute>Email</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="employeeID" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D7763D23-84DB-40F2-A9C0-C11038B43119}">
-     <direct-mapping>
-      <src-attribute>EmployeeID</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="employeeEndDate" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{620F2FF3-1AA6-4C6E-820D-11AF2B91977B}">
-     <direct-mapping>
-      <src-attribute>EmployeeEndDate</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="employeeStartDate" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{B8C465B2-4E37-4EAD-B8D9-46CAE9BB7579}">
-     <direct-mapping>
-      <src-attribute>EmployeeStartDate</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="employeeType" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{50DF5836-B2C0-4F13-AB11-0B32424A478F}">
-     <direct-mapping>
-      <src-attribute>EmployeeType</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="firstName" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{F8A09B71-672E-4603-9DAF-A317CAEAC860}">
-     <direct-mapping>
-      <src-attribute>FirstName</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="jobTitle" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D0BE1EDA-1077-4B66-B859-3124F34210E8}">
-     <direct-mapping>
-      <src-attribute>JobTitle</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="lastName" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{2D29DA2D-01A6-4ED1-B961-23DBC75CA806}">
-     <direct-mapping>
-      <src-attribute>LastName</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="mailNickname" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{9B54E3BB-C82D-48E7-A7E1-FF63373DABD6}">
-     <direct-mapping>
-      <src-attribute>MailNickname</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="manager" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{8975EC86-B2F5-467A-8691-0C72F66F4EFD}">
-     <direct-mapping>
-      <src-attribute>Manager</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="middleName" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{FE904DF3-BB88-4208-8B90-BAABC43C10A2}">
-     <direct-mapping>
-      <src-attribute>MiddleName</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="mobilePhone" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{646637FF-88F4-44F0-9BEF-19353C6EB5C3}">
-     <direct-mapping>
-      <src-attribute>MobilePhone</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="officeFax" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{CAC6BD70-09FB-42A0-A076-0DD37E2B8006}">
-     <direct-mapping>
-      <src-attribute>OfficeFax</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="officeLocation" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{7EFA7A50-2A0C-4A13-8749-075CCCBF0631}">
-     <direct-mapping>
-      <src-attribute>OfficeLocation</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="officePhone" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D85A2683-E5E4-4C96-9B5F-20EAD253A9C0}">
-     <direct-mapping>
-      <src-attribute>OfficePhone</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="photo" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{A1ECA723-23B8-40B5-BC71-A4F9C8A2105F}">
-     <direct-mapping>
-      <src-attribute>Photo</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="postalCode" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{A2761BC1-1E78-447F-9A6C-8F6E2D522FFA}">
-     <direct-mapping>
-      <src-attribute>PostalCode</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="objectSid" type="ranked">
-    <import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{A7A5DE4D-6C01-4AEA-9CC3-B41CEF127BAB}">
-     <sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{E3078C7E-CA5D-4470-A4B4-4B8FABB21F2E}" initial-flow-only="false" is-existence-test="false">
-      <src-attribute>objectSid</src-attribute>
-     </sync-rule-mapping>
-    </import-flow>
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{F196B3C4-3701-4297-912C-5155F2050CBE}">
-     <direct-mapping>
-      <src-attribute>ObjectSID</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="domain" type="ranked">
-    <import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{76B2229F-23E3-448B-B149-255337A6B17F}">
-     <sync-rule-mapping mapping-type="constant" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{ACE1DCB4-7DDF-444A-8795-F1C733169BFC}" initial-flow-only="false" is-existence-test="false">
-      <sync-rule-value>CONTOSO</sync-rule-value>
-     </sync-rule-mapping>
-    </import-flow>
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{CD7DDFA5-1B5D-43FA-A4D9-AC36475DD16B}">
-     <direct-mapping>
-      <src-attribute>Domain</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-  </import-flow-set>
-  <import-flow-set mv-object-type="group">
-   <import-flows mv-attribute="csObjectID" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{4896BAE9-5974-4513-B957-282D2DF110AE}">
-     <direct-mapping>
-      <src-attribute intrinsic="true">dn</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="expectedRulesList" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{FD05BBC3-59D5-42B3-B4C3-232EF296D984}">
-     <direct-mapping>
-      <src-attribute>ExpectedRulesList</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="accountName" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{A128E03D-6C2C-495E-8CFB-02620DCEB308}">
-     <direct-mapping>
-      <src-attribute>AccountName</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="description" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{C2B216AE-576D-4B24-B617-400FB37ACE33}">
-     <direct-mapping>
-      <src-attribute>Description</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="displayName" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{A032F21D-8D13-4920-9180-11800B6A34EB}">
-     <direct-mapping>
-      <src-attribute>DisplayName</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="email" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{523F5BA5-45D9-469B-9D99-62CA76C03C0B}">
-     <direct-mapping>
-      <src-attribute>Email</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="mailNickname" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{4F40BEBF-B05A-4279-9E01-CD10FAFCBC97}">
-     <direct-mapping>
-      <src-attribute>MailNickname</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="member" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{C288B897-DF58-4325-B480-CFEE69378660}">
-     <direct-mapping>
-      <src-attribute>Member</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="objectSid" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{6BF383DA-5560-49BA-B00F-273474F978A5}">
-     <direct-mapping>
-      <src-attribute>ObjectSID</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="domain" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{D727DCF7-4A84-46B4-8797-C8C56F61116E}">
-     <direct-mapping>
-      <src-attribute>Domain</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="owner" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{219D1DCF-A55E-4DFB-8B11-6A73758398AB}">
-     <direct-mapping>
-      <src-attribute>Owner</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="scope" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{FE613771-589A-4DC3-B724-E0ABBBE79519}">
-     <direct-mapping>
-      <src-attribute>Scope</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="type" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{A8F34CC2-FF09-46F1-B125-8DFDB3C12D0B}">
-     <direct-mapping>
-      <src-attribute>Type</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="displayedOwner" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{F12EA409-AA37-4B0F-8D96-A3B3E311C855}">
-     <direct-mapping>
-      <src-attribute>DisplayedOwner</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-  </import-flow-set>
-  <import-flow-set mv-object-type="detectedRuleEntry">
-   <import-flows mv-attribute="csObjectID" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="DetectedRuleEntry" id="{510680EA-A2E1-4A42-8229-2B3CCAC2F9CC}">
-     <direct-mapping>
-      <src-attribute intrinsic="true">dn</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-  </import-flow-set>
-  <import-flow-set mv-object-type="synchronizationRule">
-   <import-flows mv-attribute="connectedObjectType" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{9AC1CCCA-8429-442E-99FE-97FE3D317DB6}">
-     <direct-mapping>
-      <src-attribute>ConnectedObjectType</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="connectedSystem" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{32EFD3B0-0F4A-49F4-8254-B2BCF0509637}">
-     <direct-mapping>
-      <src-attribute>ConnectedSystem</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="connectedSystemScope" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{49E235ED-9439-40D3-A874-932ADA48861C}">
-     <direct-mapping>
-      <src-attribute>ConnectedSystemScope</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="createConnectedSystemObject" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{E1B04810-50E8-407A-BB66-D035DB566B85}">
-     <direct-mapping>
-      <src-attribute>CreateConnectedSystemObject</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="createILMObject" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{694DABA1-6984-44CE-A349-C275A3D4F9A3}">
-     <direct-mapping>
-      <src-attribute>CreateILMObject</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="dependency" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{C638BC54-5579-4287-B542-6E2EB05464CA}">
-     <direct-mapping>
-      <src-attribute>Dependency</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="disconnectConnectedSystemObject" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{274096A2-6AF1-44F8-AAF2-D030420AD193}">
-     <direct-mapping>
-      <src-attribute>DisconnectConnectedSystemObject</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="displayName" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{6114EC77-40F6-480D-BB51-38C770817FB6}">
-     <direct-mapping>
-      <src-attribute>DisplayName</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="existenceTest" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{6DEE3A02-DC54-483C-AF6C-CB60C8C003F1}">
-     <direct-mapping>
-      <src-attribute>ExistenceTest</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="flowType" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{DCA05B6B-A6C3-4B99-BCDB-55A3A41BD6B7}">
-     <direct-mapping>
-      <src-attribute>FlowType</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="ilmObjectType" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{76FE909F-EEFE-4B65-B6D8-0195EA339650}">
-     <direct-mapping>
-      <src-attribute>ILMObjectType</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="initialFlow" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{5465D459-D99C-4689-B908-B111DEA0E144}">
-     <direct-mapping>
-      <src-attribute>InitialFlow</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="persistentFlow" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{106788CC-3D46-43CA-841F-305314604587}">
-     <direct-mapping>
-      <src-attribute>PersistentFlow</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="precedence" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{6AE6857E-CC14-461E-9D89-82F09B4D6A08}">
-     <direct-mapping>
-      <src-attribute>Precedence</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="relationshipCriteria" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{550BD62F-4115-4430-AFFB-0289E048B210}">
-     <direct-mapping>
-      <src-attribute>RelationshipCriteria</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="synchronizationRuleParameters" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{7DC62E33-015A-4A03-B58B-25CE04752A1D}">
-     <direct-mapping>
-      <src-attribute>SynchronizationRuleParameters</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="msidmOutboundIsFilterBased" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{C785B246-33DB-4CF6-99F7-B28DD8D17C45}">
-     <direct-mapping>
-      <src-attribute>msidmOutboundIsFilterBased</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="msidmOutboundScopingFilters" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{2F562287-572B-4D3E-8A2B-2301656E37DE}">
-     <direct-mapping>
-      <src-attribute>msidmOutboundScopingFilters</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-  </import-flow-set>
-  <import-flow-set mv-object-type="expectedRuleEntry">
-   <import-flows mv-attribute="createdTime" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{F5761DCA-A648-457A-9502-4D40422B1AA7}">
-     <direct-mapping>
-      <src-attribute>CreatedTime</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="expectedRuleEntryAction" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{044C9E02-AAF5-4AE2-A97B-10F3F1DA471C}">
-     <direct-mapping>
-      <src-attribute>ExpectedRuleEntryAction</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="synchronizationRuleData" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{E4FFC22A-10B9-4110-8DD0-D75A789B1667}">
-     <direct-mapping>
-      <src-attribute>SynchronizationRuleData</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="synchronizationRuleID" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{0AD2A998-B21F-43A0-AD4A-F96AA39869F4}">
-     <direct-mapping>
-      <src-attribute>SynchronizationRuleID</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-   <import-flows mv-attribute="displayName" type="ranked">
-    <import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{8416B3AE-8D9F-4FC4-938B-4598BC674C9E}">
-     <direct-mapping>
-      <src-attribute>DisplayName</src-attribute>
-     </direct-mapping>
-    </import-flow>
-   </import-flows>
-  </import-flow-set>
-  <per-ma-options>
-   <ma-options ma-id="{5A22292D-DB03-4A69-8ECD-FA3B50293721}">
-    <enable-recall>true</enable-recall>
-   </ma-options>
-   <ma-options ma-id="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}">
-    <enable-recall>true</enable-recall>
-   </ma-options>
-   <ma-options ma-id="{D7A141C2-3C21-4CC1-8B41-14055EF3490B}">
-    <enable-recall>true</enable-recall>
-   </ma-options>
-  </per-ma-options>
- </import-attribute-flow>
+ <import-attribute-flow><import-flow-set mv-object-type="expectedRuleEntry"><import-flows mv-attribute="displayName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{8416B3AE-8D9F-4FC4-938B-4598BC674C9E}"><direct-mapping><src-attribute>DisplayName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="synchronizationRuleID" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{0AD2A998-B21F-43A0-AD4A-F96AA39869F4}"><direct-mapping><src-attribute>SynchronizationRuleID</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="synchronizationRuleData" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{E4FFC22A-10B9-4110-8DD0-D75A789B1667}"><direct-mapping><src-attribute>SynchronizationRuleData</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="expectedRuleEntryAction" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{044C9E02-AAF5-4AE2-A97B-10F3F1DA471C}"><direct-mapping><src-attribute>ExpectedRuleEntryAction</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="createdTime" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{F5761DCA-A648-457A-9502-4D40422B1AA7}"><direct-mapping><src-attribute>CreatedTime</src-attribute></direct-mapping></import-flow></import-flows></import-flow-set><import-flow-set mv-object-type="synchronizationRule"><import-flows mv-attribute="msidmOutboundScopingFilters" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{2F562287-572B-4D3E-8A2B-2301656E37DE}"><direct-mapping><src-attribute>msidmOutboundScopingFilters</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="msidmOutboundIsFilterBased" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{C785B246-33DB-4CF6-99F7-B28DD8D17C45}"><direct-mapping><src-attribute>msidmOutboundIsFilterBased</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="synchronizationRuleParameters" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{7DC62E33-015A-4A03-B58B-25CE04752A1D}"><direct-mapping><src-attribute>SynchronizationRuleParameters</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="relationshipCriteria" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{550BD62F-4115-4430-AFFB-0289E048B210}"><direct-mapping><src-attribute>RelationshipCriteria</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="precedence" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{6AE6857E-CC14-461E-9D89-82F09B4D6A08}"><direct-mapping><src-attribute>Precedence</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="persistentFlow" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{106788CC-3D46-43CA-841F-305314604587}"><direct-mapping><src-attribute>PersistentFlow</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="initialFlow" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{5465D459-D99C-4689-B908-B111DEA0E144}"><direct-mapping><src-attribute>InitialFlow</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="ilmObjectType" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{76FE909F-EEFE-4B65-B6D8-0195EA339650}"><direct-mapping><src-attribute>ILMObjectType</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="flowType" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{DCA05B6B-A6C3-4B99-BCDB-55A3A41BD6B7}"><direct-mapping><src-attribute>FlowType</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="existenceTest" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{6DEE3A02-DC54-483C-AF6C-CB60C8C003F1}"><direct-mapping><src-attribute>ExistenceTest</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="displayName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{6114EC77-40F6-480D-BB51-38C770817FB6}"><direct-mapping><src-attribute>DisplayName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="disconnectConnectedSystemObject" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{274096A2-6AF1-44F8-AAF2-D030420AD193}"><direct-mapping><src-attribute>DisconnectConnectedSystemObject</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="dependency" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{C638BC54-5579-4287-B542-6E2EB05464CA}"><direct-mapping><src-attribute>Dependency</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="createILMObject" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{694DABA1-6984-44CE-A349-C275A3D4F9A3}"><direct-mapping><src-attribute>CreateILMObject</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="createConnectedSystemObject" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{E1B04810-50E8-407A-BB66-D035DB566B85}"><direct-mapping><src-attribute>CreateConnectedSystemObject</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="connectedSystemScope" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{49E235ED-9439-40D3-A874-932ADA48861C}"><direct-mapping><src-attribute>ConnectedSystemScope</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="connectedSystem" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{32EFD3B0-0F4A-49F4-8254-B2BCF0509637}"><direct-mapping><src-attribute>ConnectedSystem</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="connectedObjectType" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{9AC1CCCA-8429-442E-99FE-97FE3D317DB6}"><direct-mapping><src-attribute>ConnectedObjectType</src-attribute></direct-mapping></import-flow></import-flows></import-flow-set><import-flow-set mv-object-type="detectedRuleEntry"><import-flows mv-attribute="csObjectID" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="DetectedRuleEntry" id="{510680EA-A2E1-4A42-8229-2B3CCAC2F9CC}"><direct-mapping><src-attribute intrinsic="true">dn</src-attribute></direct-mapping></import-flow></import-flows></import-flow-set><import-flow-set mv-object-type="group"><import-flows mv-attribute="displayedOwner" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{F12EA409-AA37-4B0F-8D96-A3B3E311C855}"><direct-mapping><src-attribute>DisplayedOwner</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="type" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{A8F34CC2-FF09-46F1-B125-8DFDB3C12D0B}"><direct-mapping><src-attribute>Type</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="scope" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{FE613771-589A-4DC3-B724-E0ABBBE79519}"><direct-mapping><src-attribute>Scope</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="owner" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{219D1DCF-A55E-4DFB-8B11-6A73758398AB}"><direct-mapping><src-attribute>Owner</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="domain" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{D727DCF7-4A84-46B4-8797-C8C56F61116E}"><direct-mapping><src-attribute>Domain</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="objectSid" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{6BF383DA-5560-49BA-B00F-273474F978A5}"><direct-mapping><src-attribute>ObjectSID</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="member" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{C288B897-DF58-4325-B480-CFEE69378660}"><direct-mapping><src-attribute>Member</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="mailNickname" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{4F40BEBF-B05A-4279-9E01-CD10FAFCBC97}"><direct-mapping><src-attribute>MailNickname</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="email" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{523F5BA5-45D9-469B-9D99-62CA76C03C0B}"><direct-mapping><src-attribute>Email</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="displayName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{A032F21D-8D13-4920-9180-11800B6A34EB}"><direct-mapping><src-attribute>DisplayName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="description" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{C2B216AE-576D-4B24-B617-400FB37ACE33}"><direct-mapping><src-attribute>Description</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="accountName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{A128E03D-6C2C-495E-8CFB-02620DCEB308}"><direct-mapping><src-attribute>AccountName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="expectedRulesList" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{FD05BBC3-59D5-42B3-B4C3-232EF296D984}"><direct-mapping><src-attribute>ExpectedRulesList</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="csObjectID" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{4896BAE9-5974-4513-B957-282D2DF110AE}"><direct-mapping><src-attribute intrinsic="true">dn</src-attribute></direct-mapping></import-flow></import-flows></import-flow-set><import-flow-set mv-object-type="person"><import-flows mv-attribute="xObjectGUID" type="ranked"><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{DCDB69BB-3C2A-45BD-9795-F91115CDCBEB}"><sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{EA0327E0-3360-454D-BA43-B1764713C8F2}" initial-flow-only="false" is-existence-test="false"><src-attribute>objectGUID</src-attribute></sync-rule-mapping></import-flow></import-flows><import-flows mv-attribute="domain" type="ranked"><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{76B2229F-23E3-448B-B149-255337A6B17F}"><sync-rule-mapping mapping-type="constant" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{9133BE17-F9DE-4011-B0D6-A57EBA22B4B3}" initial-flow-only="false" is-existence-test="false"><sync-rule-value>CONTOSO</sync-rule-value></sync-rule-mapping></import-flow><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{CD7DDFA5-1B5D-43FA-A4D9-AC36475DD16B}"><direct-mapping><src-attribute>Domain</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="objectSid" type="ranked"><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{A7A5DE4D-6C01-4AEA-9CC3-B41CEF127BAB}"><sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{D8168AD7-73BA-46AE-9868-F3D78F0536E3}" initial-flow-only="false" is-existence-test="false"><src-attribute>objectSid</src-attribute></sync-rule-mapping></import-flow><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{F196B3C4-3701-4297-912C-5155F2050CBE}"><direct-mapping><src-attribute>ObjectSID</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="postalCode" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{A2761BC1-1E78-447F-9A6C-8F6E2D522FFA}"><direct-mapping><src-attribute>PostalCode</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="photo" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{A1ECA723-23B8-40B5-BC71-A4F9C8A2105F}"><direct-mapping><src-attribute>Photo</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="officePhone" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D85A2683-E5E4-4C96-9B5F-20EAD253A9C0}"><direct-mapping><src-attribute>OfficePhone</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="officeLocation" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{7EFA7A50-2A0C-4A13-8749-075CCCBF0631}"><direct-mapping><src-attribute>OfficeLocation</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="officeFax" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{CAC6BD70-09FB-42A0-A076-0DD37E2B8006}"><direct-mapping><src-attribute>OfficeFax</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="mobilePhone" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{646637FF-88F4-44F0-9BEF-19353C6EB5C3}"><direct-mapping><src-attribute>MobilePhone</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="middleName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{FE904DF3-BB88-4208-8B90-BAABC43C10A2}"><direct-mapping><src-attribute>MiddleName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="manager" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{8975EC86-B2F5-467A-8691-0C72F66F4EFD}"><direct-mapping><src-attribute>Manager</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="mailNickname" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{9B54E3BB-C82D-48E7-A7E1-FF63373DABD6}"><direct-mapping><src-attribute>MailNickname</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="lastName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{2D29DA2D-01A6-4ED1-B961-23DBC75CA806}"><direct-mapping><src-attribute>LastName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="jobTitle" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D0BE1EDA-1077-4B66-B859-3124F34210E8}"><direct-mapping><src-attribute>JobTitle</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="firstName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{F8A09B71-672E-4603-9DAF-A317CAEAC860}"><direct-mapping><src-attribute>FirstName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="employeeType" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{50DF5836-B2C0-4F13-AB11-0B32424A478F}"><direct-mapping><src-attribute>EmployeeType</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="employeeStartDate" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{B8C465B2-4E37-4EAD-B8D9-46CAE9BB7579}"><direct-mapping><src-attribute>EmployeeStartDate</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="employeeEndDate" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{620F2FF3-1AA6-4C6E-820D-11AF2B91977B}"><direct-mapping><src-attribute>EmployeeEndDate</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="employeeID" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D7763D23-84DB-40F2-A9C0-C11038B43119}"><direct-mapping><src-attribute>EmployeeID</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="email" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{38BEE018-2759-437B-B5C8-23D59A2E85DA}"><direct-mapping><src-attribute>Email</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="displayName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D9D72B7B-D3FB-49DF-89B2-AA7B6C4DBF78}"><direct-mapping><src-attribute>DisplayName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="description" type="ranked"><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{A69A3ECE-5F40-4815-8A7A-48C6FCF02C90}"><sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{D394CF71-09B0-4746-929A-063A8D9F722C}" initial-flow-only="false" is-existence-test="false"><src-attribute>description</src-attribute></sync-rule-mapping></import-flow></import-flows><import-flows mv-attribute="department" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{64F7EF76-E6B4-40BD-805C-5CBEA0681763}"><direct-mapping><src-attribute>Department</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="country" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{31D2DE71-81A0-4FFF-BF27-BEEF738DE8EC}"><direct-mapping><src-attribute>Country</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="company" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{1F17403F-DD92-4723-ABCD-3A17E96E82FA}"><direct-mapping><src-attribute>Company</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="city" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{A1AA4B0B-2499-4252-87F5-5C1A790FA93E}"><direct-mapping><src-attribute>City</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="address" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{2D39189F-6C43-43E8-9426-6AE386E875FF}"><direct-mapping><src-attribute>Address</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="accountName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{13539F96-195C-4199-8A8F-99FEFDDF5119}"><direct-mapping><src-attribute>AccountName</src-attribute></direct-mapping></import-flow><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{2BA28F87-2FBB-4A3D-B6E4-61347613C2CC}"><sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{7B36FE1C-BBA3-450A-A606-EAD6845DA87F}" initial-flow-only="false" is-existence-test="false"><src-attribute>sAMAccountName</src-attribute></sync-rule-mapping></import-flow></import-flows><import-flows mv-attribute="expectedRulesList" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D4A67699-64D9-4715-A5B6-83F503A667B9}"><direct-mapping><src-attribute>ExpectedRulesList</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="csObjectID" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{31676D61-D7C4-4F99-BA41-AD67B6376B16}"><direct-mapping><src-attribute intrinsic="true">dn</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="xActiveDirectoryDN" type="ranked"><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{F9C75362-6DEF-4D5D-A820-BE01013D6B70}"><sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{8BA6FB9F-0504-44E2-83BE-3B1A5A8AEABA}" initial-flow-only="false" is-existence-test="false"><src-attribute intrinsic="true">dn</src-attribute></sync-rule-mapping></import-flow></import-flows></import-flow-set><per-ma-options><ma-options ma-id="{D7A141C2-3C21-4CC1-8B41-14055EF3490B}"><enable-recall>true</enable-recall></ma-options><ma-options ma-id="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}"><enable-recall>true</enable-recall></ma-options><ma-options ma-id="{5A22292D-DB03-4A69-8ECD-FA3B50293721}"><enable-recall>true</enable-recall></ma-options><ma-options ma-id="{A4ED877F-DAB0-455A-A645-EBA39E915BB8}"><enable-recall>true</enable-recall></ma-options></per-ma-options></import-attribute-flow>
 </mv-data>
 
 </export-ma>
