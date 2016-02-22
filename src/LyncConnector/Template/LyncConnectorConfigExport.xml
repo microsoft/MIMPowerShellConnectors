@@ -1,4 +1,4 @@
-<export-ma server='CONTOSO-FIMWAL1' export-date='2016-02-16 22:57:03.637'>
+<export-ma server='CONTOSO-FIMWAL1' export-date='2016-02-22 18:12:03.564'>
 <!--WARNING>
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
@@ -9,15 +9,15 @@
 </WARNING-->
 <ma-data>
  <format-version>1</format-version>
- <id>{A4ED877F-DAB0-455A-A645-EBA39E915BB8}</id>
+ <id>{46E3F078-5D69-4A51-8731-AC0483F19B6F}</id>
  <name>Skype</name>
  <category>Extensible2</category>
  <subtype>PowerShell (Microsoft)</subtype>
  <ma-listname>PowerShell (Microsoft)</ma-listname>
  <ma-companyname>Microsoft</ma-companyname>
- <creation-time>2016-02-16 22:56:32.939</creation-time>
- <last-modification-time>2016-02-16 22:56:49.818</last-modification-time>
- <version>2</version>
+ <creation-time>2016-02-22 18:11:48.930</creation-time>
+ <last-modification-time>2016-02-22 18:11:48.930</last-modification-time>
+ <version>1</version>
  <internal-version>1</internal-version>
  <password-sync-allowed>0</password-sync-allowed>
  <schema>
@@ -54,7 +54,7 @@ Set-StrictMode -Version "2.0"
 
 $Global:ConnectorName = "LyncPowerShellConnector"
 $Global:RemoteSessionName = "LyncPowerShellConnector"
-$Error.Clear()
+$Global:Error.Clear()
 
 #endregion "Global Variables"
 
@@ -77,13 +77,20 @@ function Enter-Script
 	param(
 		[parameter(Mandatory = $true)]
 		[string]
-		$ScriptType
+		$ScriptType,
+		[parameter(Mandatory = $false)]
+		[ValidateNotNull()]
+		[System.Collections.ArrayList]
+		$ErrorObject
 	)
 
 	process
 	{
 		Write-Verbose "$Global:ConnectorName - $ScriptType Script: Execution Started..."
-		$Error.Clear()
+		if ($ErrorObject)
+		{
+			$ErrorObject.Clear()
+		}
 	}
 }
 
@@ -102,6 +109,10 @@ function Exit-Script
 		[string]
 		$ScriptType,
 		[parameter(Mandatory = $false)]
+		[ValidateNotNull()]
+		[System.Collections.ArrayList]
+		$ErrorObject,
+		[parameter(Mandatory = $false)]
 		[switch]
 		$SuppressErrorCheck,
 		[parameter(Mandatory = $false)]
@@ -111,14 +122,18 @@ function Exit-Script
 
 	process
 	{
-		if ($Error.Count -ne 0 -and !$SuppressErrorCheck)
+		if (!$SuppressErrorCheck -and $ErrorObject -and $ErrorObject.Count -ne 0)
 		{
-			$errorMessage = [string]$Error[0]
+			# Take the first one otherwise you get "An error occurred while enumerating through a collection: Collection was modified; enumeration operation may not execute.."
+			# Seems like a bug in Remote PSH 
+			$errorMessage = $ErrorObject[0] # | Out-String -ErrorAction SilentlyContinue
 
 			if ($ExceptionRaisedOnErrorCheck -eq $null)
 			{
 				$ExceptionRaisedOnErrorCheck = [Microsoft.MetadirectoryServices.ExtensibleExtensionException]
 			}
+
+			$ErrorObject.Clear()
 
 			throw  $errorMessage -as $ExceptionRaisedOnErrorCheck
 		}
@@ -906,40 +921,19 @@ function New-CSEntryChangeExportError
 		[Guid]
 		$CSEntryChangeIdentifier,
 		[parameter(Mandatory = $true)]
-		[object]
+		[System.Collections.ArrayList]
 		$ErrorObject
 	)
 
 	$csentryChangeResult = $null
+	# Take the first one otherwise you get "An error occurred while enumerating through a collection: Collection was modified; enumeration operation may not execute.."
+	# Seems like a bug in Remote PSH 
+	$errorDetail = $ErrorObject[0] # | Out-String -ErrorAction SilentlyContinue
+	Write-Warning ("CSEntry Identifier: {0}. ErrorCount: {1}. ErrorDetail: {2}" -f $CSEntryChangeIdentifier, $ErrorObject.Count, $errorDetail)
+	$csentryChangeResult = [Microsoft.MetadirectoryServices.CSEntryChangeResult]::Create($CSEntryChangeIdentifier, $null, "ExportErrorCustomContinueRun", "RUNTIME_EXCEPTION", $errorDetail)
+	Write-Warning ("CSEntryChangeResult Identifier: {0}. ErrorCode: {1}. ErrorName: {2}. ErrorDetail: {3}" -f $csentryChangeResult.Identifier, $csentryChangeResult.ErrorCode, $csentryChangeResult.ErrorName, $csentryChangeResult.ErrorDetail)
 
-	try
-	{
-		foreach ($cmdStatus in $ErrorObject)
-		{
-			$exception = $cmdStatus.GetBaseException()
-			$exceptionType = $exception.GetType().Name
-			$exceptionMessage = $exception.Message
-
-			Write-Warning ("CSEntry Identifier: {0}. ErrorName: {1}. ErrorDetail: {2}" -f $CSEntryChangeIdentifier, $exceptionType, $exceptionMessage)
-			$csentryChangeResult = [Microsoft.MetadirectoryServices.CSEntryChangeResult]::Create($CSEntryChangeIdentifier, $null, "ExportErrorCustomContinueRun", $exceptionType, $exceptionMessage)
-			Write-Warning ("CSEntryChangeResult Identifier: {0}. ErrorCode: {1}. ErrorName: {2}. ErrorDetail: {3}" -f $csentryChangeResult.Identifier, $csentryChangeResult.ErrorCode, $csentryChangeResult.ErrorName, $csentryChangeResult.ErrorDetail)
-					
-			break # report the first error and stop
-		}
-	}
-	catch
-	{
-		foreach ($cmdStatus in $ErrorObject)
-		{
-			$exceptionType = "RUNTIME_EXCEPTION"
-			$exceptionMessage = $cmdStatus.ToString()
-			Write-Warning ("CSEntry Identifier: {0}. Error: {1}" -f $CSEntryChangeIdentifier, $exceptionMessage)
-			$csentryChangeResult = [Microsoft.MetadirectoryServices.CSEntryChangeResult]::Create($CSEntryChangeIdentifier, $null, "ExportErrorCustomContinueRun", $exceptionType, $exceptionMessage)
-			Write-Warning ("CSEntryChangeResult Identifier: {0}. ErrorCode: {1}. ErrorName: {2}. ErrorDetail: {3}" -f $csentryChangeResult.Identifier, $csentryChangeResult.ErrorCode, $csentryChangeResult.ErrorName, $csentryChangeResult.ErrorDetail)
-
-			break # report the first error and stop
-		}
-	}
+	$ErrorObject.Clear()
 
 	return $csentryChangeResult
 }
@@ -1089,7 +1083,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Validation"
+Enter-Script -ScriptType "Validation" -ErrorObject $Error
 
 function Test-ConfigParameterPage
 {
@@ -1289,7 +1283,7 @@ function Test-GlobalConfigParameterPage
 
 Test-ConfigParameterPage
 
-Exit-Script -ScriptType "Validation"
+Exit-Script -ScriptType "Validation" -ErrorObject $Error
 </parameter><parameter name="Schema Script" type="text" use="connectivity">&lt;#
 &lt;copyright file="SchemaScript-Lync.ps1" company="Microsoft"&gt;
 	Copyright (c) Microsoft. All Rights Reserved.
@@ -1324,7 +1318,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Schema"
+Enter-Script -ScriptType "Schema" -ErrorObject $Error
 
 function Get-ConnectorSchema
 {
@@ -1350,7 +1344,7 @@ function Get-ConnectorSchema
 
 Get-ConnectorSchema
 
-Exit-Script -ScriptType "Schema"
+Exit-Script -ScriptType "Schema" -ErrorObject $Error
 </parameter><parameter name="Additional Config Parameter Names" type="string" use="connectivity">SipAddressType,SipDomain,ForceMove,UserPages, OrganizationalUnitPages,PreferredDomainControllerFQDN, LastRunDateTimeOffsetMinute</parameter><parameter name="Additional Encrypted Config Parameter Names" type="string" use="connectivity"></parameter><parameter name="Distinguished Name Style" type="drop-down" use="capabilities">Ldap</parameter><parameter name="Export Type" type="drop-down" use="capabilities">AttributeUpdate</parameter><parameter name="Data Normalization" type="drop-down" use="capabilities">None</parameter><parameter name="Object Confirmation" type="drop-down" use="capabilities">NoAddAndDeleteConfirmation</parameter><parameter name="Use DN As Anchor (Only LDAP style DN)" type="checkbox" use="capabilities">0</parameter><parameter name="Concurrent Operations Of Several Connectors" type="checkbox" use="capabilities">1</parameter><parameter name="Partitions (Only LDAP style DN)" type="checkbox" use="capabilities">1</parameter><parameter name="Hierarchy (Only LDAP style DN)" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Import" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Delta Import" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Export" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Full Export" type="checkbox" use="capabilities">0</parameter><parameter name="No Reference Values In First Export Pass" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Object Rename" type="checkbox" use="capabilities">1</parameter><parameter name="Delete-Add As Replace" type="checkbox" use="capabilities">1</parameter><parameter name="Enable Password operations" type="checkbox" use="capabilities">0</parameter><parameter name="Enable Export Password In First Pass" type="checkbox" use="capabilities">0</parameter><parameter name="Partition Script" type="text" use="global">&lt;#
 &lt;copyright file="PartitionScript-Lync.ps1" company="Microsoft"&gt;
 	Copyright (c) Microsoft. All Rights Reserved.
@@ -1385,7 +1379,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Partition"
+Enter-Script -ScriptType "Partition" -ErrorObject $Error
 
 function Get-Partitions
 {
@@ -1485,7 +1479,7 @@ if ([string]::IsNullOrEmpty($preferredDomainController))
 
 Get-Partitions
 
-Exit-Script -ScriptType "Partition"
+Exit-Script -ScriptType "Partition" -ErrorObject $Error
 </parameter><parameter name="Hierarchy Script" type="text" use="global">&lt;#
 &lt;copyright file="HierarchyScript-Lync.ps1" company="Microsoft"&gt;
 	Copyright (c) Microsoft. All Rights Reserved.
@@ -1523,7 +1517,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Hierarchy"
+Enter-Script -ScriptType "Hierarchy" -ErrorObject $Error
 
 function Get-Hierarchy
 {
@@ -1597,7 +1591,7 @@ if (![string]::IsNullOrEmpty($preferredDomainController))
 
 Get-Hierarchy
 
-Exit-Script -ScriptType "Hierarchy"
+Exit-Script -ScriptType "Hierarchy" -ErrorObject $Error
 </parameter><parameter name="Begin Import Script" type="text" use="global">&lt;#
 &lt;copyright file="Begin-ImportScript-Lync.ps1" company="Microsoft"&gt;
 	Copyright (c) Microsoft. All Rights Reserved.
@@ -1636,7 +1630,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Begin-Import"
+Enter-Script -ScriptType "Begin-Import" -ErrorObject $Error
 
 function Get-OpenImportConnectionResults
 {
@@ -1732,6 +1726,7 @@ if (![string]::IsNullOrEmpty($preferredDomainController))
 }
 
 $session = Get-PSSession -Name $Global:RemoteSessionName -ErrorAction "SilentlyContinue"
+$Error.Clear() # Could use -ErrorAction "Igonre" in PSH v3.0
 
 if (!$session)
 {
@@ -1749,7 +1744,7 @@ if (!$session)
 Get-OpenImportConnectionResults
 
 $exceptionRaisedOnErrorCheck = [Microsoft.MetadirectoryServices.ServerDownException]
-Exit-Script -ScriptType "Begin-Import" -ExceptionRaisedOnErrorCheck $exceptionRaisedOnErrorCheck
+Exit-Script -ScriptType "Begin-Import" -ExceptionRaisedOnErrorCheck $exceptionRaisedOnErrorCheck -ErrorObject $Error
 
 </parameter><parameter name="Import Script" type="text" use="global">&lt;#
 &lt;copyright file="ImportScript-Lync.ps1" company="Microsoft"&gt;
@@ -1791,7 +1786,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Import"
+Enter-Script -ScriptType "Import" -ErrorObject $Error
 
 function Import-CSEntries
 {
@@ -2248,7 +2243,7 @@ Write-Debug ("GetImportEntriesRunStep.CustomData received is: {0}" -f $customDat
 
 Import-CSEntries
 
-Exit-Script -ScriptType "Import"
+Exit-Script -ScriptType "Import" -ErrorObject $Error
 
 </parameter><parameter name="End Import Script" type="text" use="global">&lt;#
 &lt;copyright file="End-ImportScript-Lync.ps1" company="Microsoft"&gt;
@@ -2291,7 +2286,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "End-Import"
+Enter-Script -ScriptType "End-Import" -ErrorObject $Error
 
 function Get-CloseImportConnectionResults
 {
@@ -2328,7 +2323,7 @@ if (Test-Variable -Name "Session" -Scope "Global")
 	Remove-PSSession $Global:Session
 }
 
-Exit-Script -ScriptType "End-Import"
+Exit-Script -ScriptType "End-Import" -ErrorObject $Error
 </parameter><parameter name="Begin Export Script" type="text" use="global">&lt;#
 &lt;copyright file="Begin-ExportScript-Lync.ps1" company="Microsoft"&gt;
 	Copyright (c) Microsoft. All Rights Reserved.
@@ -2367,7 +2362,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Begin-Export"
+Enter-Script -ScriptType "Begin-Export" -ErrorObject $Error
 
 $server = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "Server"
 $preferredDomainController = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "PreferredDomainControllerFQDN"
@@ -2380,6 +2375,7 @@ if (![string]::IsNullOrEmpty($preferredDomainController))
 $Global:PreferredDomainController = $preferredDomainController
 
 $session = Get-PSSession -Name $Global:RemoteSessionName -ErrorAction "SilentlyContinue"
+$Error.Clear() # Could use -ErrorAction "Igonre" in PSH v3.0
 
 if (!$session)
 {
@@ -2398,7 +2394,7 @@ if (!$session)
 }
 
 $exceptionRaisedOnErrorCheck = [Microsoft.MetadirectoryServices.ServerDownException]
-Exit-Script -ScriptType "Begin-Export" -ExceptionRaisedOnErrorCheck $exceptionRaisedOnErrorCheck
+Exit-Script -ScriptType "Begin-Export" -ExceptionRaisedOnErrorCheck $exceptionRaisedOnErrorCheck -ErrorObject $Error
 </parameter><parameter name="Export Script" type="text" use="global">&lt;#
 &lt;copyright file="ExportScript-Lync.ps1" company="Microsoft"&gt;
 	Copyright (c) Microsoft. All Rights Reserved.
@@ -2439,7 +2435,7 @@ $commonModule = (Join-Path -Path $scriptDir -ChildPath $configParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Export"
+Enter-Script -ScriptType "Export" -ErrorObject $Error
 
 function Export-CSEntries
 {
@@ -2459,7 +2455,7 @@ function Export-CSEntries
 
 	foreach ($csentryChange in $CSEntries)
 	{
-		$Global:CmdStatus = $null
+		$Error.Clear() = $null
 		$newAnchorTable = @{}
 
 		$dn = Get-CSEntryChangeDN $csentryChange
@@ -2492,12 +2488,12 @@ function Export-CSEntries
 		}
 		catch
 		{
-			$Global:CmdStatus = "$_"
+			Write-Error "$_"
 		}
 
-		if (Test-Variable "CmdStatus" "Global")
+		if ($Error)
 		{
-			$csentryChangeResult = New-CSEntryChangeExportError -CSEntryChangeIdentifier $csentryChange.Identifier -ErrorObject $Global:CmdStatus
+			$csentryChangeResult = New-CSEntryChangeExportError -CSEntryChangeIdentifier $csentryChange.Identifier -ErrorObject $Error
 		}
 		else
 		{
@@ -2549,13 +2545,11 @@ function Export-User
 				$cmd += " -DomainController '$preferredDomainController'"
 			}
 
-			$cmd += " -ErrorVariable 'Global:CmdStatus' -ErrorAction 'SilentlyContinue'"
-
 			Write-Debug "Invoking $cmd for user: $dn"
 
 			$x = Invoke-Expression $cmd 
 
-			if (!$Global:CmdStatus)
+			if (!$Error)
 			{
 				$newAnchorTable.Add("Guid", $x.Guid.ToByteArray())
 			}
@@ -2690,7 +2684,7 @@ function Invoke-EnableCsUserCommand
 		$CSEntryChange
 	)
 
-	if (!$Global:CmdStatus)
+	if (!$Error)
 	{
 		$dn  = Get-CSEntryChangeDN $CSEntryChange
 		$identity = Get-CsIdentity $CSEntryChange
@@ -2716,8 +2710,6 @@ function Invoke-EnableCsUserCommand
 			$cmd +=  " -SipAddressType '$sipAddressType'"
 		}
 
-		$cmd += " -ErrorVariable 'Global:CmdStatus' -ErrorAction 'SilentlyContinue'"
-
 		Write-Debug "Invoking $cmd for user: $dn"
 
 		Invoke-Expression $cmd | Out-Null
@@ -2740,7 +2732,7 @@ function Invoke-SetCsUserCommand
 		$CSEntryChange
 	)
 
-	if (!$Global:CmdStatus)
+	if (!$Error)
 	{
 		$dn  = Get-CSEntryChangeDN $CSEntryChange
 		$identity = Get-CsIdentity $CSEntryChange
@@ -2770,8 +2762,6 @@ function Invoke-SetCsUserCommand
 		if ($remoteCallControlTelephonyEnabled -ne $null) { $cmd += " -RemoteCallControlTelephonyEnabled `$$remoteCallControlTelephonyEnabled" }
 		if ($sipAddress -ne $null) { $cmd += " -SipAddress '$sipAddress'" }
 
-		$cmd += " -ErrorVariable 'Global:CmdStatus' -ErrorAction 'SilentlyContinue'"
-
 		Write-Debug "Invoking $cmd for user: $dn"
 
 		Invoke-Expression $cmd | Out-Null
@@ -2795,7 +2785,7 @@ function Invoke-GrantCsPolicyCommands
 	)
 
 
-	if (!$Global:CmdStatus)
+	if (!$Error)
 	{
 		$dn  = Get-CSEntryChangeDN $CSEntryChange
 		$identity = Get-CsIdentity $CSEntryChange
@@ -2840,8 +2830,6 @@ function Invoke-GrantCsPolicyCommands
 		if ($presencePolicyChanged) { $cmd += " | Grant-CsPresencePolicy -PolicyName '$presencePolicy' -PassThru" }
 		if ($voicePolicyChanged) { $cmd += " | Grant-CsVoicePolicy -PolicyName '$voicePolicy' -PassThru" }
 
-		$cmd += " -ErrorVariable 'Global:CmdStatus' -ErrorAction 'SilentlyContinue'"
-
 		Write-Debug "Invoking $cmd for user: $dn"
 
 		Invoke-Expression $cmd | Out-Null
@@ -2864,14 +2852,14 @@ function Invoke-MoveCsUserCommand
 		$CSEntryChange
 	)
 
-	if (!$Global:CmdStatus)
+	if (!$Error)
 	{
 		$dn  = Get-CSEntryChangeDN $CSEntryChange
 		$identity = Get-CsIdentity $CSEntryChange
 		$registrarPool  = Get-CSEntryChangeValue -CSEntryChange $CSEntryChange -AttributeName "RegistrarPool"
 		if ($registrarPool)
 		{
-			$cmd = "Move-CsUser -Identity '$identity' -Target $registrarPool -Force:`$$forceMove -Confirm:`$$false -ErrorVariable 'Global:CmdStatus' -ErrorAction 'SilentlyContinue'"
+			$cmd = "Move-CsUser -Identity '$identity' -Target $registrarPool -Force:`$$forceMove -Confirm:`$$false'"
 			if (![string]::IsNullOrEmpty($preferredDomainController))
 			{
 				$cmd += " -DomainController '$preferredDomainController'"
@@ -2900,7 +2888,7 @@ function Invoke-DisableCsUserCommand
 		$CSEntryChange
 	)
 
-	if (!$Global:CmdStatus)
+	if (!$Error)
 	{
 		$dn  = Get-CSEntryChangeDN $CSEntryChange
 		$identity = Get-CsIdentity $CSEntryChange
@@ -2911,29 +2899,9 @@ function Invoke-DisableCsUserCommand
 			$cmd += " -DomainController '$preferredDomainController'"
 		}
 
-		$cmd += " -ErrorVariable 'Global:CmdStatus' -ErrorAction 'SilentlyContinue'"
-
 		Write-Debug "Invoking $cmd for user: $dn"
 
 		Invoke-Expression $cmd | Out-Null
-		
-		# quick and dirty check for object deletion in AD. will probably need localisation.
-		# we could query AD as well, but that will again work only with PreferredDomainController setting in a multi-domain setup since we want to use objectGUID and not DN to bind.
-		if ($Global:CmdStatus)
-		{
-			foreach ($cmdStatus in $Global:CmdStatus)
-			{
-				$exceptionMessage = $cmdStatus.ToString()
-				if ($exceptionMessage.Contains("Management object not found for identity"))
-				{
-					Write-Warning ("CSEntry Identifier: {0}. Error: {1}" -f $CSEntryChange.Identifier, $exceptionMessage)
-
-					$Global:CmdStatus = $null # ignore the error if the object is already deleted from AD.
-				}
-
-				break # process the first error and stop
-			}
-		}
 	}
 }
 
@@ -2955,7 +2923,7 @@ function Get-CsIdentity
 		$CSEntryChange
 	)
 
-	if (!$Global:CmdStatus)
+	if (!$Error)
 	{
 		$dn  = Get-CSEntryChangeDN $CSEntryChange
 
@@ -2987,7 +2955,7 @@ $forceMove = (Get-ConfigParameter -ConfigParameters $configParameters -Parameter
 
 Export-CSEntries
 
-Exit-Script -ScriptType "Export" -SuppressErrorCheck
+Exit-Script -ScriptType "Export" -SuppressErrorCheck -ErrorObject $Error
 
 </parameter><parameter name="End Export Script" type="text" use="global">&lt;#
 &lt;copyright file="End-ExportScript-Lync.ps1" company="Microsoft"&gt;
@@ -3030,23 +2998,23 @@ $commonModule = (Join-Path -Path $scriptDir -ChildPath $configParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "End-Export"
+Enter-Script -ScriptType "End-Export" -ErrorObject $Error
 
 if (Test-Variable -Name "Session" -Scope "Global")
 {
 	Remove-PSSession $Global:Session
 }
 
-Exit-Script -ScriptType "End-Export"
-</parameter><parameter name="Begin Password Script" type="text" use="global"></parameter><parameter name="Password Extension Script" type="text" use="global"></parameter><parameter name="End Password Script" type="text" use="global"></parameter><parameter name="SipAddressType_Global" type="string" use="global">UserPrincipalName</parameter><parameter name="SipDomain_Global" type="string" use="global"></parameter><parameter name="ForceMove_Global" type="string" use="global">Yes</parameter><parameter name="UserPages_Global" type="string" use="global">a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9</parameter><parameter name="OrganizationalUnitPages_Global" type="string" use="global"></parameter><parameter name="PreferredDomainControllerFQDN_Global" type="string" use="global">contoso-dc01,contoso-dc02</parameter><parameter name="LastRunDateTimeOffsetMinute_Global" type="string" use="global">30</parameter></parameter-values><possible_component_mappings><mapping><dn_component>Ou</dn_component><object_class>OrganizationalUnit</object_class></mapping></possible_component_mappings><default_visible_attributes><attribute>Guid</attribute><attribute>Name</attribute><attribute>ObjectClass</attribute><attribute>ObjectCategory</attribute><attribute>ArchivingPolicy</attribute><attribute>AudioVideoDisabled</attribute><attribute>ClientPolicy</attribute><attribute>ClientVersionPolicy</attribute><attribute>ConferencingPolicy</attribute><attribute>DialPlan</attribute><attribute>DisplayName</attribute><attribute>Enabled</attribute><attribute>EnabledForFederation</attribute><attribute>EnabledForInternetAccess</attribute><attribute>EnabledForRichPresence</attribute><attribute>EnterpriseVoiceEnabled</attribute><attribute>ExternalAccessPolicy</attribute><attribute>FirstName</attribute><attribute>HomeServer</attribute><attribute>HostedVoiceMail</attribute><attribute>HostedVoicemailPolicy</attribute><attribute>HostingProvider</attribute><attribute>Identity</attribute><attribute>IPPBXSoftPhoneRoutingEnabled</attribute><attribute>IsValid</attribute><attribute>LastName</attribute><attribute>LineServerURI</attribute><attribute>LineURI</attribute><attribute>LocationPolicy</attribute><attribute>OriginatorSid</attribute><attribute>PinPolicy</attribute><attribute>PresencePolicy</attribute><attribute>PrivateLine</attribute><attribute>ProxyAddresses</attribute><attribute>PublicNetworkEnabled</attribute><attribute>RegistrarPool</attribute><attribute>RemoteCallControlTelephonyEnabled</attribute><attribute>SamAccountName</attribute><attribute>Sid</attribute><attribute>SipAddress</attribute><attribute>TargetRegistrarPool</attribute><attribute>TargetServerIfMoving</attribute><attribute>TenantId</attribute><attribute>UserPrincipalName</attribute><attribute>VoicePolicy</attribute></default_visible_attributes><case_normalize_dn_for_anchor>1</case_normalize_dn_for_anchor></MAConfig>
+Exit-Script -ScriptType "End-Export" -ErrorObject $Error
+</parameter><parameter name="Begin Password Script" type="text" use="global"></parameter><parameter name="Password Extension Script" type="text" use="global"></parameter><parameter name="End Password Script" type="text" use="global"></parameter><parameter name="SipAddressType_Global" type="string" use="global">UserPrincipalName</parameter><parameter name="SipDomain_Global" type="string" use="global"></parameter><parameter name="ForceMove_Global" type="string" use="global">Yes</parameter><parameter name="UserPages_Global" type="string" use="global">a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9</parameter><parameter name="OrganizationalUnitPages_Global" type="string" use="global"></parameter><parameter name="PreferredDomainControllerFQDN_Global" type="string" use="global"></parameter><parameter name="LastRunDateTimeOffsetMinute_Global" type="string" use="global">30</parameter></parameter-values><possible_component_mappings><mapping><dn_component>Ou</dn_component><object_class>OrganizationalUnit</object_class></mapping></possible_component_mappings><default_visible_attributes><attribute>Guid</attribute><attribute>Name</attribute><attribute>ObjectClass</attribute><attribute>ObjectCategory</attribute><attribute>ArchivingPolicy</attribute><attribute>AudioVideoDisabled</attribute><attribute>ClientPolicy</attribute><attribute>ClientVersionPolicy</attribute><attribute>ConferencingPolicy</attribute><attribute>DialPlan</attribute><attribute>DisplayName</attribute><attribute>Enabled</attribute><attribute>EnabledForFederation</attribute><attribute>EnabledForInternetAccess</attribute><attribute>EnabledForRichPresence</attribute><attribute>EnterpriseVoiceEnabled</attribute><attribute>ExternalAccessPolicy</attribute><attribute>FirstName</attribute><attribute>HomeServer</attribute><attribute>HostedVoiceMail</attribute><attribute>HostedVoicemailPolicy</attribute><attribute>HostingProvider</attribute><attribute>Identity</attribute><attribute>IPPBXSoftPhoneRoutingEnabled</attribute><attribute>IsValid</attribute><attribute>LastName</attribute><attribute>LineServerURI</attribute><attribute>LineURI</attribute><attribute>LocationPolicy</attribute><attribute>OriginatorSid</attribute><attribute>PinPolicy</attribute><attribute>PresencePolicy</attribute><attribute>PrivateLine</attribute><attribute>ProxyAddresses</attribute><attribute>PublicNetworkEnabled</attribute><attribute>RegistrarPool</attribute><attribute>RemoteCallControlTelephonyEnabled</attribute><attribute>SamAccountName</attribute><attribute>Sid</attribute><attribute>SipAddress</attribute><attribute>TargetRegistrarPool</attribute><attribute>TargetServerIfMoving</attribute><attribute>TenantId</attribute><attribute>UserPrincipalName</attribute><attribute>VoicePolicy</attribute></default_visible_attributes><case_normalize_dn_for_anchor>1</case_normalize_dn_for_anchor></MAConfig>
  </private-configuration>
  <SyncConfig-refresh-schema>0</SyncConfig-refresh-schema>
  <ma-partition-data>
  <partition>
-  <id>{1F5269DB-30FA-4336-BF23-7B262C3744B5}</id>
+  <id>{B4B7B354-490F-4BB6-B51C-A033A21425F8}</id>
   <name>DC=contoso,DC=com</name>
-  <creation-time>2016-02-16 22:56:32.940</creation-time>
-  <last-modification-time>2016-02-16 22:56:32.940</last-modification-time>
+  <creation-time>2016-02-22 18:11:48.930</creation-time>
+  <last-modification-time>2016-02-22 18:11:48.930</last-modification-time>
   <version>1</version>
   <selected>1</selected>
   <filter>
@@ -3096,44 +3064,44 @@ Exit-Script -ScriptType "End-Export"
 
  <ma-run-data>
  <run-configuration>
-  <id>{A69619A5-34BD-4E13-B760-DBA4F097F4D2}</id>
+  <id>{D68E1254-24D0-4712-B95E-F8B843EB5139}</id>
   <name>Delta Import</name>
-  <creation-time>2016-02-16 22:56:32.987</creation-time>
+  <creation-time>2016-02-22 18:11:48.993</creation-time>
   <version>1</version>
-  <last-modification-time>2016-02-16 22:56:32.987</last-modification-time>
-  <configuration><step><step-type type="delta-import"><import-subtype>to-cs</import-subtype></step-type><threshold><batch-size>9999</batch-size></threshold><partition>{1F5269DB-30FA-4336-BF23-7B262C3744B5}</partition><custom-data><extensible2-step-data><timeout>0</timeout><batch-size>9999</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
+  <last-modification-time>2016-02-22 18:11:48.993</last-modification-time>
+  <configuration><step><step-type type="delta-import"><import-subtype>to-cs</import-subtype></step-type><threshold><batch-size>9999</batch-size></threshold><partition>{B4B7B354-490F-4BB6-B51C-A033A21425F8}</partition><custom-data><extensible2-step-data><timeout>0</timeout><batch-size>9999</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
  </run-configuration>
  <run-configuration>
-  <id>{7CA44966-A6A0-4D51-96BF-B8DEFC3638CA}</id>
+  <id>{377CB8D6-408F-42D7-BB54-A6AE43A0E4A5}</id>
   <name>Delta Synchronization</name>
-  <creation-time>2016-02-16 22:56:32.987</creation-time>
+  <creation-time>2016-02-22 18:11:48.993</creation-time>
   <version>1</version>
-  <last-modification-time>2016-02-16 22:56:32.987</last-modification-time>
-  <configuration><step><step-type type="apply-rules"><apply-rules-subtype>apply-pending</apply-rules-subtype></step-type><threshold><batch-size>1</batch-size></threshold><partition>{1F5269DB-30FA-4336-BF23-7B262C3744B5}</partition><custom-data><extensible2-step-data><batch-size>0</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
+  <last-modification-time>2016-02-22 18:11:48.993</last-modification-time>
+  <configuration><step><step-type type="apply-rules"><apply-rules-subtype>apply-pending</apply-rules-subtype></step-type><threshold><batch-size>1</batch-size></threshold><partition>{B4B7B354-490F-4BB6-B51C-A033A21425F8}</partition><custom-data><extensible2-step-data><batch-size>0</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
  </run-configuration>
  <run-configuration>
-  <id>{76DEAA73-DE13-4191-8927-CDD5358203C3}</id>
+  <id>{4F390475-DB7A-444B-A2E5-7C939F31C162}</id>
   <name>Export</name>
-  <creation-time>2016-02-16 22:56:32.987</creation-time>
+  <creation-time>2016-02-22 18:11:48.993</creation-time>
   <version>1</version>
-  <last-modification-time>2016-02-16 22:56:32.987</last-modification-time>
-  <configuration><step><step-type type="export"></step-type><threshold><batch-size>1</batch-size></threshold><partition>{1F5269DB-30FA-4336-BF23-7B262C3744B5}</partition><custom-data><extensible2-step-data><timeout>0</timeout><batch-size>1</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
+  <last-modification-time>2016-02-22 18:11:48.993</last-modification-time>
+  <configuration><step><step-type type="export"></step-type><threshold><batch-size>1</batch-size></threshold><partition>{B4B7B354-490F-4BB6-B51C-A033A21425F8}</partition><custom-data><extensible2-step-data><timeout>0</timeout><batch-size>1</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
  </run-configuration>
  <run-configuration>
-  <id>{1B5BE29E-57E2-460C-A6BF-7D215DDF43F3}</id>
+  <id>{BE81662A-D9E5-4374-8DAE-697EBF73C1E4}</id>
   <name>Full Import</name>
-  <creation-time>2016-02-16 22:56:32.987</creation-time>
+  <creation-time>2016-02-22 18:11:48.993</creation-time>
   <version>1</version>
-  <last-modification-time>2016-02-16 22:56:32.987</last-modification-time>
-  <configuration><step><step-type type="full-import"><import-subtype>to-cs</import-subtype></step-type><threshold><batch-size>9999</batch-size></threshold><partition>{1F5269DB-30FA-4336-BF23-7B262C3744B5}</partition><custom-data><extensible2-step-data><timeout>0</timeout><batch-size>9999</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
+  <last-modification-time>2016-02-22 18:11:48.993</last-modification-time>
+  <configuration><step><step-type type="full-import"><import-subtype>to-cs</import-subtype></step-type><threshold><batch-size>9999</batch-size></threshold><partition>{B4B7B354-490F-4BB6-B51C-A033A21425F8}</partition><custom-data><extensible2-step-data><timeout>0</timeout><batch-size>9999</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
  </run-configuration>
  <run-configuration>
-  <id>{176A097D-65AE-46A1-9D09-8CFB90CDD9A6}</id>
+  <id>{3A8C79F9-BBA4-4937-B7B7-128E77316BE8}</id>
   <name>Full Synchronisation</name>
-  <creation-time>2016-02-16 22:56:32.987</creation-time>
+  <creation-time>2016-02-22 18:11:48.993</creation-time>
   <version>1</version>
-  <last-modification-time>2016-02-16 22:56:32.987</last-modification-time>
-  <configuration><step><step-type type="apply-rules"><apply-rules-subtype>reevaluate-flow-connectors</apply-rules-subtype></step-type><threshold><batch-size>1</batch-size></threshold><partition>{1F5269DB-30FA-4336-BF23-7B262C3744B5}</partition><custom-data><extensible2-step-data><batch-size>0</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
+  <last-modification-time>2016-02-22 18:11:48.993</last-modification-time>
+  <configuration><step><step-type type="apply-rules"><apply-rules-subtype>reevaluate-flow-connectors</apply-rules-subtype></step-type><threshold><batch-size>1</batch-size></threshold><partition>{B4B7B354-490F-4BB6-B51C-A033A21425F8}</partition><custom-data><extensible2-step-data><batch-size>0</batch-size></extensible2-step-data><parameter-values><parameter name="SipAddressType_RunStep" type="string" use="run-step"></parameter><parameter name="SipDomain_RunStep" type="string" use="run-step"></parameter><parameter name="ForceMove_RunStep" type="string" use="run-step"></parameter><parameter name="UserPages_RunStep" type="string" use="run-step"></parameter><parameter name="OrganizationalUnitPages_RunStep" type="string" use="run-step"></parameter><parameter name="PreferredDomainControllerFQDN_RunStep" type="string" use="run-step"></parameter><parameter name="LastRunDateTimeOffsetMinute_RunStep" type="string" use="run-step"></parameter></parameter-values></custom-data></step></configuration>
  </run-configuration>
 </ma-run-data>
 
@@ -3145,7 +3113,7 @@ Exit-Script -ScriptType "End-Export"
 </ma-data>
 
 <mv-data>
- <import-attribute-flow><import-flow-set mv-object-type="expectedRuleEntry"><import-flows mv-attribute="displayName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{8416B3AE-8D9F-4FC4-938B-4598BC674C9E}"><direct-mapping><src-attribute>DisplayName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="synchronizationRuleID" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{0AD2A998-B21F-43A0-AD4A-F96AA39869F4}"><direct-mapping><src-attribute>SynchronizationRuleID</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="synchronizationRuleData" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{E4FFC22A-10B9-4110-8DD0-D75A789B1667}"><direct-mapping><src-attribute>SynchronizationRuleData</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="expectedRuleEntryAction" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{044C9E02-AAF5-4AE2-A97B-10F3F1DA471C}"><direct-mapping><src-attribute>ExpectedRuleEntryAction</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="createdTime" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{F5761DCA-A648-457A-9502-4D40422B1AA7}"><direct-mapping><src-attribute>CreatedTime</src-attribute></direct-mapping></import-flow></import-flows></import-flow-set><import-flow-set mv-object-type="synchronizationRule"><import-flows mv-attribute="msidmOutboundScopingFilters" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{2F562287-572B-4D3E-8A2B-2301656E37DE}"><direct-mapping><src-attribute>msidmOutboundScopingFilters</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="msidmOutboundIsFilterBased" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{C785B246-33DB-4CF6-99F7-B28DD8D17C45}"><direct-mapping><src-attribute>msidmOutboundIsFilterBased</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="synchronizationRuleParameters" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{7DC62E33-015A-4A03-B58B-25CE04752A1D}"><direct-mapping><src-attribute>SynchronizationRuleParameters</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="relationshipCriteria" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{550BD62F-4115-4430-AFFB-0289E048B210}"><direct-mapping><src-attribute>RelationshipCriteria</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="precedence" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{6AE6857E-CC14-461E-9D89-82F09B4D6A08}"><direct-mapping><src-attribute>Precedence</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="persistentFlow" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{106788CC-3D46-43CA-841F-305314604587}"><direct-mapping><src-attribute>PersistentFlow</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="initialFlow" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{5465D459-D99C-4689-B908-B111DEA0E144}"><direct-mapping><src-attribute>InitialFlow</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="ilmObjectType" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{76FE909F-EEFE-4B65-B6D8-0195EA339650}"><direct-mapping><src-attribute>ILMObjectType</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="flowType" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{DCA05B6B-A6C3-4B99-BCDB-55A3A41BD6B7}"><direct-mapping><src-attribute>FlowType</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="existenceTest" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{6DEE3A02-DC54-483C-AF6C-CB60C8C003F1}"><direct-mapping><src-attribute>ExistenceTest</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="displayName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{6114EC77-40F6-480D-BB51-38C770817FB6}"><direct-mapping><src-attribute>DisplayName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="disconnectConnectedSystemObject" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{274096A2-6AF1-44F8-AAF2-D030420AD193}"><direct-mapping><src-attribute>DisconnectConnectedSystemObject</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="dependency" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{C638BC54-5579-4287-B542-6E2EB05464CA}"><direct-mapping><src-attribute>Dependency</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="createILMObject" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{694DABA1-6984-44CE-A349-C275A3D4F9A3}"><direct-mapping><src-attribute>CreateILMObject</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="createConnectedSystemObject" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{E1B04810-50E8-407A-BB66-D035DB566B85}"><direct-mapping><src-attribute>CreateConnectedSystemObject</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="connectedSystemScope" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{49E235ED-9439-40D3-A874-932ADA48861C}"><direct-mapping><src-attribute>ConnectedSystemScope</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="connectedSystem" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{32EFD3B0-0F4A-49F4-8254-B2BCF0509637}"><direct-mapping><src-attribute>ConnectedSystem</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="connectedObjectType" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{9AC1CCCA-8429-442E-99FE-97FE3D317DB6}"><direct-mapping><src-attribute>ConnectedObjectType</src-attribute></direct-mapping></import-flow></import-flows></import-flow-set><import-flow-set mv-object-type="detectedRuleEntry"><import-flows mv-attribute="csObjectID" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="DetectedRuleEntry" id="{510680EA-A2E1-4A42-8229-2B3CCAC2F9CC}"><direct-mapping><src-attribute intrinsic="true">dn</src-attribute></direct-mapping></import-flow></import-flows></import-flow-set><import-flow-set mv-object-type="group"><import-flows mv-attribute="displayedOwner" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{F12EA409-AA37-4B0F-8D96-A3B3E311C855}"><direct-mapping><src-attribute>DisplayedOwner</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="type" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{A8F34CC2-FF09-46F1-B125-8DFDB3C12D0B}"><direct-mapping><src-attribute>Type</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="scope" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{FE613771-589A-4DC3-B724-E0ABBBE79519}"><direct-mapping><src-attribute>Scope</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="owner" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{219D1DCF-A55E-4DFB-8B11-6A73758398AB}"><direct-mapping><src-attribute>Owner</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="domain" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{D727DCF7-4A84-46B4-8797-C8C56F61116E}"><direct-mapping><src-attribute>Domain</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="objectSid" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{6BF383DA-5560-49BA-B00F-273474F978A5}"><direct-mapping><src-attribute>ObjectSID</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="member" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{C288B897-DF58-4325-B480-CFEE69378660}"><direct-mapping><src-attribute>Member</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="mailNickname" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{4F40BEBF-B05A-4279-9E01-CD10FAFCBC97}"><direct-mapping><src-attribute>MailNickname</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="email" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{523F5BA5-45D9-469B-9D99-62CA76C03C0B}"><direct-mapping><src-attribute>Email</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="displayName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{A032F21D-8D13-4920-9180-11800B6A34EB}"><direct-mapping><src-attribute>DisplayName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="description" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{C2B216AE-576D-4B24-B617-400FB37ACE33}"><direct-mapping><src-attribute>Description</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="accountName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{A128E03D-6C2C-495E-8CFB-02620DCEB308}"><direct-mapping><src-attribute>AccountName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="expectedRulesList" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{FD05BBC3-59D5-42B3-B4C3-232EF296D984}"><direct-mapping><src-attribute>ExpectedRulesList</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="csObjectID" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{4896BAE9-5974-4513-B957-282D2DF110AE}"><direct-mapping><src-attribute intrinsic="true">dn</src-attribute></direct-mapping></import-flow></import-flows></import-flow-set><import-flow-set mv-object-type="person"><import-flows mv-attribute="xObjectGUID" type="ranked"><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{DCDB69BB-3C2A-45BD-9795-F91115CDCBEB}"><sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{EA0327E0-3360-454D-BA43-B1764713C8F2}" initial-flow-only="false" is-existence-test="false"><src-attribute>objectGUID</src-attribute></sync-rule-mapping></import-flow></import-flows><import-flows mv-attribute="domain" type="ranked"><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{76B2229F-23E3-448B-B149-255337A6B17F}"><sync-rule-mapping mapping-type="constant" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{9133BE17-F9DE-4011-B0D6-A57EBA22B4B3}" initial-flow-only="false" is-existence-test="false"><sync-rule-value>CONTOSO</sync-rule-value></sync-rule-mapping></import-flow><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{CD7DDFA5-1B5D-43FA-A4D9-AC36475DD16B}"><direct-mapping><src-attribute>Domain</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="objectSid" type="ranked"><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{A7A5DE4D-6C01-4AEA-9CC3-B41CEF127BAB}"><sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{D8168AD7-73BA-46AE-9868-F3D78F0536E3}" initial-flow-only="false" is-existence-test="false"><src-attribute>objectSid</src-attribute></sync-rule-mapping></import-flow><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{F196B3C4-3701-4297-912C-5155F2050CBE}"><direct-mapping><src-attribute>ObjectSID</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="postalCode" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{A2761BC1-1E78-447F-9A6C-8F6E2D522FFA}"><direct-mapping><src-attribute>PostalCode</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="photo" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{A1ECA723-23B8-40B5-BC71-A4F9C8A2105F}"><direct-mapping><src-attribute>Photo</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="officePhone" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D85A2683-E5E4-4C96-9B5F-20EAD253A9C0}"><direct-mapping><src-attribute>OfficePhone</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="officeLocation" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{7EFA7A50-2A0C-4A13-8749-075CCCBF0631}"><direct-mapping><src-attribute>OfficeLocation</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="officeFax" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{CAC6BD70-09FB-42A0-A076-0DD37E2B8006}"><direct-mapping><src-attribute>OfficeFax</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="mobilePhone" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{646637FF-88F4-44F0-9BEF-19353C6EB5C3}"><direct-mapping><src-attribute>MobilePhone</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="middleName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{FE904DF3-BB88-4208-8B90-BAABC43C10A2}"><direct-mapping><src-attribute>MiddleName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="manager" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{8975EC86-B2F5-467A-8691-0C72F66F4EFD}"><direct-mapping><src-attribute>Manager</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="mailNickname" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{9B54E3BB-C82D-48E7-A7E1-FF63373DABD6}"><direct-mapping><src-attribute>MailNickname</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="lastName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{2D29DA2D-01A6-4ED1-B961-23DBC75CA806}"><direct-mapping><src-attribute>LastName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="jobTitle" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D0BE1EDA-1077-4B66-B859-3124F34210E8}"><direct-mapping><src-attribute>JobTitle</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="firstName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{F8A09B71-672E-4603-9DAF-A317CAEAC860}"><direct-mapping><src-attribute>FirstName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="employeeType" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{50DF5836-B2C0-4F13-AB11-0B32424A478F}"><direct-mapping><src-attribute>EmployeeType</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="employeeStartDate" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{B8C465B2-4E37-4EAD-B8D9-46CAE9BB7579}"><direct-mapping><src-attribute>EmployeeStartDate</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="employeeEndDate" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{620F2FF3-1AA6-4C6E-820D-11AF2B91977B}"><direct-mapping><src-attribute>EmployeeEndDate</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="employeeID" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D7763D23-84DB-40F2-A9C0-C11038B43119}"><direct-mapping><src-attribute>EmployeeID</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="email" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{38BEE018-2759-437B-B5C8-23D59A2E85DA}"><direct-mapping><src-attribute>Email</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="displayName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D9D72B7B-D3FB-49DF-89B2-AA7B6C4DBF78}"><direct-mapping><src-attribute>DisplayName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="description" type="ranked"><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{A69A3ECE-5F40-4815-8A7A-48C6FCF02C90}"><sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{D394CF71-09B0-4746-929A-063A8D9F722C}" initial-flow-only="false" is-existence-test="false"><src-attribute>description</src-attribute></sync-rule-mapping></import-flow></import-flows><import-flows mv-attribute="department" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{64F7EF76-E6B4-40BD-805C-5CBEA0681763}"><direct-mapping><src-attribute>Department</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="country" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{31D2DE71-81A0-4FFF-BF27-BEEF738DE8EC}"><direct-mapping><src-attribute>Country</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="company" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{1F17403F-DD92-4723-ABCD-3A17E96E82FA}"><direct-mapping><src-attribute>Company</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="city" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{A1AA4B0B-2499-4252-87F5-5C1A790FA93E}"><direct-mapping><src-attribute>City</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="address" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{2D39189F-6C43-43E8-9426-6AE386E875FF}"><direct-mapping><src-attribute>Address</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="accountName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{13539F96-195C-4199-8A8F-99FEFDDF5119}"><direct-mapping><src-attribute>AccountName</src-attribute></direct-mapping></import-flow><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{2BA28F87-2FBB-4A3D-B6E4-61347613C2CC}"><sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{7B36FE1C-BBA3-450A-A606-EAD6845DA87F}" initial-flow-only="false" is-existence-test="false"><src-attribute>sAMAccountName</src-attribute></sync-rule-mapping></import-flow></import-flows><import-flows mv-attribute="expectedRulesList" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D4A67699-64D9-4715-A5B6-83F503A667B9}"><direct-mapping><src-attribute>ExpectedRulesList</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="csObjectID" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{31676D61-D7C4-4F99-BA41-AD67B6376B16}"><direct-mapping><src-attribute intrinsic="true">dn</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="xActiveDirectoryDN" type="ranked"><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{F9C75362-6DEF-4D5D-A820-BE01013D6B70}"><sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{8BA6FB9F-0504-44E2-83BE-3B1A5A8AEABA}" initial-flow-only="false" is-existence-test="false"><src-attribute intrinsic="true">dn</src-attribute></sync-rule-mapping></import-flow></import-flows></import-flow-set><per-ma-options><ma-options ma-id="{D7A141C2-3C21-4CC1-8B41-14055EF3490B}"><enable-recall>true</enable-recall></ma-options><ma-options ma-id="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}"><enable-recall>true</enable-recall></ma-options><ma-options ma-id="{5A22292D-DB03-4A69-8ECD-FA3B50293721}"><enable-recall>true</enable-recall></ma-options><ma-options ma-id="{A4ED877F-DAB0-455A-A645-EBA39E915BB8}"><enable-recall>true</enable-recall></ma-options></per-ma-options></import-attribute-flow>
+ <import-attribute-flow><import-flow-set mv-object-type="expectedRuleEntry"><import-flows mv-attribute="displayName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{8416B3AE-8D9F-4FC4-938B-4598BC674C9E}"><direct-mapping><src-attribute>DisplayName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="synchronizationRuleID" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{0AD2A998-B21F-43A0-AD4A-F96AA39869F4}"><direct-mapping><src-attribute>SynchronizationRuleID</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="synchronizationRuleData" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{E4FFC22A-10B9-4110-8DD0-D75A789B1667}"><direct-mapping><src-attribute>SynchronizationRuleData</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="expectedRuleEntryAction" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{044C9E02-AAF5-4AE2-A97B-10F3F1DA471C}"><direct-mapping><src-attribute>ExpectedRuleEntryAction</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="createdTime" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="ExpectedRuleEntry" id="{F5761DCA-A648-457A-9502-4D40422B1AA7}"><direct-mapping><src-attribute>CreatedTime</src-attribute></direct-mapping></import-flow></import-flows></import-flow-set><import-flow-set mv-object-type="synchronizationRule"><import-flows mv-attribute="msidmOutboundScopingFilters" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{2F562287-572B-4D3E-8A2B-2301656E37DE}"><direct-mapping><src-attribute>msidmOutboundScopingFilters</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="msidmOutboundIsFilterBased" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{C785B246-33DB-4CF6-99F7-B28DD8D17C45}"><direct-mapping><src-attribute>msidmOutboundIsFilterBased</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="synchronizationRuleParameters" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{7DC62E33-015A-4A03-B58B-25CE04752A1D}"><direct-mapping><src-attribute>SynchronizationRuleParameters</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="relationshipCriteria" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{550BD62F-4115-4430-AFFB-0289E048B210}"><direct-mapping><src-attribute>RelationshipCriteria</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="precedence" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{6AE6857E-CC14-461E-9D89-82F09B4D6A08}"><direct-mapping><src-attribute>Precedence</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="persistentFlow" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{106788CC-3D46-43CA-841F-305314604587}"><direct-mapping><src-attribute>PersistentFlow</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="initialFlow" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{5465D459-D99C-4689-B908-B111DEA0E144}"><direct-mapping><src-attribute>InitialFlow</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="ilmObjectType" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{76FE909F-EEFE-4B65-B6D8-0195EA339650}"><direct-mapping><src-attribute>ILMObjectType</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="flowType" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{DCA05B6B-A6C3-4B99-BCDB-55A3A41BD6B7}"><direct-mapping><src-attribute>FlowType</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="existenceTest" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{6DEE3A02-DC54-483C-AF6C-CB60C8C003F1}"><direct-mapping><src-attribute>ExistenceTest</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="displayName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{6114EC77-40F6-480D-BB51-38C770817FB6}"><direct-mapping><src-attribute>DisplayName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="disconnectConnectedSystemObject" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{274096A2-6AF1-44F8-AAF2-D030420AD193}"><direct-mapping><src-attribute>DisconnectConnectedSystemObject</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="dependency" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{C638BC54-5579-4287-B542-6E2EB05464CA}"><direct-mapping><src-attribute>Dependency</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="createILMObject" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{694DABA1-6984-44CE-A349-C275A3D4F9A3}"><direct-mapping><src-attribute>CreateILMObject</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="createConnectedSystemObject" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{E1B04810-50E8-407A-BB66-D035DB566B85}"><direct-mapping><src-attribute>CreateConnectedSystemObject</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="connectedSystemScope" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{49E235ED-9439-40D3-A874-932ADA48861C}"><direct-mapping><src-attribute>ConnectedSystemScope</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="connectedSystem" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{32EFD3B0-0F4A-49F4-8254-B2BCF0509637}"><direct-mapping><src-attribute>ConnectedSystem</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="connectedObjectType" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="SynchronizationRule" id="{9AC1CCCA-8429-442E-99FE-97FE3D317DB6}"><direct-mapping><src-attribute>ConnectedObjectType</src-attribute></direct-mapping></import-flow></import-flows></import-flow-set><import-flow-set mv-object-type="detectedRuleEntry"><import-flows mv-attribute="csObjectID" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="DetectedRuleEntry" id="{510680EA-A2E1-4A42-8229-2B3CCAC2F9CC}"><direct-mapping><src-attribute intrinsic="true">dn</src-attribute></direct-mapping></import-flow></import-flows></import-flow-set><import-flow-set mv-object-type="group"><import-flows mv-attribute="displayedOwner" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{F12EA409-AA37-4B0F-8D96-A3B3E311C855}"><direct-mapping><src-attribute>DisplayedOwner</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="type" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{A8F34CC2-FF09-46F1-B125-8DFDB3C12D0B}"><direct-mapping><src-attribute>Type</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="scope" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{FE613771-589A-4DC3-B724-E0ABBBE79519}"><direct-mapping><src-attribute>Scope</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="owner" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{219D1DCF-A55E-4DFB-8B11-6A73758398AB}"><direct-mapping><src-attribute>Owner</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="domain" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{D727DCF7-4A84-46B4-8797-C8C56F61116E}"><direct-mapping><src-attribute>Domain</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="objectSid" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{6BF383DA-5560-49BA-B00F-273474F978A5}"><direct-mapping><src-attribute>ObjectSID</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="member" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{C288B897-DF58-4325-B480-CFEE69378660}"><direct-mapping><src-attribute>Member</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="mailNickname" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{4F40BEBF-B05A-4279-9E01-CD10FAFCBC97}"><direct-mapping><src-attribute>MailNickname</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="email" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{523F5BA5-45D9-469B-9D99-62CA76C03C0B}"><direct-mapping><src-attribute>Email</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="displayName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{A032F21D-8D13-4920-9180-11800B6A34EB}"><direct-mapping><src-attribute>DisplayName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="description" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{C2B216AE-576D-4B24-B617-400FB37ACE33}"><direct-mapping><src-attribute>Description</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="accountName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{A128E03D-6C2C-495E-8CFB-02620DCEB308}"><direct-mapping><src-attribute>AccountName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="expectedRulesList" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{FD05BBC3-59D5-42B3-B4C3-232EF296D984}"><direct-mapping><src-attribute>ExpectedRulesList</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="csObjectID" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Group" id="{4896BAE9-5974-4513-B957-282D2DF110AE}"><direct-mapping><src-attribute intrinsic="true">dn</src-attribute></direct-mapping></import-flow></import-flows></import-flow-set><import-flow-set mv-object-type="person"><import-flows mv-attribute="xObjectGUID" type="ranked"><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{DCDB69BB-3C2A-45BD-9795-F91115CDCBEB}"><sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{EA0327E0-3360-454D-BA43-B1764713C8F2}" initial-flow-only="false" is-existence-test="false"><src-attribute>objectGUID</src-attribute></sync-rule-mapping></import-flow></import-flows><import-flows mv-attribute="domain" type="ranked"><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{76B2229F-23E3-448B-B149-255337A6B17F}"><sync-rule-mapping mapping-type="constant" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{9133BE17-F9DE-4011-B0D6-A57EBA22B4B3}" initial-flow-only="false" is-existence-test="false"><sync-rule-value>CONTOSO</sync-rule-value></sync-rule-mapping></import-flow><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{CD7DDFA5-1B5D-43FA-A4D9-AC36475DD16B}"><direct-mapping><src-attribute>Domain</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="objectSid" type="ranked"><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{A7A5DE4D-6C01-4AEA-9CC3-B41CEF127BAB}"><sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{D8168AD7-73BA-46AE-9868-F3D78F0536E3}" initial-flow-only="false" is-existence-test="false"><src-attribute>objectSid</src-attribute></sync-rule-mapping></import-flow><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{F196B3C4-3701-4297-912C-5155F2050CBE}"><direct-mapping><src-attribute>ObjectSID</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="postalCode" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{A2761BC1-1E78-447F-9A6C-8F6E2D522FFA}"><direct-mapping><src-attribute>PostalCode</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="photo" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{A1ECA723-23B8-40B5-BC71-A4F9C8A2105F}"><direct-mapping><src-attribute>Photo</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="officePhone" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D85A2683-E5E4-4C96-9B5F-20EAD253A9C0}"><direct-mapping><src-attribute>OfficePhone</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="officeLocation" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{7EFA7A50-2A0C-4A13-8749-075CCCBF0631}"><direct-mapping><src-attribute>OfficeLocation</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="officeFax" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{CAC6BD70-09FB-42A0-A076-0DD37E2B8006}"><direct-mapping><src-attribute>OfficeFax</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="mobilePhone" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{646637FF-88F4-44F0-9BEF-19353C6EB5C3}"><direct-mapping><src-attribute>MobilePhone</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="middleName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{FE904DF3-BB88-4208-8B90-BAABC43C10A2}"><direct-mapping><src-attribute>MiddleName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="manager" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{8975EC86-B2F5-467A-8691-0C72F66F4EFD}"><direct-mapping><src-attribute>Manager</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="mailNickname" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{9B54E3BB-C82D-48E7-A7E1-FF63373DABD6}"><direct-mapping><src-attribute>MailNickname</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="lastName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{2D29DA2D-01A6-4ED1-B961-23DBC75CA806}"><direct-mapping><src-attribute>LastName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="jobTitle" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D0BE1EDA-1077-4B66-B859-3124F34210E8}"><direct-mapping><src-attribute>JobTitle</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="firstName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{F8A09B71-672E-4603-9DAF-A317CAEAC860}"><direct-mapping><src-attribute>FirstName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="employeeType" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{50DF5836-B2C0-4F13-AB11-0B32424A478F}"><direct-mapping><src-attribute>EmployeeType</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="employeeStartDate" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{B8C465B2-4E37-4EAD-B8D9-46CAE9BB7579}"><direct-mapping><src-attribute>EmployeeStartDate</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="employeeEndDate" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{620F2FF3-1AA6-4C6E-820D-11AF2B91977B}"><direct-mapping><src-attribute>EmployeeEndDate</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="employeeID" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D7763D23-84DB-40F2-A9C0-C11038B43119}"><direct-mapping><src-attribute>EmployeeID</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="email" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{38BEE018-2759-437B-B5C8-23D59A2E85DA}"><direct-mapping><src-attribute>Email</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="displayName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D9D72B7B-D3FB-49DF-89B2-AA7B6C4DBF78}"><direct-mapping><src-attribute>DisplayName</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="description" type="ranked"><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{A69A3ECE-5F40-4815-8A7A-48C6FCF02C90}"><sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{D394CF71-09B0-4746-929A-063A8D9F722C}" initial-flow-only="false" is-existence-test="false"><src-attribute>description</src-attribute></sync-rule-mapping></import-flow></import-flows><import-flows mv-attribute="department" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{64F7EF76-E6B4-40BD-805C-5CBEA0681763}"><direct-mapping><src-attribute>Department</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="country" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{31D2DE71-81A0-4FFF-BF27-BEEF738DE8EC}"><direct-mapping><src-attribute>Country</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="company" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{1F17403F-DD92-4723-ABCD-3A17E96E82FA}"><direct-mapping><src-attribute>Company</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="city" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{A1AA4B0B-2499-4252-87F5-5C1A790FA93E}"><direct-mapping><src-attribute>City</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="address" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{2D39189F-6C43-43E8-9426-6AE386E875FF}"><direct-mapping><src-attribute>Address</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="accountName" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{13539F96-195C-4199-8A8F-99FEFDDF5119}"><direct-mapping><src-attribute>AccountName</src-attribute></direct-mapping></import-flow><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{2BA28F87-2FBB-4A3D-B6E4-61347613C2CC}"><sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{7B36FE1C-BBA3-450A-A606-EAD6845DA87F}" initial-flow-only="false" is-existence-test="false"><src-attribute>sAMAccountName</src-attribute></sync-rule-mapping></import-flow></import-flows><import-flows mv-attribute="expectedRulesList" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{D4A67699-64D9-4715-A5B6-83F503A667B9}"><direct-mapping><src-attribute>ExpectedRulesList</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="csObjectID" type="ranked"><import-flow src-ma="{5A22292D-DB03-4A69-8ECD-FA3B50293721}" cd-object-type="Person" id="{31676D61-D7C4-4F99-BA41-AD67B6376B16}"><direct-mapping><src-attribute intrinsic="true">dn</src-attribute></direct-mapping></import-flow></import-flows><import-flows mv-attribute="xActiveDirectoryDN" type="ranked"><import-flow src-ma="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}" cd-object-type="user" id="{F9C75362-6DEF-4D5D-A820-BE01013D6B70}"><sync-rule-mapping mapping-type="direct" sync-rule-id="{D6883918-BBCD-E511-80CE-000D3A101B6C}" sync-rule-mapping-id="{8BA6FB9F-0504-44E2-83BE-3B1A5A8AEABA}" initial-flow-only="false" is-existence-test="false"><src-attribute intrinsic="true">dn</src-attribute></sync-rule-mapping></import-flow></import-flows></import-flow-set><per-ma-options><ma-options ma-id="{D7A141C2-3C21-4CC1-8B41-14055EF3490B}"><enable-recall>true</enable-recall></ma-options><ma-options ma-id="{44ADA013-1FDE-43D3-97DC-6AD0BB106409}"><enable-recall>true</enable-recall></ma-options><ma-options ma-id="{5A22292D-DB03-4A69-8ECD-FA3B50293721}"><enable-recall>true</enable-recall></ma-options><ma-options ma-id="{46E3F078-5D69-4A51-8731-AC0483F19B6F}"><enable-recall>true</enable-recall></ma-options></per-ma-options></import-attribute-flow>
 </mv-data>
 
 </export-ma>
