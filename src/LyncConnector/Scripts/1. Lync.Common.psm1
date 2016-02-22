@@ -14,7 +14,7 @@ Set-StrictMode -Version "2.0"
 
 $Global:ConnectorName = "LyncPowerShellConnector"
 $Global:RemoteSessionName = "LyncPowerShellConnector"
-$Error.Clear()
+$Global:Error.Clear()
 
 #endregion "Global Variables"
 
@@ -37,13 +37,20 @@ function Enter-Script
 	param(
 		[parameter(Mandatory = $true)]
 		[string]
-		$ScriptType
+		$ScriptType,
+		[parameter(Mandatory = $false)]
+		[ValidateNotNull()]
+		[System.Collections.ArrayList]
+		$ErrorObject
 	)
 
 	process
 	{
 		Write-Verbose "$Global:ConnectorName - $ScriptType Script: Execution Started..."
-		$Error.Clear()
+		if ($ErrorObject)
+		{
+			$ErrorObject.Clear()
+		}
 	}
 }
 
@@ -62,6 +69,10 @@ function Exit-Script
 		[string]
 		$ScriptType,
 		[parameter(Mandatory = $false)]
+		[ValidateNotNull()]
+		[System.Collections.ArrayList]
+		$ErrorObject,
+		[parameter(Mandatory = $false)]
 		[switch]
 		$SuppressErrorCheck,
 		[parameter(Mandatory = $false)]
@@ -71,14 +82,18 @@ function Exit-Script
 
 	process
 	{
-		if ($Error.Count -ne 0 -and !$SuppressErrorCheck)
+		if (!$SuppressErrorCheck -and $ErrorObject -and $ErrorObject.Count -ne 0)
 		{
-			$errorMessage = [string]$Error[0]
+			# Take the first one otherwise you get "An error occurred while enumerating through a collection: Collection was modified; enumeration operation may not execute.."
+			# Seems like a bug in Remote PSH 
+			$errorMessage = $ErrorObject[0] # | Out-String -ErrorAction SilentlyContinue
 
 			if ($ExceptionRaisedOnErrorCheck -eq $null)
 			{
 				$ExceptionRaisedOnErrorCheck = [Microsoft.MetadirectoryServices.ExtensibleExtensionException]
 			}
+
+			$ErrorObject.Clear()
 
 			throw  $errorMessage -as $ExceptionRaisedOnErrorCheck
 		}
@@ -866,40 +881,19 @@ function New-CSEntryChangeExportError
 		[Guid]
 		$CSEntryChangeIdentifier,
 		[parameter(Mandatory = $true)]
-		[object]
+		[System.Collections.ArrayList]
 		$ErrorObject
 	)
 
 	$csentryChangeResult = $null
+	# Take the first one otherwise you get "An error occurred while enumerating through a collection: Collection was modified; enumeration operation may not execute.."
+	# Seems like a bug in Remote PSH 
+	$errorDetail = $ErrorObject[0] # | Out-String -ErrorAction SilentlyContinue
+	Write-Warning ("CSEntry Identifier: {0}. ErrorCount: {1}. ErrorDetail: {2}" -f $CSEntryChangeIdentifier, $ErrorObject.Count, $errorDetail)
+	$csentryChangeResult = [Microsoft.MetadirectoryServices.CSEntryChangeResult]::Create($CSEntryChangeIdentifier, $null, "ExportErrorCustomContinueRun", "RUNTIME_EXCEPTION", $errorDetail)
+	Write-Warning ("CSEntryChangeResult Identifier: {0}. ErrorCode: {1}. ErrorName: {2}. ErrorDetail: {3}" -f $csentryChangeResult.Identifier, $csentryChangeResult.ErrorCode, $csentryChangeResult.ErrorName, $csentryChangeResult.ErrorDetail)
 
-	try
-	{
-		foreach ($cmdStatus in $ErrorObject)
-		{
-			$exception = $cmdStatus.GetBaseException()
-			$exceptionType = $exception.GetType().Name
-			$exceptionMessage = $exception.Message
-
-			Write-Warning ("CSEntry Identifier: {0}. ErrorName: {1}. ErrorDetail: {2}" -f $CSEntryChangeIdentifier, $exceptionType, $exceptionMessage)
-			$csentryChangeResult = [Microsoft.MetadirectoryServices.CSEntryChangeResult]::Create($CSEntryChangeIdentifier, $null, "ExportErrorCustomContinueRun", $exceptionType, $exceptionMessage)
-			Write-Warning ("CSEntryChangeResult Identifier: {0}. ErrorCode: {1}. ErrorName: {2}. ErrorDetail: {3}" -f $csentryChangeResult.Identifier, $csentryChangeResult.ErrorCode, $csentryChangeResult.ErrorName, $csentryChangeResult.ErrorDetail)
-					
-			break # report the first error and stop
-		}
-	}
-	catch
-	{
-		foreach ($cmdStatus in $ErrorObject)
-		{
-			$exceptionType = "RUNTIME_EXCEPTION"
-			$exceptionMessage = $cmdStatus.ToString()
-			Write-Warning ("CSEntry Identifier: {0}. Error: {1}" -f $CSEntryChangeIdentifier, $exceptionMessage)
-			$csentryChangeResult = [Microsoft.MetadirectoryServices.CSEntryChangeResult]::Create($CSEntryChangeIdentifier, $null, "ExportErrorCustomContinueRun", $exceptionType, $exceptionMessage)
-			Write-Warning ("CSEntryChangeResult Identifier: {0}. ErrorCode: {1}. ErrorName: {2}. ErrorDetail: {3}" -f $csentryChangeResult.Identifier, $csentryChangeResult.ErrorCode, $csentryChangeResult.ErrorName, $csentryChangeResult.ErrorDetail)
-
-			break # report the first error and stop
-		}
-	}
+	$ErrorObject.Clear()
 
 	return $csentryChangeResult
 }

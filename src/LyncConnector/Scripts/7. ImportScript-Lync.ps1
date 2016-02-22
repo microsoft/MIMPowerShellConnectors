@@ -38,7 +38,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Import"
+Enter-Script -ScriptType "Import" -ErrorObject $Error
 
 function Import-CSEntries
 {
@@ -495,5 +495,5 @@ Write-Debug ("GetImportEntriesRunStep.CustomData received is: {0}" -f $customDat
 
 Import-CSEntries
 
-Exit-Script -ScriptType "Import"
+Exit-Script -ScriptType "Import" -ErrorObject $Error
 

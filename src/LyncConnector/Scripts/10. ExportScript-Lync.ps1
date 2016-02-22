@@ -38,7 +38,7 @@ $commonModule = (Join-Path -Path $scriptDir -ChildPath $configParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Export"
+Enter-Script -ScriptType "Export" -ErrorObject $Error
 
 function Export-CSEntries
 {
@@ -58,7 +58,7 @@ function Export-CSEntries
 
 	foreach ($csentryChange in $CSEntries)
 	{
-		$Global:CmdStatus = $null
+		$Error.Clear() = $null
 		$newAnchorTable = @{}
 
 		$dn = Get-CSEntryChangeDN $csentryChange
@@ -91,12 +91,12 @@ function Export-CSEntries
 		}
 		catch
 		{
-			$Global:CmdStatus = "$_"
+			Write-Error "$_"
 		}
 
-		if (Test-Variable "CmdStatus" "Global")
+		if ($Error)
 		{
-			$csentryChangeResult = New-CSEntryChangeExportError -CSEntryChangeIdentifier $csentryChange.Identifier -ErrorObject $Global:CmdStatus
+			$csentryChangeResult = New-CSEntryChangeExportError -CSEntryChangeIdentifier $csentryChange.Identifier -ErrorObject $Error
 		}
 		else
 		{
@@ -148,13 +148,11 @@ function Export-User
 				$cmd += " -DomainController '$preferredDomainController'"
 			}
 
-			$cmd += " -ErrorVariable 'Global:CmdStatus' -ErrorAction 'SilentlyContinue'"
-
 			Write-Debug "Invoking $cmd for user: $dn"
 
 			$x = Invoke-Expression $cmd 
 
-			if (!$Global:CmdStatus)
+			if (!$Error)
 			{
 				$newAnchorTable.Add("Guid", $x.Guid.ToByteArray())
 			}
@@ -289,7 +287,7 @@ function Invoke-EnableCsUserCommand
 		$CSEntryChange
 	)
 
-	if (!$Global:CmdStatus)
+	if (!$Error)
 	{
 		$dn  = Get-CSEntryChangeDN $CSEntryChange
 		$identity = Get-CsIdentity $CSEntryChange
@@ -315,8 +313,6 @@ function Invoke-EnableCsUserCommand
 			$cmd +=  " -SipAddressType '$sipAddressType'"
 		}
 
-		$cmd += " -ErrorVariable 'Global:CmdStatus' -ErrorAction 'SilentlyContinue'"
-
 		Write-Debug "Invoking $cmd for user: $dn"
 
 		Invoke-Expression $cmd | Out-Null
@@ -339,7 +335,7 @@ function Invoke-SetCsUserCommand
 		$CSEntryChange
 	)
 
-	if (!$Global:CmdStatus)
+	if (!$Error)
 	{
 		$dn  = Get-CSEntryChangeDN $CSEntryChange
 		$identity = Get-CsIdentity $CSEntryChange
@@ -369,8 +365,6 @@ function Invoke-SetCsUserCommand
 		if ($remoteCallControlTelephonyEnabled -ne $null) { $cmd += " -RemoteCallControlTelephonyEnabled `$$remoteCallControlTelephonyEnabled" }
 		if ($sipAddress -ne $null) { $cmd += " -SipAddress '$sipAddress'" }
 
-		$cmd += " -ErrorVariable 'Global:CmdStatus' -ErrorAction 'SilentlyContinue'"
-
 		Write-Debug "Invoking $cmd for user: $dn"
 
 		Invoke-Expression $cmd | Out-Null
@@ -394,7 +388,7 @@ function Invoke-GrantCsPolicyCommands
 	)
 
 
-	if (!$Global:CmdStatus)
+	if (!$Error)
 	{
 		$dn  = Get-CSEntryChangeDN $CSEntryChange
 		$identity = Get-CsIdentity $CSEntryChange
@@ -439,8 +433,6 @@ function Invoke-GrantCsPolicyCommands
 		if ($presencePolicyChanged) { $cmd += " | Grant-CsPresencePolicy -PolicyName '$presencePolicy' -PassThru" }
 		if ($voicePolicyChanged) { $cmd += " | Grant-CsVoicePolicy -PolicyName '$voicePolicy' -PassThru" }
 
-		$cmd += " -ErrorVariable 'Global:CmdStatus' -ErrorAction 'SilentlyContinue'"
-
 		Write-Debug "Invoking $cmd for user: $dn"
 
 		Invoke-Expression $cmd | Out-Null
@@ -463,14 +455,14 @@ function Invoke-MoveCsUserCommand
 		$CSEntryChange
 	)
 
-	if (!$Global:CmdStatus)
+	if (!$Error)
 	{
 		$dn  = Get-CSEntryChangeDN $CSEntryChange
 		$identity = Get-CsIdentity $CSEntryChange
 		$registrarPool  = Get-CSEntryChangeValue -CSEntryChange $CSEntryChange -AttributeName "RegistrarPool"
 		if ($registrarPool)
 		{
-			$cmd = "Move-CsUser -Identity '$identity' -Target $registrarPool -Force:`$$forceMove -Confirm:`$$false -ErrorVariable 'Global:CmdStatus' -ErrorAction 'SilentlyContinue'"
+			$cmd = "Move-CsUser -Identity '$identity' -Target $registrarPool -Force:`$$forceMove -Confirm:`$$false'"
 			if (![string]::IsNullOrEmpty($preferredDomainController))
 			{
 				$cmd += " -DomainController '$preferredDomainController'"
@@ -499,7 +491,7 @@ function Invoke-DisableCsUserCommand
 		$CSEntryChange
 	)
 
-	if (!$Global:CmdStatus)
+	if (!$Error)
 	{
 		$dn  = Get-CSEntryChangeDN $CSEntryChange
 		$identity = Get-CsIdentity $CSEntryChange
@@ -510,29 +502,9 @@ function Invoke-DisableCsUserCommand
 			$cmd += " -DomainController '$preferredDomainController'"
 		}
 
-		$cmd += " -ErrorVariable 'Global:CmdStatus' -ErrorAction 'SilentlyContinue'"
-
 		Write-Debug "Invoking $cmd for user: $dn"
 
 		Invoke-Expression $cmd | Out-Null
-		
-		# quick and dirty check for object deletion in AD. will probably need localisation.
-		# we could query AD as well, but that will again work only with PreferredDomainController setting in a multi-domain setup since we want to use objectGUID and not DN to bind.
-		if ($Global:CmdStatus)
-		{
-			foreach ($cmdStatus in $Global:CmdStatus)
-			{
-				$exceptionMessage = $cmdStatus.ToString()
-				if ($exceptionMessage.Contains("Management object not found for identity"))
-				{
-					Write-Warning ("CSEntry Identifier: {0}. Error: {1}" -f $CSEntryChange.Identifier, $exceptionMessage)
-
-					$Global:CmdStatus = $null # ignore the error if the object is already deleted from AD.
-				}
-
-				break # process the first error and stop
-			}
-		}
 	}
 }
 
@@ -554,7 +526,7 @@ function Get-CsIdentity
 		$CSEntryChange
 	)
 
-	if (!$Global:CmdStatus)
+	if (!$Error)
 	{
 		$dn  = Get-CSEntryChangeDN $CSEntryChange
 
@@ -586,5 +558,5 @@ $forceMove = (Get-ConfigParameter -ConfigParameters $configParameters -Parameter
 
 Export-CSEntries
 
-Exit-Script -ScriptType "Export" -SuppressErrorCheck
+Exit-Script -ScriptType "Export" -SuppressErrorCheck -ErrorObject $Error
 

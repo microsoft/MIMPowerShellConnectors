@@ -36,7 +36,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Begin-Import"
+Enter-Script -ScriptType "Begin-Import" -ErrorObject $Error
 
 function Get-OpenImportConnectionResults
 {
@@ -132,6 +132,7 @@ if (![string]::IsNullOrEmpty($preferredDomainController))
 }
 
 $session = Get-PSSession -Name $Global:RemoteSessionName -ErrorAction "SilentlyContinue"
+$Error.Clear() # Could use -ErrorAction "Igonre" in PSH v3.0
 
 if (!$session)
 {
@@ -149,5 +150,5 @@ if (!$session)
 Get-OpenImportConnectionResults
 
 $exceptionRaisedOnErrorCheck = [Microsoft.MetadirectoryServices.ServerDownException]
-Exit-Script -ScriptType "Begin-Import" -ExceptionRaisedOnErrorCheck $exceptionRaisedOnErrorCheck
+Exit-Script -ScriptType "Begin-Import" -ExceptionRaisedOnErrorCheck $exceptionRaisedOnErrorCheck -ErrorObject $Error
 

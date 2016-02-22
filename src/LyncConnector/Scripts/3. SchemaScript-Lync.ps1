@@ -32,7 +32,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Schema"
+Enter-Script -ScriptType "Schema" -ErrorObject $Error
 
 function Get-ConnectorSchema
 {
@@ -58,4 +58,4 @@ function Get-ConnectorSchema
 
 Get-ConnectorSchema
 
-Exit-Script -ScriptType "Schema"
+Exit-Script -ScriptType "Schema" -ErrorObject $Error

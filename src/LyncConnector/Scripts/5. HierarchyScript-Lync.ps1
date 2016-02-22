@@ -35,7 +35,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Hierarchy"
+Enter-Script -ScriptType "Hierarchy" -ErrorObject $Error
 
 function Get-Hierarchy
 {
@@ -109,4 +109,4 @@ if (![string]::IsNullOrEmpty($preferredDomainController))
 
 Get-Hierarchy
 
-Exit-Script -ScriptType "Hierarchy"
+Exit-Script -ScriptType "Hierarchy" -ErrorObject $Error

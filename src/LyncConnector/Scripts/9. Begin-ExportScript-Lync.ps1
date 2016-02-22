@@ -36,7 +36,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Begin-Export"
+Enter-Script -ScriptType "Begin-Export" -ErrorObject $Error
 
 $server = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "Server"
 $preferredDomainController = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "PreferredDomainControllerFQDN"
@@ -49,6 +49,7 @@ if (![string]::IsNullOrEmpty($preferredDomainController))
 $Global:PreferredDomainController = $preferredDomainController
 
 $session = Get-PSSession -Name $Global:RemoteSessionName -ErrorAction "SilentlyContinue"
+$Error.Clear() # Could use -ErrorAction "Igonre" in PSH v3.0
 
 if (!$session)
 {
@@ -67,4 +68,4 @@ if (!$session)
 }
 
 $exceptionRaisedOnErrorCheck = [Microsoft.MetadirectoryServices.ServerDownException]
-Exit-Script -ScriptType "Begin-Export" -ExceptionRaisedOnErrorCheck $exceptionRaisedOnErrorCheck
+Exit-Script -ScriptType "Begin-Export" -ExceptionRaisedOnErrorCheck $exceptionRaisedOnErrorCheck -ErrorObject $Error

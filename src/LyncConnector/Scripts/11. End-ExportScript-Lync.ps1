@@ -39,11 +39,11 @@ $commonModule = (Join-Path -Path $scriptDir -ChildPath $configParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "End-Export"
+Enter-Script -ScriptType "End-Export" -ErrorObject $Error
 
 if (Test-Variable -Name "Session" -Scope "Global")
 {
 	Remove-PSSession $Global:Session
 }
 
-Exit-Script -ScriptType "End-Export"
+Exit-Script -ScriptType "End-Export" -ErrorObject $Error

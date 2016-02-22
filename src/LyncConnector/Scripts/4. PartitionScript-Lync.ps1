@@ -32,7 +32,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Partition"
+Enter-Script -ScriptType "Partition" -ErrorObject $Error
 
 function Get-Partitions
 {
@@ -132,4 +132,4 @@ if ([string]::IsNullOrEmpty($preferredDomainController))
 
 Get-Partitions
 
-Exit-Script -ScriptType "Partition"
+Exit-Script -ScriptType "Partition" -ErrorObject $Error

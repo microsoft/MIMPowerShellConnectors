@@ -39,7 +39,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "End-Import"
+Enter-Script -ScriptType "End-Import" -ErrorObject $Error
 
 function Get-CloseImportConnectionResults
 {
@@ -76,4 +76,4 @@ if (Test-Variable -Name "Session" -Scope "Global")
 	Remove-PSSession $Global:Session
 }
 
-Exit-Script -ScriptType "End-Import"
+Exit-Script -ScriptType "End-Import" -ErrorObject $Error

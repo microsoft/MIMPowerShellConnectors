@@ -35,7 +35,7 @@ $commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common
 
 if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
 
-Enter-Script -ScriptType "Validation"
+Enter-Script -ScriptType "Validation" -ErrorObject $Error
 
 function Test-ConfigParameterPage
 {
@@ -235,4 +235,4 @@ function Test-GlobalConfigParameterPage
 
 Test-ConfigParameterPage
 
-Exit-Script -ScriptType "Validation"
+Exit-Script -ScriptType "Validation" -ErrorObject $Error
