@@ -536,7 +536,7 @@ function Get-CsIdentity
 		}
 		else # should only be here when ObjectModificationType = "Add"
 		{
-			return $dn
+			return $dn.Replace("`'","''") # escape any single quotes in the DN
 		}
 	}
 }
