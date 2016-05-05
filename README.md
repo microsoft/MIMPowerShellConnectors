@@ -8,7 +8,7 @@ The MIM PowerShell Connectors projects aims to be a repository of Management Age
 	 * Supports management of users and policy assignments in Skype 2015, Lync 2013 and Lync 2010.
 	 * Supports Delta Import and (Delta) Export
  * [Flat File Connector][FlatFileConnector]
- 	 *  This connector was previously published as a part of the [Sample Connector Collection][TechNetSampleConnectorCollection].
+ 	 *  This connector was previously published as a part of the [Sample Connector Collection][TechNetSampleConnectorCollection] on TechNet.
  * Office365 Licensing Connector (Coming soon...)
  * SharePoint Site, User and Group Management Connector (Coming soon...)
  * Home Drive Provisioning (Coming soon...)
