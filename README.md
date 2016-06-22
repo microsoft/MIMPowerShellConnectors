@@ -37,3 +37,7 @@ For details on how you can contribute, please check [CONTRIBUTING.md](https://gi
 [LyncConnector]: https://github.com/Microsoft/MIMPowerShellConnectors/wiki/Lync-Connector
 [FlatFileConnector]: https://github.com/Microsoft/MIMPowerShellConnectors/wiki/Flat-File-Connector-Setup-and-Configuration
 [TechNetSampleConnectorCollection]: http://social.technet.microsoft.com/wiki/contents/articles/23647.windows-powershell-connector-for-fim-2010-r2-sample-connector-collection.aspx
+
+# Code of Conduct
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
