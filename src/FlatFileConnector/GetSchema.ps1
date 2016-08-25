@@ -1,5 +1,5 @@
 ﻿param( 
-[System.Collections.ObjectModel.KeyedCollectionstring], [Microsoft.MetadirectoryServices.ConfigParameter]  
+    [System.Collections.ObjectModel.KeyedCollection[[string], [Microsoft.MetadirectoryServices.ConfigParameter]]]  
     $ConfigParameters,
     [PSCredential]
     $PSCredential
