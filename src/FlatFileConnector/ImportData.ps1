@@ -1,6 +1,5 @@
 ﻿param(    
-    [System.Collections.ObjectModel.KeyedCollectionstring], [Microsoft.MetadirectoryServices.ConfigParameter]
-    [ValidateNotNull()]
+    [System.Collections.ObjectModel.KeyedCollection[[string], [Microsoft.MetadirectoryServices.ConfigParameter]]]
     $ConfigParameters,
     [Microsoft.MetadirectoryServices.Schema]
     [ValidateNotNull()]
