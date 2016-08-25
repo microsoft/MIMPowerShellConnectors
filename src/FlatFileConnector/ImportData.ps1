@@ -50,7 +50,7 @@ if ($encoding)
     Write-Verbose "Setting encoding to $encoding)"
 }
 
-$recordsToImport = Import-Csv @importCsvParameters
+$recordsToImport = Import-Csv $importCsvParameters
 Write-Verbose "Imported $($recordsToImport.Count) records"
 
 foreach ($record in $recordsToImport)
