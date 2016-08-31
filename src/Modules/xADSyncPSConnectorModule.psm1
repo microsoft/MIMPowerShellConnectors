@@ -348,8 +348,7 @@ function New-GenericObject
       $ConstructorParameters
     )
 
-    $genericTypeName = $typeName + '
- `r`n' + $typeParameters.Count
+    $genericTypeName = $typeName + '`' + $typeParameters.Count
     $genericType = [Type]$genericTypeName
 
     if (!$genericType)
