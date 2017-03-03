@@ -462,7 +462,7 @@ function Invoke-MoveCsUserCommand
 		$registrarPool  = Get-CSEntryChangeValue -CSEntryChange $CSEntryChange -AttributeName "RegistrarPool"
 		if ($registrarPool)
 		{
-			$cmd = "Move-CsUser -Identity '$identity' -Target $registrarPool -Force:`$$forceMove -Confirm:`$$false'"
+			$cmd = "Move-CsUser -Identity '$identity' -Target $registrarPool -Force:`$$forceMove -Confirm:`$$false"
 			if (![string]::IsNullOrEmpty($preferredDomainController))
 			{
 				$cmd += " -DomainController '$preferredDomainController'"
