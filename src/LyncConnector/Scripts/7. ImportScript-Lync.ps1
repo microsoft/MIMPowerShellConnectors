@@ -34,11 +34,89 @@ param(
 
 Set-StrictMode -Version "2.0"
 
-$commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common Module Script Name (with extension)"].Value)
+Function Escape-IllegalCharacters {
+    
+param(
+	[parameter(Mandatory = $true)]
+	[string]$DN
+)
 
-if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
+    $l = $DN.Length
+    $i = 0
+    $parts = New-Object System.Collections.ArrayList
+    $delims = @("OU=","DC=","CN=")
+    $illegalChars = ',\/#+<>;"='.ToCharArray()
+    $charArr = $DN.ToCharArray()
+    $tempString = ""
+    $newDN = ""
 
-Enter-Script -ScriptType "Import" -ErrorObject $Error
+    do {
+        
+        if ($charArr[$i] -eq ",") {
+            # Check if end of part base on next 3 chars
+            $endOfPart=$false
+            if ($i+3 -lt $l) {
+                #not at end of string
+                $nextThree = ($charArr[$i+1] + $charArr[$i+2] + $charArr[$i+3]).ToUpper()
+                if ($delims.Contains($nextThree)) {
+                    $endOfPart = $true
+                }
+            }
+            if ($endOfPart) {
+                $parts.Add($tempString) | out-null
+                $tempString = ""
+                $i++
+            }
+            else {
+                $tempString += $charArr[$i]
+                $i++
+            }
+        }
+        else {
+            # Add to tempString
+            $tempString += $charArr[$i]
+            if ($i -eq $l-1) {
+                $parts.Add($tempString) | out-null
+            }
+            $i++
+        }
+    
+
+    }
+    while ($i -lt $l)
+
+    foreach ($part in $parts) {
+        $type = $part.Substring(0,3)
+        $value = $part.Substring(3)
+        $newValue = ""
+        foreach ($char in $value.ToCharArray()) {
+            if ($illegalChars.Contains($char)) {
+                $newValue += ("\"+$char)
+            }
+            else {
+                $newValue+=$char
+            }
+        }
+        $part = $type + $newValue
+        if ($newDN -ne "") {
+            $newDN += ","
+        }
+        $newDN+=$part
+    }
+
+    $newDN
+}
+
+
+Function Write-MIMLog ([string]$m) {
+	$logFile = Join-Path -Path ([Microsoft.MetadirectoryServices.MAUtils]::MAFolder) -ChildPath "PSMA.txt"
+	Write-Verbose $m
+	$logOn = $true
+	if ($logOn) {
+		$d = [string](Get-Date -Format s)
+		($d + "   " + $m) | Out-File $logFile -Append
+	}
+}
 
 function Import-CSEntries
 {
@@ -343,7 +421,7 @@ function Get-OrganizationalUnits
 
 	foreach ($includedNode in $openImportConnectionRunStep.InclusionHierarchyNodes)
 	{
-		$rootDN = $includedNode.DN
+		$rootDN = Escape-IllegalCharacters -DN $includedNode.DN
 
 		Write-Debug "Enumerating Inclusion OrganizationalUnit Hierarchy for $rootDN"
 
@@ -353,7 +431,7 @@ function Get-OrganizationalUnits
 	$excludedNodeOUs = @()
 	foreach ($exludedNode in $openImportConnectionRunStep.ExclusionHierarchyNodes)
 	{
-		$rootDN = $includedNode.DN
+		$rootDN = Escape-IllegalCharacters -DN $includedNode.DN
 
 		Write-Debug "Enumerating Exclusion OrganizationalUnit Hierarchy for $rootDN"
 
@@ -454,46 +532,62 @@ function Get-OrganizationalUnitHierarchy
 	return $organizationalUnits
 }
 
-$userPages = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "UserPages"
+try {
 
-if ([string]::IsNullOrEmpty($userPages))
-{
-	$userPages = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9".Split(",") 
-} 
-else
-{
-	$userPages = $userPages.Split(",")
+	
+	
+	$commonModule = (Join-Path -Path $ScriptDir -ChildPath $ConfigParameters["Common Module Script Name (with extension)"].Value)
+
+	if (!(Get-Module -Name (Get-Item $commonModule).BaseName)) { Import-Module -Name $commonModule }
+
+	Enter-Script -ScriptType "Import" -ErrorObject $Error
+
+
+	$userPages = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "UserPages"
+
+	if ([string]::IsNullOrEmpty($userPages))
+	{
+		$userPages = "a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,0,1,2,3,4,5,6,7,8,9".Split(",") 
+	} 
+	else
+	{
+		$userPages = $userPages.Split(",")
+	}
+
+	$ouPages = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "OrganizationalUnitPages"
+	if ([string]::IsNullOrEmpty($ouPages))
+	{
+		$ouPages = @("")
+	} 
+	else
+	{
+		$ouPages = $ouPages.Split(",")
+	}
+
+	$lastRunDateTimeOffset = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "LastRunDateTimeOffsetMinutes" 
+
+	if ([string]::IsNullOrEmpty($lastRunDateTimeOffset))
+	{
+		$lastRunDateTimeOffset = 30 # in minutes
+	}
+	else
+	{
+		$lastRunDateTimeOffset = $lastRunDateTimeOffset.Trim()
+	}
+
+	$deltaImport = $openImportConnectionRunStep.ImportType -eq "Delta"
+	$customData = [xml]$getImportEntriesRunStep.CustomData
+
+	$preferredDomainController = $customData.WaterMark.PreferredDomainController
+
+	Write-Debug ("GetImportEntriesRunStep.CustomData received is: {0}" -f $customData.InnerXml)
+
+	Import-CSEntries
+
+	Exit-Script -ScriptType "Import" -ErrorObject $Error
 }
 
-$ouPages = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "OrganizationalUnitPages"
-if ([string]::IsNullOrEmpty($ouPages))
-{
-	$ouPages = @("")
-} 
-else
-{
-	$ouPages = $ouPages.Split(",")
+catch {
+	$ErrorMessage = $_.Exception.Message
+    Write-MIMLog "ERROR!! Exception caught: $ErrorMessage"
 }
-
-$lastRunDateTimeOffset = Get-ConfigParameter -ConfigParameters $ConfigParameters -ParameterName "LastRunDateTimeOffsetMinutes" 
-
-if ([string]::IsNullOrEmpty($lastRunDateTimeOffset))
-{
-	$lastRunDateTimeOffset = 30 # in minutes
-}
-else
-{
-	$lastRunDateTimeOffset = $lastRunDateTimeOffset.Trim()
-}
-
-$deltaImport = $openImportConnectionRunStep.ImportType -eq "Delta"
-$customData = [xml]$getImportEntriesRunStep.CustomData
-
-$preferredDomainController = $customData.WaterMark.PreferredDomainController
-
-Write-Debug ("GetImportEntriesRunStep.CustomData received is: {0}" -f $customData.InnerXml)
-
-Import-CSEntries
-
-Exit-Script -ScriptType "Import" -ErrorObject $Error
-
