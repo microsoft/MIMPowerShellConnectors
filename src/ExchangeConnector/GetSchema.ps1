@@ -53,6 +53,7 @@ $Schema = New-xADSyncPSConnectorSchema
 $UserBaseAttributes = @{
     'dn' = @{Multivalued=$False;DataType='String';SupportedOperation='ImportExport'}
     'mailNickname' = @{Multivalued=$False;DataType='String';SupportedOperation='ImportExport'}
+    'sAMAccountName' = @{Multivalued=$False;DataType='String';SupportedOperation='ImportExport'}
     '_MailboxType' = @{Multivalued=$False;DataType='String';SupportedOperation='ImportExport'}
     '_isMailboxEnabled' = @{Multivalued=$False;DataType='Boolean';SupportedOperation='ImportExport'}
 }

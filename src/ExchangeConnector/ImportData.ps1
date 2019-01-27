@@ -147,6 +147,10 @@ try {
                             $csEntry = New-xADSyncPSConnectorCSEntryChange -ObjectType $ObjectType -ModificationType $ModificationType -DN $User.Properties.'distinguishedname'
                             # Process Attributes
 
+                            if($null -ne $User.Properties.'samaccountname') {
+                                Get-CSAttributeChange -InputObject $csEntry -ColumnsToImport $columnsToImport -Attribute 'sAMAccountName' -Value $User.Properties.'samaccountname'[0] -ModificationType $ModificationType
+                            }
+
                             if($null -ne $User.Properties.'mailnickname') {
                                 Get-CSAttributeChange -InputObject $csEntry -ColumnsToImport $columnsToImport -Attribute 'mailNickname' -Value $User.Properties.'mailnickname'[0] -ModificationType $ModificationType
                             }
