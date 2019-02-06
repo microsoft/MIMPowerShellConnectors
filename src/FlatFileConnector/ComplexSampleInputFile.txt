@@ -1,0 +1,5 @@
+#TYPE MIMPSConnector.SchemaConfig
+ObjectType;FileName;ReferenceAttributes
+Employee;ComplexEmployees.txt;Manager|Organization#Organization
+Consultant;ComplexConsultants.txt;Manager#Employee|Organization#Organization
+Organization;ComplexOrganizations.txt;
