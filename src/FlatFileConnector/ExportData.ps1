@@ -1,116 +1,106 @@
-﻿param(    
+﻿param(
+    # Table of all configuration parameters set at instance of connector
     [System.Collections.ObjectModel.KeyedCollection[[string], [Microsoft.MetadirectoryServices.ConfigParameter]]]
     $ConfigParameters,
+
+    # Representation of Schema
     [Microsoft.MetadirectoryServices.Schema]
     $Schema,
+
+    # Informs the script about the partition
     [Microsoft.MetadirectoryServices.OpenExportConnectionRunStep]
     $OpenExportConnectionRunStep,
+
+    # List of objects to export
     [System.Collections.Generic.IList[Microsoft.MetaDirectoryServices.CSEntryChange]]
     $CSEntries,
-    [PSCredential]
-    $PSCredential
+
+    # Contains any credentials entered by the administrator on the Connectivity tab
+    [Alias('PSCredential')]
+    [System.Management.Automation.PSCredential]
+    $Credential,
+
+    # Path to debug log
+    [String]
+    $LogFilePath = "$([System.Environment]::GetEnvironmentVariable('Temp', 'Machine'))\MIMPS_ExportScript.log"
 )
+
 Set-PSDebug -Strict
+function Write-Log {
+    <#
+    .SYNOPSIS
+    Function for logging, modify to suit your needs.
+    #>
+    [CmdletBinding()]
+    param([string]$Message, [String]$Path)
+    # Uncomment this line to enable debug logging
+    # Out-File -InputObject $Message -FilePath $Path -Append
+}
+$PSDefaultParameterValues['Write-Log:Path'] = $LogFilePath
+Write-Log -Message "Export Started at: $(Get-Date -Format 'o')"
 
-Import-Module (Join-Path -Path ([Microsoft.MetadirectoryServices.MAUtils]::MAFolder) -ChildPath 'xADSyncPSConnectorModule.psm1') -Verbose:$false
+try {
+    $commonModule = (Join-Path -Path ([Microsoft.MetadirectoryServices.MAUtils]::MAFolder) -ChildPath $ConfigParameters['Common Module Script Name (with extension)'].Value)
+    Import-Module -Name $commonModule -Verbose:$false -ErrorAction Stop
+    Write-Log -Message "CommonModule imported"
+} catch {
+    throw "Failed to import common module with error [$_]"
+}
 
-function CreateCustomPSObject
-{
-    param
-    (
-        $PropertyNames = @()
+function New-CustomPSObject {
+    param(
+        [Parameter(Mandatory)]
+        [string[]]
+        $PropertyNames
     )
     $template = New-Object -TypeName System.Object
-
-    foreach ($property in $PropertyNames)
-    {
-        $template | Add-Member -MemberType NoteProperty -Name $property -Value $null
+    foreach ($property in $PropertyNames) {
+        Add-Member -InputObject $template -MemberType NoteProperty -Name $property -Value $null
     }
 
     return $template
 }
 
+if ($OpenExportConnectionRunStep.StepPartition.DN -like 'OBJECT=*') {
+    # Complex
+    $Type = $Schema.Types | Where-Object -FilterScript {"OBJECT=$($_.Name)" -eq $OpenExportConnectionRunStep.StepPartition.DN}
+} else {
+    $Type = $Schema.Types
+}
+
 $exportCsvParameters = @{
-    Path = (Join-Path -Path (Get-xADSyncPSConnectorFolder -Folder ManagementAgent) -ChildPath (Get-xADSyncPSConnectorSetting -Name 'FileName' -Scope Global -ConfigurationParameters $ConfigParameters))
+    Path = $Global:FilePath
+    Encoding = $Global:Encoding
+    Delimiter = $Global:Delimiter
+    NoTypeInformation = $true
+    Append = $true
+    ErrorAction = 'Stop'
 }
 
 $csentryChangeResults = New-GenericObject System.Collections.Generic.List Microsoft.MetadirectoryServices.CSEntryChangeResult
 
-if ((Test-Path ([IO.Path]::GetDirectoryName($exportCsvParameters['Path'])) -PathType Container) -eq $false)
-{
-    ##TODO: ECMA exception?
-    throw "Could not find $($exportCsvParameters['Path'])"   
-}
-
-Write-Verbose "Export path: $($exportCsvParameters['Path'])"
-
-$delimiter = Get-xADSyncPSConnectorSetting -Name 'Delimiter' -Scope Global -ConfigurationParameters $ConfigParameters
-if ($delimiter)
-{
-    $exportCsvParameters.Add('Delimiter', $delimiter)
-    Write-Verbose "Setting delimiter to $delimiter)"
-}
-
-$encoding = Get-xADSyncPSConnectorSetting -Name 'Encoding' -Scope Global -ConfigurationParameters $ConfigParameters
-if ($encoding)
-{
-    ##TODO: Validation
-    $exportCsvParameters.Add('Encoding', $encoding)
-    Write-Verbose "Setting encoding to $encoding)"
-}
-
-$columnsToExport = @()
-foreach ($attribute in $Schema.Types[0].Attributes)
-{
-    $columnsToExport += $attribute.Name
-    Write-Verbose "Added attribute $($attribute.Name) to export list"
-}
-
-Write-Verbose "Loaded $($columnsToExport.Count) attributes to export" 
-
-$csvSource = @()
-foreach ($entry in $CSEntries)
-{
-    Write-Verbose "Processing object $($entry.Identifier)"
-
-    [bool]$objectHasAttributes = $false
-    $baseObject = CreateCustomPSObject -PropertyNames $columnsToExport
-
-    if ($entry.ModificationType -ne 'Delete')
-    {
-        foreach ($attribute in $columnsToExport)
-        {                              
-            if (($entry.AttributeChanges.Contains($attribute)) -eq $false -and ($entry.AnchorAttributes.Contains($attribute) -eq $false))
-            {
+$ExportObjects = foreach ($entry in $CSEntries) {
+    $baseObject = New-CustomPSObject -PropertyNames $global:columnsToExport
+    if ($entry.ModificationType -ne 'Delete') {
+        foreach ($attribute in $global:columnsToExport) {
+            if (($entry.AttributeChanges.Contains($attribute)) -eq $false -and ($entry.AnchorAttributes.Contains($attribute) -eq $false)) {
                 continue
             }
-            
-            if ($entry.AnchorAttributes[$attribute].Value)
-            {
+            if ($entry.AnchorAttributes[$attribute].Value) {
                 $baseObject.$attribute = $entry.AnchorAttributes[$attribute].Value
-                $objectHasAttributes = $true
-            }
-            elseif ($entry.AttributeChanges[$attribute].ValueChanges[0].Value)
-            {
+            } elseif ($entry.AttributeChanges[$attribute].ValueChanges[0].Value) {
                 $baseObject.$attribute = $entry.AttributeChanges[$attribute].ValueChanges[0].Value
-                $objectHasAttributes = $true
-            }            
+            }
         }
-
-        if ($objectHasAttributes)
-        {
-            $csvSource += $baseObject
+        if ($baseObject.psobject.Properties.Value) {
+            Write-Output -InputObject $baseObject
         }
-$csentryChangeResult = [Microsoft.MetadirectoryServices.CSEntryChangeResult]::Create($entry.Identifier, $null, "Success")
-    } 
-
-    $csentryChangeResults.Add($csentryChangeResult) 
-    Write-Verbose "Completed processing object $($entry.Identifier)"   
+    }
+    $csentryChangeResult = [Microsoft.MetadirectoryServices.CSEntryChangeResult]::Create($entry.Identifier, $null, "Success")
+    $csentryChangeResults.Add($csentryChangeResult)
 }
 
-$csvSource | Export-Csv @exportCsvParameters -NoTypeInformation
-
-$result = New-Object -TypeName Microsoft.MetadirectoryServices.PutExportEntriesResults
+$ExportObjects | Export-Csv @exportCsvParameters
 
 $closedType = [Type] "Microsoft.MetadirectoryServices.PutExportEntriesResults"
-return [Activator]::CreateInstance($closedType, $csentryChangeResults) 
+return [Activator]::CreateInstance($closedType, $csentryChangeResults)
