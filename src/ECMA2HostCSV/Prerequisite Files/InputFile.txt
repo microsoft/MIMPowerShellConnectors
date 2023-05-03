@@ -1,5 +1,5 @@
 "AzureObjectID";"IsActive";"DisplayName";"EmployeeId";"Title";"UserName";"Email"
 "de4841f1-cb92-48e5-9056-29a36a0653c2";"True";"Adele Vance";"";"Retail Manager";"AdeleV@contoso.OnMicrosoft.com";"AdeleV@contoso.OnMicrosoft.com"
 "b2c15a35-7a3e-4714-ab50-79e9dd1fb13d";"True";"Alex Wilber";"";"Marketing Assistant";"AlexW1@contoso.OnMicrosoft.com";"AlexW1@contoso.OnMicrosoft.com"
-"ba8c90b5-176c-499d-9dbb-dd7027dd9fd3";"True";"Bianca Pisani";"";"Salesperson";"BiancaP@M365x86254880.OnMicrosoft.com";""
-"20cb6663-d2f7-4994-960a-df575ecd233e";"True";"Allan Deyoung";"";"IT Admin";"AllanD1@M365x86254880.OnMicrosoft.com";"AllanD1@M365x86254880.OnMicrosoft.com"
+"ba8c90b5-176c-499d-9dbb-dd7027dd9fd3";"True";"Bianca Pisani";"";"Salesperson";"BiancaP@Contoso.OnMicrosoft.com";""
+"20cb6663-d2f7-4994-960a-df575ecd233e";"True";"Allan Deyoung";"";"IT Admin";"AllanD1@Contoso.OnMicrosoft.com";"AllanD1@Contoso.OnMicrosoft.com"
